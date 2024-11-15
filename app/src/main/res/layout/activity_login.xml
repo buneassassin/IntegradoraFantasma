@@ -45,7 +45,9 @@
                 android:drawablePadding="8dp"
                 android:hint="@string/username"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:maxLength="25"
+                android:scrollHorizontally="false" />
 
             <EditText
                 android:id="@+id/password"
@@ -57,7 +59,9 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:maxLength="20"
+            android:scrollHorizontally="false" />
 
             <Button
                 android:id="@+id/loginButton"
@@ -84,6 +88,5 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

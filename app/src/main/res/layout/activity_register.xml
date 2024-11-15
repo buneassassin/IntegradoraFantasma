@@ -45,7 +45,9 @@
                 android:drawablePadding="8dp"
                 android:hint="Username"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:maxLength="25"
+                android:scrollHorizontally="false" />
 
             <EditText
                 android:id="@+id/email"
@@ -57,7 +59,9 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:maxLength="30"
+                android:scrollHorizontally="false" />
 
             <EditText
                 android:id="@+id/password"
@@ -69,7 +73,9 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:maxLength="20"
+                android:scrollHorizontally="false" />
 
             <Button
                 android:id="@+id/registerButton"
@@ -78,7 +84,9 @@
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/purple"
                 android:text="@string/register"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="onRegiterClick"/>
+
             <TextView
                 android:id="@+id/loginPrompt"
                 android:layout_width="wrap_content"
