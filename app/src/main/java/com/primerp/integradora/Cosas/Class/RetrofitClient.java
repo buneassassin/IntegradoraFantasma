@@ -10,7 +10,7 @@ public class RetrofitClient {
     private ApiService apiService;
 
     // Aquí debe ir la URL base
-    private static final String BASE_URL = "http://192.168.113.184:8003/api/v1/";
+    private static final String BASE_URL = "http://192.168.1.13:8003/api/v1/";
 
     private RetrofitClient() {
         Retrofit retrofit = new Retrofit.Builder()
