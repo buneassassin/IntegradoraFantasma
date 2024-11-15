@@ -96,6 +96,7 @@
                 android:focusable="true"
                 android:onClick="onRegistrationPromptClick" />
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
