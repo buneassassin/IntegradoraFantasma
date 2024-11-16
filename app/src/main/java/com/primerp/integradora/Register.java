@@ -21,7 +21,8 @@ import retrofit2.Response;
 
 public class Register extends AppCompatActivity {
 
-    private EditText usernameEditText, emailEditText, passwordEditText;
+    private EditText usuario_nomEditText, emailEditText, passwordEditText;
+    private EditText nombresEditText, apellidoPaternoEditText, apellidoMaternoEditText, telefonoEditText;
     private Button registerButton;
     private boolean isRegistrationSuccessful = false; // Bandera para verificar el éxito del registro
 
@@ -43,9 +44,15 @@ public class Register extends AppCompatActivity {
         // Si no hay token, mostrar la pantalla de registro
         setContentView(R.layout.activity_register);
 
-        usernameEditText = findViewById(R.id.username);
+        // Referenciar los campos
+        usuario_nomEditText = findViewById(R.id.usuario_nom);
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
+        nombresEditText = findViewById(R.id.nombres);
+        apellidoPaternoEditText = findViewById(R.id.a_p);
+        apellidoMaternoEditText = findViewById(R.id.a_m);
+        telefonoEditText = findViewById(R.id.telefono);
+
         registerButton = findViewById(R.id.registerButton);
 
         // Configurar el botón con el método OnClickListener
@@ -63,18 +70,24 @@ public class Register extends AppCompatActivity {
         });
     }
 
-
     private void registerUser() {
-        String usuario_nom = usernameEditText.getText().toString().trim();
+        // Obtener los valores de los campos
+        String usuario_nom = usuario_nomEditText.getText().toString().trim();
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
+        String nombres = nombresEditText.getText().toString().trim();
+        String apellidoPaterno = apellidoPaternoEditText.getText().toString().trim();
+        String apellidoMaterno = apellidoMaternoEditText.getText().toString().trim();
+        String telefono = telefonoEditText.getText().toString().trim();
 
-        if (usuario_nom.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (usuario_nom.isEmpty() || email.isEmpty() || password.isEmpty() ||
+                nombres.isEmpty() || apellidoPaterno.isEmpty() || apellidoMaterno.isEmpty() || telefono.isEmpty()) {
             Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        RegisterRequest registerRequest = new RegisterRequest(usuario_nom, email, password);
+        // Crear el objeto de solicitud
+        RegisterRequest registerRequest = new RegisterRequest(usuario_nom, email, password, nombres, apellidoPaterno, apellidoMaterno, telefono);
         ApiService apiService = RetrofitClient.getInstance().createService(ApiService.class);
 
         Call<RegisterResponse> call = apiService.registerUser(registerRequest);
@@ -90,7 +103,6 @@ public class Register extends AppCompatActivity {
                     }
                 } else {
                     try {
-                        // Inspecciona el cuerpo del error
                         String errorBody = response.errorBody().string();
                         Toast.makeText(Register.this, "Error en la respuesta del servidor: " + errorBody, Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
