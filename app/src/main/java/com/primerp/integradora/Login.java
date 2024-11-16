@@ -61,7 +61,9 @@ public class Login extends AppCompatActivity {
         }
 
         LoginRequest loginRequest = new LoginRequest(email, password);
-        ApiService apiService = RetrofitClient.getInstance().createService(ApiService.class);
+
+        // Ajuste: Utiliza getApiService() en lugar de createService()
+        ApiService apiService = RetrofitClient.getInstance(this).getApiService();
 
         Call<LoginResponse> call = apiService.loginUser(loginRequest);
         call.enqueue(new Callback<LoginResponse>() {

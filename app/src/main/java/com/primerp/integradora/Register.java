@@ -88,7 +88,7 @@ public class Register extends AppCompatActivity {
 
         // Crear el objeto de solicitud
         RegisterRequest registerRequest = new RegisterRequest(usuario_nom, email, password, nombres, apellidoPaterno, apellidoMaterno, telefono);
-        ApiService apiService = RetrofitClient.getInstance().createService(ApiService.class);
+        ApiService apiService = RetrofitClient.getInstance(this).getApiService();
 
         Call<RegisterResponse> call = apiService.registerUser(registerRequest);
         call.enqueue(new Callback<RegisterResponse>() {
