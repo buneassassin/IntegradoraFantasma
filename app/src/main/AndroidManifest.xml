@@ -18,10 +18,13 @@
             android:name=".Register"
             android:exported="false" />
         <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".Cosas.Esplach.Esplach"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
