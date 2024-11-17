@@ -26,4 +26,8 @@ public class RegisterRequest {
         this.email = email;
         this.telefono = phone;
     }
+
+    public RegisterRequest(String email) {
+        this.email = email;
+    }
 }

@@ -28,5 +28,11 @@
     <string name="nombre">Nombre</string>
     <string name="usuario">Usuario</string>
     <string name="editar_prerfil">Editar Prerfil</string>
+    <string name="olvidaste_tu_contrase_a">¿Olvidaste tu contraseña?</string>
+    <string name="correo_electr_nico">Correo electrónico</string>
+    <string name="introduce_tu_correo_electr_nico_y_te_enviaremos_un_correo">Introduce tu correo electrónico y te enviaremos un correo.</string>
+    <string name="enviar_correo">Enviar correo</string>
+    <string name="volver_al_inicio_de_sesi_n">Volver al inicio de sesión</string>
+    <string name="recuperar_contrase_a">Recuperar Contraseña</string>
 
 </resources>

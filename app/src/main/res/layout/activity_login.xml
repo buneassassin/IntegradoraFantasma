@@ -71,6 +71,8 @@
                 android:singleLine="true"
                 android:scrollHorizontally="true" />
 
+
+
             <!-- Botón de Login -->
             <Button
                 android:id="@+id/loginButton"
@@ -95,6 +97,19 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="onRegistrationPromptClick" />
+            <!-- Texto de Olvidó su contraseña -->
+            <TextView
+                android:id="@+id/forgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/olvidaste_tu_contrase_a"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:textStyle="italic"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onForgotPasswordClick" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.primerp.integradora.Cosas.Api.ApiService;
+import com.primerp.integradora.Cosas.Dialog.ForgotPasswordActivity;
 import com.primerp.integradora.Cosas.Responst.LoginRequest;
 import com.primerp.integradora.Cosas.Responst.LoginResponse;
 import com.primerp.integradora.Cosas.Class.RetrofitClient;
@@ -105,4 +106,13 @@ public class Login extends AppCompatActivity {
         Intent intent = new Intent(this, Register.class);
         startActivity(intent);
     }
+
+    public void onForgotPasswordClick(View view) {
+        // Acción al hacer clic, como redirigir a otra pantalla o mostrar un mensaje
+        Toast.makeText(this, "Redirigiendo a recuperar contraseña...", Toast.LENGTH_SHORT).show();
+        // Ejemplo de redirección:
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
+        startActivity(intent);
+    }
+
 }

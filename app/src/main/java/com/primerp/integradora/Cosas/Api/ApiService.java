@@ -35,5 +35,7 @@ public interface ApiService {
             @Header("Authorization") String authToken,
             @Body PassaworRequest passwordMap
     );
+    @POST("reset-password")
+    Call<ApiResponse> resetPassword(@Body RegisterRequest registerRequest);
 
 }
