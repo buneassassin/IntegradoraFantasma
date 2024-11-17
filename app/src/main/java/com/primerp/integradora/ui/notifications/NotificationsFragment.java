@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import com.primerp.integradora.Cosas.Api.ApiService;
 import com.primerp.integradora.Cosas.Class.RetrofitClient;
 import com.primerp.integradora.Cosas.Class.SessionManager;
 import com.primerp.integradora.Cosas.Class.User;
+import com.primerp.integradora.Cosas.Dialog.EditContrasenaDialogActivity;
 import com.primerp.integradora.Cosas.Dialog.EditProfileDialogActivity;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Login;
@@ -57,6 +59,7 @@ public class NotificationsFragment extends Fragment {
         apiService = RetrofitClient.getInstance(getContext()).getApiService();
         Button logoutButton = binding.btnLogout;
         Button editperfil = binding.editProfile;
+        ImageButton editarContrasena = binding.editContrasena;
         getUserInfo();
         editperfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +73,12 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 logoutUser();
+            }
+        });
+        editarContrasena.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editarContrasena();
             }
         });
 
@@ -159,5 +168,10 @@ public class NotificationsFragment extends Fragment {
         });
 
     }
+    public void editarContrasena() {
+        Intent intent = new Intent(getActivity(), EditContrasenaDialogActivity.class);
+        startActivity(intent);
+    }
+
 
 }

@@ -3,6 +3,7 @@ package com.primerp.integradora.Cosas.Api;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Cosas.Responst.LoginRequest;
 import com.primerp.integradora.Cosas.Responst.LoginResponse;
+import com.primerp.integradora.Cosas.Responst.PassaworRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterResponse;
 
@@ -32,7 +33,7 @@ public interface ApiService {
     @POST("updatePassword")
     Call<ApiResponse> updatePassword(
             @Header("Authorization") String authToken,
-            @Body Map<String, String> passwordMap
+            @Body PassaworRequest passwordMap
     );
 
 }

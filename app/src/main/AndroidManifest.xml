@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Integradora"
         tools:targetApi="31">
         <activity
+            android:name=".Cosas.Dialog.EditContrasenaDialogActivity"
+            android:exported="false" />
+        <activity
             android:name=".Cosas.Dialog.EditProfileDialogActivity"
             android:exported="false" />
         <activity
