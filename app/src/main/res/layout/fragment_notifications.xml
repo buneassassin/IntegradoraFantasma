@@ -150,7 +150,7 @@
     android:id="@+id/btn_request_completed"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:text="Request Completed"
+    android:text="Notification"
     android:drawableStart="@drawable/ic_notifications"
     android:textColor="#FFFFFF"
     android:backgroundTint="#03A9F4"
