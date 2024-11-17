@@ -66,6 +66,13 @@ public class NotificationsFragment extends Fragment {
                 logoutUser();
             }
         });
+        Button editProfile = root.findViewById(R.id.edit_profile);
+       /* editProfile.setOnClickListener(view -> {
+            // Crear e inicializar el diálogo de edición
+            EditProfileDialogFragment dialog = new EditProfileDialogFragment();
+            dialog.show(getSupportFragmentManager(), "EditProfileDialog");
+        });*/
+
 
         return root;
     }
