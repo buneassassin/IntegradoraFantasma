@@ -51,7 +51,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         //validate
         if (email.isEmpty()) {
             emailInput.setError("Por favor, ingrese su correo electrónico");
-            return;
         }else{
 
 
