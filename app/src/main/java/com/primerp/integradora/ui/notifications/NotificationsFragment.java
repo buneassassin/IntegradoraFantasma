@@ -1,6 +1,5 @@
 package com.primerp.integradora.ui.notifications;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,7 +63,6 @@ public class NotificationsFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EditProfileDialogActivity.class);
                 startActivity(intent);
-                getActivity().finish();
 
             }
         });
@@ -74,9 +72,6 @@ public class NotificationsFragment extends Fragment {
                 logoutUser();
             }
         });
-
-
-
 
         return root;
     }

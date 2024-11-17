@@ -102,9 +102,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void onRegistrationPromptClick(View view) {
-        // Lógica para redirigir a la pantalla de registro
         Intent intent = new Intent(this, Register.class);
-
         startActivity(intent);
     }
 }
