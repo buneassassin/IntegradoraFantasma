@@ -10,5 +10,11 @@
     <string name="ya_tienes_cuenta_inicia_sesi_n">¿Ya tienes cuenta? Inicia sesión.</string>
     <string name="register">Register</string>
     <string name="ya_tienes_una_cuenta_inicia_sesi_n">¿Ya tienes una cuenta? Inicia sesión</string>
+    <string name="agregar_nuevo_tinaco">Agregar Nuevo Tinaco</string>
+    <string name="edit_profile" />
+    <string name="nombre_del_individuo">Nombre del individuo</string>
+    <string name="_000_000_0000">000 000 0000</string>
+    <string name="usario_ejemplo_com">Usario@ejemplo.com</string>
+    <string name="title_perfil">Perfil\n</string>
 
 </resources>

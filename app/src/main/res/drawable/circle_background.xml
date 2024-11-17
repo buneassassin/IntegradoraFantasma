@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <!-- Color de fondo del círculo -->
+    <solid android:color="#2196F3" /> <!-- Cambia el color aquí -->
+
+    <!-- Bordes opcionales -->
+    <stroke
+        android:width="2dp"
+        android:color="#FFFFFF" /> <!-- Cambia el color del borde aquí -->
+
+    <!-- Tamaño opcional del padding -->
+    <padding
+        android:left="8dp"
+        android:top="8dp"
+        android:right="8dp"
+        android:bottom="8dp" />
+
+    <!-- Radio opcional (para asegurar un círculo perfecto) -->
+    <size
+        android:width="50dp"
+        android:height="50dp" />
+</shape>
