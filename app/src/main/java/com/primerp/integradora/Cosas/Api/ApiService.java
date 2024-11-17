@@ -22,5 +22,7 @@ public interface ApiService {
     Call<ApiResponse> logout(@Header("Authorization") String authToken);
     @GET("me")
     Call<ApiResponse> getMe(@Header("Authorization") String authToken);
+    @POST("update")
+    Call<ApiResponse> updateUser(@Header("Authorization") String authToken, @Body RegisterRequest registerRequest);
 
 }

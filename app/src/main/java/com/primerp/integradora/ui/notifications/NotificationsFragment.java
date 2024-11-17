@@ -22,6 +22,7 @@ import com.primerp.integradora.Cosas.Api.ApiService;
 import com.primerp.integradora.Cosas.Class.RetrofitClient;
 import com.primerp.integradora.Cosas.Class.SessionManager;
 import com.primerp.integradora.Cosas.Class.User;
+import com.primerp.integradora.Cosas.Dialog.EditProfileDialogActivity;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Login;
 import com.primerp.integradora.R;
@@ -53,25 +54,28 @@ public class NotificationsFragment extends Fragment {
         correo = root.findViewById(R.id.Correo);
 
 
-
-
         sessionManager = new SessionManager(getContext());
         apiService = RetrofitClient.getInstance(getContext()).getApiService();
         Button logoutButton = binding.btnLogout;
-
+        Button editperfil = binding.editProfile;
         getUserInfo();
+        editperfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EditProfileDialogActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+
+            }
+        });
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logoutUser();
             }
         });
-        Button editProfile = root.findViewById(R.id.edit_profile);
-       /* editProfile.setOnClickListener(view -> {
-            // Crear e inicializar el diálogo de edición
-            EditProfileDialogFragment dialog = new EditProfileDialogFragment();
-            dialog.show(getSupportFragmentManager(), "EditProfileDialog");
-        });*/
+
+
 
 
         return root;
