@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lavender">#8692f7</color>
     <color name="purple">#8692f7</color>
+    <color name="light_blue_mas">#74B2ED</color> <!-- Fondo de botones o encabezado -->
+    <color name="light_blue">#D0E8FF</color> <!-- Fondo de botones o encabezado -->
+    <color name="gray">#757575</color> <!-- Texto secundario -->
+    <color name="background_gray">#F5F5F5</color> <!-- Fondo del layout -->
 </resources>
