@@ -110,11 +110,7 @@ public class NotificationsFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+
     private void logoutUser() {
         String token = sessionManager.getToken();
 
@@ -154,7 +150,6 @@ public class NotificationsFragment extends Fragment {
             }
         });
     }
-
     private void getUserInfo() {
         String token = sessionManager.getToken();
 
@@ -250,12 +245,10 @@ public class NotificationsFragment extends Fragment {
         // Mostrar el diálogo
         dialog.show();
     }
-
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE);
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -271,7 +264,6 @@ public class NotificationsFragment extends Fragment {
             }
         }
     }
-
     private void uploadImageToServer(Uri imageUri) {
         // Convierte la Uri a un archivo
         File file = new File(getRealPathFromURI(imageUri));
@@ -308,8 +300,6 @@ public class NotificationsFragment extends Fragment {
             }
         });
     }
-
-    // Obtener la ruta real del archivo desde la Uri
     private String getRealPathFromURI(Uri uri) {
         String[] projection = { MediaStore.Images.Media.DATA };
         Cursor cursor = getContext().getContentResolver().query(uri, projection, null, null, null);
@@ -322,6 +312,10 @@ public class NotificationsFragment extends Fragment {
         }
         return null;
     }
-
+/*@Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }*/
 
 }
