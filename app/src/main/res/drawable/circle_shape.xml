@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/transparent" /> <!-- Fondo transparente -->
+    <corners android:radius="50dp" /> <!-- Hace que la forma sea completamente circular -->
+</shape>

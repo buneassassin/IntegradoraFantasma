@@ -10,5 +10,31 @@
     <string name="ya_tienes_cuenta_inicia_sesi_n">¿Ya tienes cuenta? Inicia sesión.</string>
     <string name="register">Register</string>
     <string name="ya_tienes_una_cuenta_inicia_sesi_n">¿Ya tienes una cuenta? Inicia sesión</string>
+    <string name="agregar_nuevo_tinaco">Agregar Nuevo Tinaco</string>
+    <string name="edit_profile" />
+    <string name="nombre_del_individuo">Nombre del individuo</string>
+    <string name="_000_000_0000">000 000 0000</string>
+    <string name="usario_ejemplo_com">Usario@ejemplo.com</string>
+    <string name="title_perfil">Perfil\n</string>
+    <string name="Contraseña">Password</string>
+    <string name="contra">*******************</string>
+    <string name="confirmar_contrase_a">Confirmar Contraseña</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="editar_contrase_a">Editar Contraseña</string>
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="telefono">Telefono</string>
+    <string name="correo">Correo</string>
+    <string name="nombre">Nombre</string>
+    <string name="usuario">Usuario</string>
+    <string name="editar_prerfil">Editar Prerfil</string>
+    <string name="olvidaste_tu_contrase_a">¿Olvidaste tu contraseña?</string>
+    <string name="correo_electr_nico">Correo electrónico</string>
+    <string name="introduce_tu_correo_electr_nico_y_te_enviaremos_un_correo">Introduce tu correo electrónico y te enviaremos un correo.</string>
+    <string name="enviar_correo">Enviar correo</string>
+    <string name="volver_al_inicio_de_sesi_n">Volver al inicio de sesión</string>
+    <string name="recuperar_contrase_a">Recuperar Contraseña</string>
+    <string name="cesor_5">Cesor 5</string>
+    <string name="tinacos_actuales">Tinacos Actuales</string>
 
 </resources>

@@ -13,7 +13,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
-import java.net.URI;
 
 public class RetrofitClient {
     private static RetrofitClient instance = null;
