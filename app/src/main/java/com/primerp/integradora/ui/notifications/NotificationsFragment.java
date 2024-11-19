@@ -35,6 +35,7 @@ import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Login;
 import com.primerp.integradora.R;
 import com.primerp.integradora.databinding.FragmentNotificationsBinding;
+import com.primerp.integradora.ui.tinaco.TinacoActivity;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -73,6 +74,7 @@ public class NotificationsFragment extends Fragment {
 
         sessionManager = new SessionManager(getContext());
         apiService = RetrofitClient.getInstance(getContext()).getApiService();
+        Button AgregarButton = binding.btnAddNew;
         Button logoutButton = binding.btnLogout;
         Button editperfil = binding.editProfile;
         ImageButton editarContrasena = binding.editContrasena;
@@ -105,6 +107,13 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 showImageDialog();
+            }
+        });
+        AgregarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), TinacoActivity.class);
+                startActivity(intent);
             }
         });
         return root;
@@ -312,10 +321,10 @@ public class NotificationsFragment extends Fragment {
         }
         return null;
     }
-/*@Override
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }*/
+    }
 
 }

@@ -7,7 +7,6 @@ import java.util.List;
 public class ApiResponse {
     private boolean success;
     private String message;
-    private List<Tinacos> tinacosList;
     private String token;
     private User user; // Agrega esto para manejar la información del usuario
 
@@ -28,11 +27,5 @@ public class ApiResponse {
         return user;
     }
 
-    public List<Tinacos> getTinacosList() {
-        return tinacosList;
-    }
 
-    public void setTinacosList(List<Tinacos> tinacosList) {
-        this.tinacosList = tinacosList;
-    }
 }

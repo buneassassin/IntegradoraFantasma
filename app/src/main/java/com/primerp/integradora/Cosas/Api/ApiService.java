@@ -7,6 +7,8 @@ import com.primerp.integradora.Cosas.Responst.LoginResponse;
 import com.primerp.integradora.Cosas.Responst.PassaworRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterResponse;
+import com.primerp.integradora.Cosas.Responst.TinacoRequest;
+import com.primerp.integradora.Cosas.Responst.TinacoResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -61,22 +63,22 @@ public interface ApiService {
     @GET("tinaco")
     Call<List<Tinacos>> getTinaco(@Header("Authorization") String authToken);
     @POST("tinaco")
-    Call<ApiResponse> addTinaco(
+    Call<TinacoResponse> addTinaco(
             @Header("Authorization") String authToken,
-            @Body Map<String, String> request
+            @Body TinacoRequest request
     );
     @DELETE("tinaco/{id}")
-    Call<ApiResponse> deleteTinaco(
+    Call<TinacoResponse> deleteTinaco(
             @Header("Authorization") String authToken,
-            @Body Map<String, String> request
+            @Body TinacoRequest request
     );
     @GET("tinaco/{id}")
-    Call<ApiResponse> getTinacoById(
+    Call<TinacoResponse> getTinacoById(
             @Header("Authorization") String authToken);
     @PUT("tinaco/{id}")
-    Call<ApiResponse> updateTinaco(
+    Call<TinacoResponse> updateTinaco(
             @Header("Authorization") String authToken,
-            @Body Map<String, String> request
+            @Body TinacoRequest request
     );
 
 
