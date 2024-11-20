@@ -1,10 +1,12 @@
 package com.primerp.integradora.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,7 @@ import com.primerp.integradora.Cosas.Modelos.Tinacos;
 import com.primerp.integradora.R;
 import com.primerp.integradora.databinding.FragmentDashboardBinding;
 import com.primerp.integradora.Cosas.Class.RetrofitClient;
+import com.primerp.integradora.ui.tinaco.TinacoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +55,15 @@ public class DashboardFragment extends Fragment {
         // Inicializa el RecyclerView correctamente
         recyclerView = root.findViewById(R.id.rv_tinacos);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        Button AgregarButton = binding.btnAddNew;
+        AgregarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), TinacoActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Configura el RecyclerView
         recyclerView();
@@ -104,10 +116,10 @@ public class DashboardFragment extends Fragment {
             }
         });
     }
-    /*@Override
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }*/
+    }
 
 }

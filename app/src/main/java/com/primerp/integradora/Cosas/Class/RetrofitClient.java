@@ -17,7 +17,7 @@ import java.io.IOException;
 public class RetrofitClient {
     private static RetrofitClient instance = null;
     private ApiService apiService;
-    private static final String BASE_URL = "http://192.168.1.13:8003/api/v1/";
+    private static final String BASE_URL = "http://192.168.1.4:8003/api/v1/";
 
     // Constructor privado con manejo de token
     private RetrofitClient(Context context) {
