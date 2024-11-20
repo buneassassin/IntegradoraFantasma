@@ -4,6 +4,8 @@ import com.primerp.integradora.Cosas.Modelos.Tinacos;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Cosas.Responst.LoginRequest;
 import com.primerp.integradora.Cosas.Responst.LoginResponse;
+import com.primerp.integradora.Cosas.Responst.NotificacionRequest;
+import com.primerp.integradora.Cosas.Responst.NotificacionResponse;
 import com.primerp.integradora.Cosas.Responst.PassaworRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterResponse;
@@ -26,30 +28,49 @@ import retrofit2.http.PUT;
 import retrofit2.http.Part;
 
 public interface ApiService {
-    // Link para el registro
+    //----------------------------------------------------------------//
+    //                  TODO Links para el registro                   //
+    //----------------------------------------------------------------//
+
     @POST("login")
-    Call<LoginResponse> loginUser(@Body LoginRequest loginRequest);
+    Call<LoginResponse> loginUser(
+            @Body LoginRequest loginRequest
+    );
     @POST("register")
-    Call<RegisterResponse> registerUser(@Body RegisterRequest registerRequest);
+    Call<RegisterResponse> registerUser(
+            @Body RegisterRequest registerRequest
+    );
     @POST("logout")
-    Call<ApiResponse> logout(@Header("Authorization") String authToken);
+    Call<ApiResponse> logout(
+            @Header("Authorization")
+            String authToken
+    );
     @GET("me")
-    Call<ApiResponse> getMe(@Header("Authorization") String authToken);
+    Call<ApiResponse> getMe(
+            @Header("Authorization")
+            String authToken
+    );
     @POST("update")
     Call<ApiResponse> updateUser(
             @Header("Authorization") String authToken,
             @Body RegisterRequest registerRequest
     );
-    // link para rescuperar contraseña
+    //----------------------------------------------------------------//
+    //              TODO links para rescuperar contraseña             //
+    //----------------------------------------------------------------//
+
     @POST("updatePassword")
     Call<ApiResponse> updatePassword(
             @Header("Authorization") String authToken,
             @Body PassaworRequest passwordMap
     );
     @POST("reset-password")
-    Call<ApiResponse> resetPassword(@Body RegisterRequest registerRequest);
-
-    //Link para las imgenes
+    Call<ApiResponse> resetPassword(
+            @Body RegisterRequest registerRequest
+    );
+    //----------------------------------------------------------------//
+    //             TODO Links para las imgenes                        //
+    //----------------------------------------------------------------//
     @Multipart
     @POST("imagen")
     Call<ApiResponse> uploadImage(
@@ -58,10 +79,19 @@ public interface ApiService {
     );
 
     @GET("imagen")
-    Call<ApiResponse> getimagen(@Header("Authorization") String authToken);
-    //Link para el tinaco
+    Call<ApiResponse> getimagen(
+            @Header("Authorization")
+            String authToken
+    );
+    //----------------------------------------------------------------//
+    //            TODO Links para el tinaco;                         //
+    //----------------------------------------------------------------//
+
     @GET("tinaco")
-    Call<List<Tinacos>> getTinaco(@Header("Authorization") String authToken);
+    Call<List<Tinacos>> getTinaco(
+            @Header("Authorization")
+            String authToken)
+            ;
     @POST("tinaco")
     Call<TinacoResponse> addTinaco(
             @Header("Authorization") String authToken,
@@ -79,6 +109,23 @@ public interface ApiService {
     Call<TinacoResponse> updateTinaco(
             @Header("Authorization") String authToken,
             @Body TinacoRequest request
+    );
+    //----------------------------------------------------------------//
+    //          TODO Link de notificacion                            //
+    //----------------------------------------------------------------//
+    @GET("notifications")
+    Call<NotificacionResponse> getNotifications(
+            @Header("Authorization") String authToken
+    );
+    @GET("notification/{id}")
+    Call<NotificacionResponse> getNotificationById(
+            @Header("Authorization") String authToken,
+            @Body NotificacionRequest request
+    );
+    @DELETE("notification/{id}")
+    Call<NotificacionResponse> deleteNotification(
+            @Header("Authorization") String authToken,
+            @Body NotificacionRequest request
     );
 
 
