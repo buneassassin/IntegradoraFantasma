@@ -8,6 +8,17 @@ public class Notificaciones {
     @SerializedName("is_read")
     private int isRead; // Cambiar de boolean a int
 
+    @SerializedName("formatted_created_at")
+    private int formattedcreatedat;
+
+    public int getformattedcreatedat() {
+        return formattedcreatedat;
+    }
+
+    public void setformattedcreatedat(int formattedcreatedat) {
+        this.formattedcreatedat = formattedcreatedat;
+    }
+
     // Getters y Setters
     public String getMessage() {
         return message;
@@ -29,4 +40,5 @@ public class Notificaciones {
     public boolean isReadAsBoolean() {
         return isRead == 1; // Considerar 1 como true y 0 como false
     }
+
 }

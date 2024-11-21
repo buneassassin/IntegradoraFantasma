@@ -28,14 +28,15 @@
 
     <ImageView
         android:id="@+id/notification_icon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="50dp"
+        android:layout_height="48dp"
         android:contentDescription="@string/notification_icon_desc"
         android:src="@drawable/ic_notification"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
-        app:layout_constraintStart_toEndOf="@+id/notification_date" />
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toEndOf="@+id/notification_message"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/notification_message"
@@ -68,8 +69,8 @@
 
     <ImageButton
         android:id="@+id/notification_delete_button"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="13dp"
+        android:layout_height="17dp"
         android:layout_marginEnd="0dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="delete_notification"
@@ -78,17 +79,5 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/notification_title"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/notification_read_indicator"
-        android:layout_width="73dp"
-        android:layout_height="65dp"
-        android:src="@drawable/ic_check_circle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.746"
-        app:layout_constraintStart_toEndOf="@+id/notification_message"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
