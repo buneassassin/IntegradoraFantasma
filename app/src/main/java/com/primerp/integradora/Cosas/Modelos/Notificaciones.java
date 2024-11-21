@@ -3,9 +3,9 @@ package com.primerp.integradora.Cosas.Modelos;
 import com.google.gson.annotations.SerializedName;
 
 public class Notificaciones {
+    private int id;
     private String message;
     private String title;
-
     @SerializedName("is_read")
     private int isRead; // Cambiar de boolean a int
 
@@ -48,6 +48,13 @@ public class Notificaciones {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }
