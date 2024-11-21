@@ -1,5 +1,6 @@
 package com.primerp.integradora.Cosas.Api;
 
+import com.primerp.integradora.Cosas.Modelos.Notificaciones;
 import com.primerp.integradora.Cosas.Modelos.Tinacos;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Cosas.Responst.LoginRequest;
@@ -114,9 +115,8 @@ public interface ApiService {
     //          TODO Link de notificacion                            //
     //----------------------------------------------------------------//
     @GET("notifications")
-    Call<NotificacionResponse> getNotifications(
-            @Header("Authorization") String authToken
-    );
+    Call<NotificacionResponse> getNotifications(@Header("Authorization") String token);
+
     @GET("notification/{id}")
     Call<NotificacionResponse> getNotificationById(
             @Header("Authorization") String authToken,

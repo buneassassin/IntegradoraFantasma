@@ -35,6 +35,7 @@ import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Login;
 import com.primerp.integradora.R;
 import com.primerp.integradora.databinding.FragmentNotificationsBinding;
+import com.primerp.integradora.ui.notificaciones.NotificacionesActivity;
 import com.primerp.integradora.ui.tinaco.TinacoActivity;
 
 import org.jetbrains.annotations.Nullable;
@@ -77,6 +78,7 @@ public class NotificationsFragment extends Fragment {
         Button AgregarButton = binding.btnAddNew;
         Button logoutButton = binding.btnLogout;
         Button editperfil = binding.editProfile;
+        Button notificacionesButton = binding.btnNotificacion;
         ImageButton editarContrasena = binding.editContrasena;
         ImageView Ver= binding.profileImage;
 
@@ -116,6 +118,14 @@ public class NotificationsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        notificacionesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), NotificacionesActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return root;
     }
 

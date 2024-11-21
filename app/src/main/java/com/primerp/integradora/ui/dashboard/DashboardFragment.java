@@ -106,7 +106,7 @@ public class DashboardFragment extends Fragment {
                     // Actualiza la lista en el adaptador existente
                     tinacoadapter.updateTinacosList(tinacosList);
                 } else {
-                    Log.d("DEBUG", "Respuesta fallida o vacía.");
+                    Log.e("API_RESPONSE", "Error: " + response.message());
                 }
             }
 
