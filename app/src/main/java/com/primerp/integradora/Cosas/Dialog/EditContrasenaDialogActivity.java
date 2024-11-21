@@ -3,8 +3,10 @@ package com.primerp.integradora.Cosas.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -40,14 +42,20 @@ public class EditContrasenaDialogActivity extends AppCompatActivity {
         confircontra = findViewById(R.id.confir_contra);
 
         saveButton = findViewById(R.id.saveButton);
-        cancelButton = findViewById(R.id.cancelButton);
 
         sessionManager = new SessionManager(this);
         apiService = RetrofitClient.getInstance(this).getApiService();
 
         saveButton.setOnClickListener(v -> editcontrasena());
 
-        cancelButton.setOnClickListener(v -> closet());
+        ImageView backIcon = findViewById(R.id.iconback);
+
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
     private void editcontrasena() {

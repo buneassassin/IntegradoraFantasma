@@ -37,8 +37,8 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
     @Override
     public void onBindViewHolder(@NonNull NotificacionAdapter.NotificacionViewHolder holder, int position) {
         Notificaciones notificacion = notificacionlist.get(position);
-        Log.d("DEBUG", "Notificación mostrada: " + notificacion.getMessage());
-        Log.d("DEBUG", "Minutos mostradas: " + notificacion.getformattedcreatedat());
+       // Log.d("DEBUG", "Notificación mostrada: " + notificacion.getMessage());
+       // Log.d("DEBUG", "Minutos mostradas: " + notificacion.getformattedcreatedat());
         holder.setData(notificacion);
 
     }
@@ -49,17 +49,19 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
     }
 
     public class NotificacionViewHolder extends RecyclerView.ViewHolder {
-        TextView message, date;
+        TextView message, date, tile;
 
 
         public NotificacionViewHolder(@NonNull View itemView) {
             super(itemView);
             message = itemView.findViewById(R.id.notification_message);
             date = itemView.findViewById(R.id.notification_date);
+            tile = itemView.findViewById(R.id.notification_title);
         }
         public void setData(Notificaciones notificacion) {
             // Asigna el mensaje directamente
             message.setText(String.valueOf(notificacion.getMessage()));
+            tile.setText(String.valueOf(notificacion.getTitle()));
 
             // Concatena el texto "Hace" con el número de minutos
             String tiempo = "Hace " + String.valueOf(notificacion.getformattedcreatedat()) + " minutos";

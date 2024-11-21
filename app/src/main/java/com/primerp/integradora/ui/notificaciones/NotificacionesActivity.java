@@ -3,7 +3,9 @@ package com.primerp.integradora.ui.notificaciones;
 import android.app.Notification;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +52,14 @@ public class NotificacionesActivity extends AppCompatActivity {
         // Inicializa el RecyclerView correctamente
         recyclerView = findViewById(R.id.rv_notificaciones);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ImageView backIcon = findViewById(R.id.iconback);
 
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         cargarnotificaciones();

@@ -2,8 +2,10 @@ package com.primerp.integradora.ui.tinaco;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -42,10 +44,14 @@ public class TinacoActivity extends AppCompatActivity {
         // inicialisamos el boton register
 
         Button registerButton = findViewById(R.id.regsirerButton);
-        //cancelButton
-        Button cancelButton = findViewById(R.id.cancelButton);
+        ImageView backIcon = findViewById(R.id.iconback);
 
-        cancelButton.setOnClickListener(v -> finish());
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         registerButton.setOnClickListener(v -> Tinacoadd());
 
 
