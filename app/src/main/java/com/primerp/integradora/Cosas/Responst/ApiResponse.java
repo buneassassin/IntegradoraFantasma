@@ -1,8 +1,6 @@
 package com.primerp.integradora.Cosas.Responst;
 
-import com.primerp.integradora.Cosas.Class.User;
-import com.primerp.integradora.Cosas.Modelos.Tinacos;
-import java.util.List;
+import com.primerp.integradora.Cosas.Modelos.User;
 
 public class ApiResponse {
     private boolean success;

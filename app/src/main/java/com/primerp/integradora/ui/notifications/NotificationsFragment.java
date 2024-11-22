@@ -5,7 +5,6 @@ import static android.app.Activity.RESULT_OK;
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -28,7 +27,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.primerp.integradora.Cosas.Api.ApiService;
 import com.primerp.integradora.Cosas.Class.RetrofitClient;
 import com.primerp.integradora.Cosas.Class.SessionManager;
-import com.primerp.integradora.Cosas.Class.User;
+import com.primerp.integradora.Cosas.Modelos.User;
 import com.primerp.integradora.Cosas.Dialog.EditContrasenaDialogActivity;
 import com.primerp.integradora.Cosas.Dialog.EditProfileDialogActivity;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
@@ -41,7 +40,6 @@ import com.primerp.integradora.ui.tinaco.TinacoActivity;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;

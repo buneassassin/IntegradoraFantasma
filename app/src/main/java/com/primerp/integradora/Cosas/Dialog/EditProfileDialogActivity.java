@@ -5,14 +5,16 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.primerp.integradora.Cosas.Api.ApiService;
 import com.primerp.integradora.Cosas.Class.RetrofitClient;
 import com.primerp.integradora.Cosas.Class.SessionManager;
-import com.primerp.integradora.Cosas.Class.User;
+import com.primerp.integradora.Cosas.Modelos.User;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Cosas.Responst.RegisterRequest;
 import com.primerp.integradora.R;
@@ -41,7 +43,6 @@ public class EditProfileDialogActivity extends AppCompatActivity {
 
         // Inicializar botones
         saveButton = findViewById(R.id.saveButton);
-        cancelButton = findViewById(R.id.cancelButton);
 
         sessionManager = new SessionManager(this);
         apiService = RetrofitClient.getInstance(this).getApiService();
@@ -50,8 +51,14 @@ public class EditProfileDialogActivity extends AppCompatActivity {
 
         // Lógica para el botón Guardar
         saveButton.setOnClickListener(v -> editProfile());
+        ImageView backIcon = findViewById(R.id.iconback);
 
-        cancelButton.setOnClickListener(v -> close());
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void editProfile() {

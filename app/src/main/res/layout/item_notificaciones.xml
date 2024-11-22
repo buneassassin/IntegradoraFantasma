@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
     android:background="@drawable/custom_edittext"
     android:padding="16dp"
-    android:layout_marginBottom="5dp">
+    android:id="@+id/layaut">
 
-    <!-- Título de la notificación -->
     <TextView
         android:id="@+id/notification_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="Notificación Título"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Notificación Título"/>
+        tools:text="Notificación Título" />
 
-    <!-- Icono de notificación -->
-
-    <!-- Mensaje de la notificación -->
 
     <ImageView
         android:id="@+id/notification_icon"
@@ -35,49 +34,54 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.7"
-        app:layout_constraintStart_toEndOf="@+id/notification_message"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/notification_message"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:text="@string/este_es_el_mensaje_de_la_notificaci_n"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/notification_title"
-        tools:text="Este es el mensaje de la notificación"/>
+        tools:text="Este es el mensaje de la notificación" />
 
-    <!-- Fecha de la notificación -->
+
     <TextView
         android:id="@+id/notification_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="@string/hace_10_minutos"
         android:textColor="@color/gray"
         android:textSize="12sp"
-        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/notification_message"
-        tools:text="Hace 10 minutos"/>
-
-    <!-- Botón para eliminar la notificación -->
-
-    <!-- Indicador de leída (por ejemplo, color o ícono) -->
+        tools:text="Hace 10 minutos" />
 
     <ImageButton
         android:id="@+id/notification_delete_button"
         android:layout_width="13dp"
         android:layout_height="17dp"
-        android:layout_marginEnd="0dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="delete_notification"
         android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/notification_title"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="257dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

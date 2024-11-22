@@ -1,7 +1,6 @@
 package com.primerp.integradora.Cosas.Responst;
 
 import com.primerp.integradora.Cosas.Modelos.Notificaciones;
-import com.primerp.integradora.Cosas.Modelos.Tinacos;
 
 import java.util.List;
 

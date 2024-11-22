@@ -1,72 +1,129 @@
 package com.primerp.integradora.Cosas.Adapter;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.primerp.integradora.Cosas.Api.ApiService;
+import com.primerp.integradora.Cosas.Dialog.NotificationDetailActivity;
 import com.primerp.integradora.Cosas.Modelos.Notificaciones;
 import com.primerp.integradora.R;
 
 import java.util.List;
 
-public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapter.NotificacionViewHolder>{
-    private List<Notificaciones> notificacionlist;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    public NotificacionAdapter(List<Notificaciones> tinacoslist) {
-        this.notificacionlist = tinacoslist;
+public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapter.NotificacionViewHolder> {
+    private List<Notificaciones> notificacionList;
+    private ApiService apiService;
+    private String authToken;
+
+    public NotificacionAdapter(List<Notificaciones> notificacionList, ApiService apiService, String authToken) {
+        this.notificacionList = notificacionList;
+        this.apiService = apiService;
+        this.authToken = authToken;
     }
-    // Método para actualizar la lista de datos
+
     public void updateNotificacionesList(List<Notificaciones> newNotificacionesList) {
-        this.notificacionlist = newNotificacionesList;
+        this.notificacionList = newNotificacionesList;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public NotificacionAdapter.NotificacionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NotificacionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_notificaciones, parent, false);
         return new NotificacionViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotificacionAdapter.NotificacionViewHolder holder, int position) {
-        Notificaciones notificacion = notificacionlist.get(position);
-        Log.d("DEBUG", "Notificación mostrada: " + notificacion.getMessage());
-        Log.d("DEBUG", "Minutos mostradas: " + notificacion.getformattedcreatedat());
+    public void onBindViewHolder(@NonNull NotificacionViewHolder holder, int position) {
+        Notificaciones notificacion = notificacionList.get(position);
         holder.setData(notificacion);
+        holder.deleteButton.setOnClickListener(v -> {
+            // Mostrar diálogo de confirmación para eliminar la notificación
+            new AlertDialog.Builder(v.getContext())
+                   .setCancelable(true)
+                    // Título y mensaje del diálogo de confirmación
+                   .setTitle("Confirmación")
+                    .setMessage("¿Estás seguro de que quieres eliminar esta notificación?")
+                    .setPositiveButton("Eliminar", (dialog, which) -> {
+                        // Acción de eliminar la notificación
+                        deleteNotification(notificacion.getId(), position);
+                    })
+                    .setNegativeButton("Cancelar", (dialog, which) -> {
+                        // Cerrar el diálogo sin hacer nada
+                        dialog.dismiss();
+                    })
+                    .show();
 
+        });
+        holder.itemView.setOnClickListener(v -> {
+            // Crear Intent para abrir la nueva actividad
+            Intent intent = new Intent(holder.itemView.getContext(), NotificationDetailActivity.class);
+            // Pasar datos de la notificación
+            intent.putExtra("notification_title", notificacion.getTitle());
+            intent.putExtra("notification_message", notificacion.getMessage());
+            intent.putExtra("notification_date", notificacion.getformattedcreatedat());intent.putExtra("id", notificacion.getId());
+            // Inicia la actividad
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return notificacionlist.size();
+        return notificacionList.size();
     }
 
-    public class NotificacionViewHolder extends RecyclerView.ViewHolder {
-        TextView message, date;
+    private void deleteNotification(int notificationId, int position) {
+        Call<Void> call = apiService.deleteNotification("Bearer " + authToken, notificationId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // Elimina el elemento de la lista y notifica al adaptador
+                    notificacionList.remove(position);
+                    notifyItemRemoved(position);
+                } else {
+                    Log.e("DELETE_API", "Error al eliminar notificación: " + response.message());
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("DELETE_API", "Error: " + t.getMessage());
+            }
+        });
+    }
+
+    public static class NotificacionViewHolder extends RecyclerView.ViewHolder {
+        TextView message, date, title;
+        ImageButton deleteButton;
 
         public NotificacionViewHolder(@NonNull View itemView) {
             super(itemView);
             message = itemView.findViewById(R.id.notification_message);
             date = itemView.findViewById(R.id.notification_date);
+            title = itemView.findViewById(R.id.notification_title);
+            deleteButton = itemView.findViewById(R.id.notification_delete_button);
         }
-        public void setData(Notificaciones notificacion) {
-            // Asigna el mensaje directamente
-            message.setText(String.valueOf(notificacion.getMessage()));
 
-            // Concatena el texto "Hace" con el número de minutos
-            String tiempo = "Hace " + String.valueOf(notificacion.getformattedcreatedat()) + " minutos";
+        public void setData(Notificaciones notificacion) {
+            message.setText(notificacion.getMessage());
+            title.setText(notificacion.getTitle());
+            String tiempo = "Hace " + notificacion.getformattedcreatedat() + " minutos";
             date.setText(tiempo);
         }
-
-
     }
-
 }
