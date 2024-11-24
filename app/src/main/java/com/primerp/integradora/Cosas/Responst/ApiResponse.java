@@ -6,7 +6,7 @@ public class ApiResponse {
     private boolean success;
     private String message;
     private String token;
-    private User user; // Agrega esto para manejar la información del usuario
+    private User user;
 
     // Getters
     public boolean isSuccess() {

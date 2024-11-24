@@ -40,8 +40,6 @@ public class EditProfileDialogActivity extends AppCompatActivity {
         editName = findViewById(R.id.edit_name);
         editEmail = findViewById(R.id.edit_email);
         editPhone = findViewById(R.id.edit_phone);
-
-        // Inicializar botones
         saveButton = findViewById(R.id.saveButton);
 
         sessionManager = new SessionManager(this);
@@ -49,7 +47,6 @@ public class EditProfileDialogActivity extends AppCompatActivity {
 
         loadUserData();
 
-        // Lógica para el botón Guardar
         saveButton.setOnClickListener(v -> editProfile());
         ImageView backIcon = findViewById(R.id.iconback);
 
@@ -84,10 +81,8 @@ public class EditProfileDialogActivity extends AppCompatActivity {
         String authToken = "Bearer " + token;
         Log.d("DEBUG", "Token con prefijo Bearer: " + authToken);
 
-        // Crear objeto RegisterRequest
         RegisterRequest registerRequest = new RegisterRequest(user, name, email, phone);
 
-        // Llamar a la API
         Call<ApiResponse> call = apiService.updateUser(authToken, registerRequest);
         call.enqueue(new Callback<ApiResponse>() {
             @Override

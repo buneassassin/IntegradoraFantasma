@@ -12,13 +12,12 @@ import com.primerp.integradora.R;
 
 public class Esplach extends AppCompatActivity {
 
-    private SharedPreferences preferences; // Declarar como variable de clase
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Inicializar SharedPreferences
         preferences = getSharedPreferences("SplashPrefs", MODE_PRIVATE);
         boolean isSplashShown = preferences.getBoolean("isSplashShown", false);
 

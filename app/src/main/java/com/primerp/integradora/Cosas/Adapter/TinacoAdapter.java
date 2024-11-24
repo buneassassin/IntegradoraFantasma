@@ -21,7 +21,6 @@ public class TinacoAdapter extends RecyclerView.Adapter<TinacoAdapter.TinacoView
         this.tinacoslist = tinacoslist;
     }
 
-    // Método para actualizar la lista de datos
     public void updateTinacosList(List<Tinacos> newTinacosList) {
         this.tinacoslist = newTinacosList;
         notifyDataSetChanged();

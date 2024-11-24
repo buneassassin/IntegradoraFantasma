@@ -17,11 +17,9 @@ import java.io.IOException;
 public class RetrofitClient {
     private static RetrofitClient instance = null;
     private ApiService apiService;
-    private static final String BASE_URL = "http://192.168.1.4:8003/api/v1/";
+    private static final String BASE_URL = "http://192.168.115.148:8003/api/v1/";
 
-    // Constructor privado con manejo de token
     private RetrofitClient(Context context) {
-        // Agrega un interceptor para incluir el token en las peticiones
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
                     @Override
@@ -29,11 +27,9 @@ public class RetrofitClient {
                         Request originalRequest = chain.request();
                         Request.Builder builder = originalRequest.newBuilder();
 
-                        // Obtener el token de SessionManager
                         String token = new SessionManager(context).getToken();
                         Log.d("DEBUG", "Token desde interceptor: " + token);
                         if (token != null) {
-                            // Añadir el token al encabezado de la petición
                             builder.header("Authorization", "Bearer " + token);
                         }
 
@@ -43,8 +39,6 @@ public class RetrofitClient {
                 })
                 .build();
 
-
-        // Configuración de Retrofit
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)
@@ -53,18 +47,12 @@ public class RetrofitClient {
 
         apiService = retrofit.create(ApiService.class);
     }
-
-    // Método estático para obtener una instancia de RetrofitClient
     public static synchronized RetrofitClient getInstance(Context context) {
         if (instance == null) {
             instance = new RetrofitClient(context);
         }
         return instance;
     }
-
-
-
-    // Método para obtener el servicio de la API
     public ApiService getApiService() {
         return apiService;
     }

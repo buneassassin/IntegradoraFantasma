@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
         if (token != null) {
             Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
-            finish(); // Termina la actividad de login para evitar que el usuario regrese al login
+            finish();
         }
 
         // Si no hay token, mostrar la pantalla de inicio de sesión
@@ -45,7 +45,6 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Llama al método para iniciar sesión
                 loginUser();
             }
         });
@@ -63,7 +62,6 @@ public class Login extends AppCompatActivity {
 
         LoginRequest loginRequest = new LoginRequest(email, password);
 
-        // Ajuste: Utiliza getApiService() en lugar de createService()
         ApiService apiService = RetrofitClient.getInstance(this).getApiService();
 
         Call<LoginResponse> call = apiService.loginUser(loginRequest);
