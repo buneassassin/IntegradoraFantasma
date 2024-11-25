@@ -71,18 +71,15 @@ public class DashboardFragment extends Fragment {
     public void recyclerView() {
         String token = sessionManager.getToken();
 
-        Log.d("DEBUG", "Token recuperado: " + token);
-
         if (token == null || token.isEmpty()) {
             Toast.makeText(getContext(), "Token no válido", Toast.LENGTH_SHORT).show();
             return;
         }
 
         tinacoadapter = new TinacoAdapter(new ArrayList<>());
-        recyclerView.setAdapter(tinacoadapter); // Asigna el adaptador al RecyclerView
+        recyclerView.setAdapter(tinacoadapter);
 
         String authToken = "Bearer " + token;
-        Log.d("DEBUG", "Token con prefijo Bearer: " + authToken);
 
         Call<List<Tinacos>> call = apiService.getTinaco(authToken);
         call.enqueue(new retrofit2.Callback<List<Tinacos>>() {
@@ -91,19 +88,26 @@ public class DashboardFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Tinacos> tinacosList = response.body();
 
-                    Log.d("DEBUG", "Cantidad de tinacos obtenidos: " + tinacosList.size());
-                    for (Tinacos tinaco : tinacosList) {
-                        Log.d("DEBUG", "Tinaco: " + tinaco.getNombre());
+                    if (tinacosList.isEmpty()) {
+                        // Muestra el estado vacío
+                        recyclerView.setVisibility(View.GONE);
+                        binding.emptyStateLayout.setVisibility(View.VISIBLE);
+                    } else {
+                        // Muestra los datos en el RecyclerView
+                        tinacoadapter.updateTinacosList(tinacosList);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        binding.emptyStateLayout.setVisibility(View.GONE);
                     }
-                    tinacoadapter.updateTinacosList(tinacosList);
                 } else {
                     Log.e("API_RESPONSE", "Error: " + response.message());
+                    Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Tinacos>> call, Throwable t) {
                 Log.d("DEBUG", "Error: " + t.getMessage());
+                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
             }
         });
     }
