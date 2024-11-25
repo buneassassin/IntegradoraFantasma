@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.primerp.integradora.Cosas.Api.ApiService;
 import com.primerp.integradora.Cosas.Dialog.ForgotPasswordActivity;
+import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Cosas.Responst.LoginRequest;
 import com.primerp.integradora.Cosas.Responst.LoginResponse;
 import com.primerp.integradora.Cosas.Class.RetrofitClient;
@@ -30,11 +31,11 @@ public class Login extends AppCompatActivity {
         String token = getSharedPreferences("user_prefs", MODE_PRIVATE).getString("auth_token", null);
 
         if (token != null) {
-            Intent intent = new Intent(Login.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            validateToken(token);
+        } else {
+            setContentView(R.layout.activity_login);
+            initViews();
         }
-
         // Si no hay token, mostrar la pantalla de inicio de sesión
         setContentView(R.layout.activity_login);
 
@@ -49,7 +50,6 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
 
     private void loginUser() {
         String email = emailEditText.getText().toString().trim();
@@ -106,11 +106,45 @@ public class Login extends AppCompatActivity {
     }
 
     public void onForgotPasswordClick(View view) {
-        // Acción al hacer clic, como redirigir a otra pantalla o mostrar un mensaje
-        Toast.makeText(this, "Redirigiendo a recuperar contraseña...", Toast.LENGTH_SHORT).show();
-        // Ejemplo de redirección:
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
+    private void validateToken(String token) {
+        ApiService apiService = RetrofitClient.getInstance(this).getApiService();
 
+        Call<ApiResponse> call = apiService.getMe("Bearer " + token);
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    setContentView(R.layout.activity_login);
+                    initViews();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Toast.makeText(Login.this, "Error al validar el token: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                setContentView(R.layout.activity_login);
+                initViews();
+            }
+        });
+    }
+
+    private void initViews() {
+        emailEditText = findViewById(R.id.username);
+        passwordEditText = findViewById(R.id.password);
+
+        Button loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginUser();
+            }
+        });
+    }
 }

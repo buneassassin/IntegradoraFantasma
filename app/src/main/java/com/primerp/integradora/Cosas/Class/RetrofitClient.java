@@ -17,7 +17,7 @@ import java.io.IOException;
 public class RetrofitClient {
     private static RetrofitClient instance = null;
     private ApiService apiService;
-    private static final String BASE_URL = "http://192.168.1.4:8003/api/v1/";
+    private static final String BASE_URL = "http://192.168.126.200:8003/api/v1/";
 
     private RetrofitClient(Context context) {
         OkHttpClient client = new OkHttpClient.Builder()
