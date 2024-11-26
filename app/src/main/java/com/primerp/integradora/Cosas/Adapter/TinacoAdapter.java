@@ -1,5 +1,6 @@
 package com.primerp.integradora.Cosas.Adapter;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.primerp.integradora.Cosas.Modelos.Tinacos;
 import com.primerp.integradora.R;
+import com.primerp.integradora.ui.tinacoDetalle.TinacoDetalleActivity;
 
 import java.util.List;
 
@@ -21,7 +23,6 @@ public class TinacoAdapter extends RecyclerView.Adapter<TinacoAdapter.TinacoView
         this.tinacoslist = tinacoslist;
     }
 
-    // Método para actualizar la lista de datos
     public void updateTinacosList(List<Tinacos> newTinacosList) {
         this.tinacoslist = newTinacosList;
         notifyDataSetChanged();
@@ -58,6 +59,14 @@ public class TinacoAdapter extends RecyclerView.Adapter<TinacoAdapter.TinacoView
 
         public void setData(Tinacos tinacos) {
             tvTitle.setText(tinacos.getNombre());
+
+            itemView.setOnClickListener(view -> {
+                Intent intent = new Intent(view.getContext(), TinacoDetalleActivity.class);
+
+                intent.putExtra("TINACO_ID", tinacos.getId());
+
+                view.getContext().startActivity(intent);
+            });
         }
     }
 }

@@ -5,18 +5,18 @@ import com.google.gson.annotations.SerializedName;
 public class Tinacos {
     private int id;
 
-    @SerializedName("name") // Mapea "name" del JSON al atributo "nombre"
-    private String nombre;
+    @SerializedName("name")
+    private String name;
 
-    @SerializedName("nivel_del_agua") // Mapea "nivel_del_agua" del JSON al atributo correspondiente
+    @SerializedName("nivel_del_agua")
     private int nivelDelAgua;
 
-    @SerializedName("id_usuario") // Mapea "id_usuario" del JSON al atributo idUsuario (opcional)
+    @SerializedName("id_usuario")
     private int idUsuario;
 
 
     public Tinacos(String nombre, int nivelDelAgua) {
-        this.nombre = nombre;
+        this.name = nombre;
         this.nivelDelAgua = nivelDelAgua;
     }
 
@@ -30,11 +30,11 @@ public class Tinacos {
     }
 
     public String getNombre() {
-        return nombre;
+        return name;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.name = nombre;
     }
 
     public int getNivelDelAgua() {

@@ -38,10 +38,8 @@ public class TinacoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tinaco);
         nombrEditText = findViewById(R.id.nombre);
 
-        // Inicializar la sesion y el API
         sessionManager = new SessionManager(this);
         apiService = RetrofitClient.getInstance(this).getApiService();
-        // inicialisamos el boton register
 
         Button registerButton = findViewById(R.id.regsirerButton);
         ImageView backIcon = findViewById(R.id.iconback);
@@ -70,8 +68,6 @@ public class TinacoActivity extends AppCompatActivity {
 
         TinacoRequest tinacoRequest = new TinacoRequest(nombre);
 
-
-        // Llamada a la API para obtener la lista de tinacos
         Call<TinacoResponse> call = apiService.addTinaco(authToken,tinacoRequest);
         call.enqueue(new retrofit2.Callback<TinacoResponse>() {
             @Override

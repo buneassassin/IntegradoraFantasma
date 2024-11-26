@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
     android:background="@drawable/custom_edittext"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:id="@+id/layaut">
 
     <!-- Título del tinaco -->
 
@@ -43,22 +44,6 @@
         tools:ignore="ContentDescription" />
 
 
-    <TextView
-        android:id="@+id/tvEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:text="Estado: Apagado"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/tvTitle"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        tools:text="Estado: Apagado" />
-
-
     <LinearLayout
         android:id="@+id/tvNivelAgua"
         android:layout_width="129dp"
@@ -68,8 +53,8 @@
         android:paddingBottom="5dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/tvEstado"
-        app:layout_constraintTop_toBottomOf="@id/tvEstado">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
         <!-- Texto normal -->
 

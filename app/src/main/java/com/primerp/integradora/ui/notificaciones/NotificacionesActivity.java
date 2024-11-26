@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,9 +39,10 @@ public class NotificacionesActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private ApiService apiService;
     private TextView messageView;
-
+    private LinearLayout emptyView; // Agrega esta línea
     private RecyclerView recyclerView;
     private NotificacionAdapter notificacionadapter;
+
 
 
 
@@ -53,6 +55,7 @@ public class NotificacionesActivity extends AppCompatActivity {
         apiService = RetrofitClient.getInstance(this).getApiService();
         recyclerView = findViewById(R.id.rv_notificaciones);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        emptyView = findViewById(R.id.empty_view); // Vincula la vista de mensaje vacío
         ImageView backIcon = findViewById(R.id.iconback);
         backIcon.setOnClickListener(v -> finish());
 
@@ -76,7 +79,14 @@ public class NotificacionesActivity extends AppCompatActivity {
             public void onResponse(Call<NotificacionResponse> call, retrofit2.Response<NotificacionResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Notificaciones> notificacionesList = response.body().getData();
-                    notificacionadapter.updateNotificacionesList(notificacionesList);
+                    if (notificacionesList.isEmpty()) {
+                        emptyView.setVisibility(View.VISIBLE); // Muestra el mensaje vacío
+                        recyclerView.setVisibility(View.GONE); // Oculta la lista
+                    } else {
+                        emptyView.setVisibility(View.GONE); // Oculta el mensaje vacío
+                        recyclerView.setVisibility(View.VISIBLE); // Muestra la lista
+                        notificacionadapter.updateNotificacionesList(notificacionesList);
+                    }
                 } else {
                     Log.e("API_RESPONSE", "Error: " + response.message());
                 }
@@ -85,8 +95,9 @@ public class NotificacionesActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<NotificacionResponse> call, Throwable t) {
                 Log.e("API_RESPONSE", "Error: " + t.getMessage());
+                emptyView.setVisibility(View.VISIBLE); // En caso de error, muestra el mensaje vacío
+                recyclerView.setVisibility(View.GONE); // Oculta la lista
             }
         });
     }
-
 }

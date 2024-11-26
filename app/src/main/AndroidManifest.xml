@@ -23,6 +23,15 @@
         android:theme="@style/Theme.Integradora"
         tools:targetApi="31">
         <activity
+            android:name=".Cosas.Dialog.EditTinacoDialogActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.tinacoGrafica.TinacoGraficaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.tinacoDetalle.TinacoDetalleActivity"
+            android:exported="false" />
+        <activity
             android:name=".Cosas.Dialog.NotificationDetailActivity"
             android:exported="false" />
         <activity

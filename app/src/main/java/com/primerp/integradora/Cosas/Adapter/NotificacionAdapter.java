@@ -52,31 +52,24 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
         Notificaciones notificacion = notificacionList.get(position);
         holder.setData(notificacion);
         holder.deleteButton.setOnClickListener(v -> {
-            // Mostrar diálogo de confirmación para eliminar la notificación
             new AlertDialog.Builder(v.getContext())
                    .setCancelable(true)
-                    // Título y mensaje del diálogo de confirmación
                    .setTitle("Confirmación")
                     .setMessage("¿Estás seguro de que quieres eliminar esta notificación?")
                     .setPositiveButton("Eliminar", (dialog, which) -> {
-                        // Acción de eliminar la notificación
                         deleteNotification(notificacion.getId(), position);
                     })
                     .setNegativeButton("Cancelar", (dialog, which) -> {
-                        // Cerrar el diálogo sin hacer nada
                         dialog.dismiss();
                     })
                     .show();
 
         });
         holder.itemView.setOnClickListener(v -> {
-            // Crear Intent para abrir la nueva actividad
             Intent intent = new Intent(holder.itemView.getContext(), NotificationDetailActivity.class);
-            // Pasar datos de la notificación
             intent.putExtra("notification_title", notificacion.getTitle());
             intent.putExtra("notification_message", notificacion.getMessage());
             intent.putExtra("notification_date", notificacion.getformattedcreatedat());intent.putExtra("id", notificacion.getId());
-            // Inicia la actividad
             holder.itemView.getContext().startActivity(intent);
         });
     }
@@ -92,7 +85,6 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    // Elimina el elemento de la lista y notifica al adaptador
                     notificacionList.remove(position);
                     notifyItemRemoved(position);
                 } else {

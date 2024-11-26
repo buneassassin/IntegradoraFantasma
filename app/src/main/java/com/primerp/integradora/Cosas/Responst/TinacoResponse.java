@@ -9,8 +9,18 @@ public class TinacoResponse {
     public List<Tinacos> getTinacosList() {
         return tinacosList;
     }
+    private Tinacos tinaco;
 
     public void setTinacosList(List<Tinacos> tinacosList) {
         this.tinacosList = tinacosList;
+    }
+
+
+    public Tinacos getTinaco() {
+        return tinaco;
+    }
+
+    public void setTinaco(Tinacos tinaco) {
+        this.tinaco = tinaco;
     }
 }

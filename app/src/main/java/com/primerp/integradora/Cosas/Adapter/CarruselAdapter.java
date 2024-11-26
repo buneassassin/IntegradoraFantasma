@@ -13,7 +13,7 @@ import java.util.List;
 public class CarruselAdapter extends PagerAdapter {
 
     private Context context;
-    private List<Integer> images; // Lista de IDs de recursos de las imágenes
+    private List<Integer> images;
 
     public CarruselAdapter(Context context, List<Integer> images) {
         this.context = context;

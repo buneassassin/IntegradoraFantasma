@@ -99,21 +99,26 @@ public interface ApiService {
     @DELETE("tinaco/{id}")
     Call<TinacoResponse> deleteTinaco(
             @Header("Authorization") String authToken,
-            @Body TinacoRequest request
+            @Path("id") int tinacoId
     );
     @GET("tinaco/{id}")
     Call<TinacoResponse> getTinacoById(
-            @Header("Authorization") String authToken);
+            @Header("Authorization") String authToken,
+            @Path("id") int tinacoId
+    );
     @PUT("tinaco/{id}")
     Call<TinacoResponse> updateTinaco(
             @Header("Authorization") String authToken,
+            @Path("id") int tinacoId,
             @Body TinacoRequest request
     );
     //----------------------------------------------------------------//
     //          TODO Link de notificacion                            //
     //----------------------------------------------------------------//
     @GET("notifications")
-    Call<NotificacionResponse> getNotifications(@Header("Authorization") String token);
+    Call<NotificacionResponse> getNotifications(
+            @Header("Authorization") String token
+    );
 
     @GET("notification/{id}")
     Call<Void> getNotificationById(
@@ -121,7 +126,10 @@ public interface ApiService {
             @Path("id") int notificationId
     );
     @DELETE("notifications/{id}")
-    Call<Void> deleteNotification(@Header("Authorization") String authToken, @Path("id") int notificationId);
+    Call<Void> deleteNotification(
+            @Header("Authorization") String authToken,
+            @Path("id") int notificationId
+    );
 
 
 
