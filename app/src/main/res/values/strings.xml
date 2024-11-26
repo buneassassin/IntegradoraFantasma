@@ -47,5 +47,6 @@
     <string name="nivel_del_agua">Nivel del agua</string>
     <string name="editar">Editar</string>
     <string name="nombre_del_tinaco">Nombre del tinaco</string>
+    <string name="editar_mi_tinaco">Editar Mi Tinaco</string>
 
 </resources>

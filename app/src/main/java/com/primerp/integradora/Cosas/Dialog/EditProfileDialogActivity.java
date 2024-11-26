@@ -28,7 +28,7 @@ public class EditProfileDialogActivity extends AppCompatActivity {
     private ApiService apiService;
     private SessionManager sessionManager;
     private EditText editName, editEmail, editPhone, editUser;
-    private Button saveButton, cancelButton;
+    private Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +104,6 @@ public class EditProfileDialogActivity extends AppCompatActivity {
         });
     }
 
-    public void close() {
-        Intent intent = new Intent(this, NotificationsFragment.class);
-        startActivity(intent);
-        finish();
-    }
     private void loadUserData() {
         String token = sessionManager.getToken();
 

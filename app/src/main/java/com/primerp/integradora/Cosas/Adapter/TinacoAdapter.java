@@ -60,10 +60,11 @@ public class TinacoAdapter extends RecyclerView.Adapter<TinacoAdapter.TinacoView
         public void setData(Tinacos tinacos) {
             tvTitle.setText(tinacos.getNombre());
 
-            // Configurar el click listener
             itemView.setOnClickListener(view -> {
-                // Crear un Intent para iniciar otra actividad
                 Intent intent = new Intent(view.getContext(), TinacoDetalleActivity.class);
+
+                intent.putExtra("TINACO_ID", tinacos.getId());
+
                 view.getContext().startActivity(intent);
             });
         }

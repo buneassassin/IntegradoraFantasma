@@ -1,5 +1,6 @@
 package com.primerp.integradora.Cosas.Responst;
 
+import com.primerp.integradora.Cosas.Modelos.Tinacos;
 import com.primerp.integradora.Cosas.Modelos.User;
 
 public class ApiResponse {
@@ -21,9 +22,13 @@ public class ApiResponse {
         return token;
     }
 
-    public User getUser() { // Getter para el objeto User
+    public User getUser() {
         return user;
     }
+
+
+
+
 
 
 }

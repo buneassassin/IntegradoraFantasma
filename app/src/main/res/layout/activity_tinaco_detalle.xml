@@ -17,9 +17,8 @@
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!-- Título -->
     <TextView
-        android:id="@+id/textTitulo"
+        android:id="@+id/textTituloTinaco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -40,7 +39,7 @@
         android:src="@drawable/imagen1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textTitulo" />
+        app:layout_constraintTop_toBottomOf="@id/textTituloTinaco" />
 
     <!-- Texto Opciones -->
     <TextView
@@ -97,7 +96,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- CardView: Editar -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardEditar"
         android:layout_width="0dp"
@@ -130,7 +128,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-    <!-- Botón: Logout -->
 
     <Button
         android:id="@+id/btn_logout"
@@ -207,6 +204,7 @@
             android:textSize="14sp" />
 
         <ImageView
+            android:id="@+id/irGarfica"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_back" />

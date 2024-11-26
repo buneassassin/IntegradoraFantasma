@@ -6,7 +6,7 @@ public class Tinacos {
     private int id;
 
     @SerializedName("name")
-    private String nombre;
+    private String name;
 
     @SerializedName("nivel_del_agua")
     private int nivelDelAgua;
@@ -16,7 +16,7 @@ public class Tinacos {
 
 
     public Tinacos(String nombre, int nivelDelAgua) {
-        this.nombre = nombre;
+        this.name = nombre;
         this.nivelDelAgua = nivelDelAgua;
     }
 
@@ -30,11 +30,11 @@ public class Tinacos {
     }
 
     public String getNombre() {
-        return nombre;
+        return name;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.name = nombre;
     }
 
     public int getNivelDelAgua() {

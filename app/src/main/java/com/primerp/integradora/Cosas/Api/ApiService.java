@@ -109,7 +109,8 @@ public interface ApiService {
     @PUT("tinaco/{id}")
     Call<TinacoResponse> updateTinaco(
             @Header("Authorization") String authToken,
-            @Path("id") int tinacoId
+            @Path("id") int tinacoId,
+            @Body TinacoRequest request
     );
     //----------------------------------------------------------------//
     //          TODO Link de notificacion                            //
