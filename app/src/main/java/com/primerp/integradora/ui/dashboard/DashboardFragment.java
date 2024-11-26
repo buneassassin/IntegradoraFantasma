@@ -89,11 +89,9 @@ public class DashboardFragment extends Fragment {
                     List<Tinacos> tinacosList = response.body();
 
                     if (tinacosList.isEmpty()) {
-                        // Muestra el estado vacío
                         recyclerView.setVisibility(View.GONE);
                         binding.emptyStateLayout.setVisibility(View.VISIBLE);
                     } else {
-                        // Muestra los datos en el RecyclerView
                         tinacoadapter.updateTinacosList(tinacosList);
                         recyclerView.setVisibility(View.VISIBLE);
                         binding.emptyStateLayout.setVisibility(View.GONE);

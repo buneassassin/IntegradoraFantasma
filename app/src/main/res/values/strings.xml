@@ -43,5 +43,9 @@
     <string name="no_hay_tinacos_icon">no_hay_tinacos_icon</string>
     <string name="no_hay_tinacos">no_hay_tinacos</string>
     <string name="no_hay_actuelamente_tinacos">No hay actuelamente tinacos</string>
+    <string name="opciones">Opciones</string>
+    <string name="nivel_del_agua">Nivel del agua</string>
+    <string name="editar">Editar</string>
+    <string name="nombre_del_tinaco">Nombre del tinaco</string>
 
 </resources>

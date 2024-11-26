@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
     android:background="@drawable/custom_edittext"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:id="@+id/layaut">
 
     <!-- Título del tinaco -->
 

@@ -1,5 +1,6 @@
 package com.primerp.integradora.Cosas.Adapter;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.primerp.integradora.Cosas.Modelos.Tinacos;
 import com.primerp.integradora.R;
+import com.primerp.integradora.ui.tinacoDetalle.TinacoDetalleActivity;
 
 import java.util.List;
 
@@ -57,6 +59,13 @@ public class TinacoAdapter extends RecyclerView.Adapter<TinacoAdapter.TinacoView
 
         public void setData(Tinacos tinacos) {
             tvTitle.setText(tinacos.getNombre());
+
+            // Configurar el click listener
+            itemView.setOnClickListener(view -> {
+                // Crear un Intent para iniciar otra actividad
+                Intent intent = new Intent(view.getContext(), TinacoDetalleActivity.class);
+                view.getContext().startActivity(intent);
+            });
         }
     }
 }
