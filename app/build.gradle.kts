@@ -58,6 +58,7 @@ dependencies {
     implementation("com.airbnb.android:lottie:5.0.3")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    testImplementation ("org.mockito:mockito-core:4.11.0")
 
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 

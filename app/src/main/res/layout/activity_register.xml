@@ -142,6 +142,7 @@
                     android:layout_marginTop="8dp" />
 
                 <!-- Botón de Registro -->
+
                 <Button
                     android:id="@+id/registerButton"
                     android:layout_width="0dp"
@@ -171,8 +172,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/registerButton"
                 android:clickable="true"
-                android:focusable="true"
-                android:onClick="onRegisterClick" />
+                android:focusable="true"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

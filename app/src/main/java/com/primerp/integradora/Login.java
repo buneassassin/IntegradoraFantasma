@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,8 @@ import retrofit2.Response;
 public class Login extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText;
+    private TextView registrationPrompt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,15 @@ public class Login extends AppCompatActivity {
                 loginUser();
             }
         });
+        registrationPrompt = findViewById(R.id.registrationPrompt);
+        registrationPrompt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void loginUser() {
@@ -98,11 +110,6 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this, "Error en la conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public void onRegistrationPromptClick(View view) {
-        Intent intent = new Intent(this, Register.class);
-        startActivity(intent);
     }
 
     public void onForgotPasswordClick(View view) {

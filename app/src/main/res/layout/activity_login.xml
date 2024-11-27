@@ -124,8 +124,7 @@
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:clickable="true"
-                android:focusable="true"
-                android:onClick="onRegistrationPromptClick" />
+                android:focusable="true" />
 
             <!-- Texto de Olvidó su contraseña -->
             <TextView
