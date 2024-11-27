@@ -35,7 +35,7 @@ android {
 }
 
 dependencies {
-
+    implementation ("androidx.transition:transition:1.4.1")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)

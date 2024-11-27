@@ -20,7 +20,6 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
     public NotificacionAdapter(List<Notificaciones> tinacoslist) {
         this.notificacionlist = tinacoslist;
     }
-    // Método para actualizar la lista de datos
     public void updateNotificacionesList(List<Notificaciones> newNotificacionesList) {
         this.notificacionlist = newNotificacionesList;
         notifyDataSetChanged();
