@@ -2,8 +2,10 @@ package com.primerp.integradora.ui.tinaco;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -36,16 +38,18 @@ public class TinacoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tinaco);
         nombrEditText = findViewById(R.id.nombre);
 
-        // Inicializar la sesion y el API
         sessionManager = new SessionManager(this);
         apiService = RetrofitClient.getInstance(this).getApiService();
-        // inicialisamos el boton register
 
         Button registerButton = findViewById(R.id.regsirerButton);
-        //cancelButton
-        Button cancelButton = findViewById(R.id.cancelButton);
+        ImageView backIcon = findViewById(R.id.iconback);
 
-        cancelButton.setOnClickListener(v -> finish());
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         registerButton.setOnClickListener(v -> Tinacoadd());
 
 
@@ -64,8 +68,6 @@ public class TinacoActivity extends AppCompatActivity {
 
         TinacoRequest tinacoRequest = new TinacoRequest(nombre);
 
-
-        // Llamada a la API para obtener la lista de tinacos
         Call<TinacoResponse> call = apiService.addTinaco(authToken,tinacoRequest);
         call.enqueue(new retrofit2.Callback<TinacoResponse>() {
             @Override

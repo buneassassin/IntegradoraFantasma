@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wave2"
-    tools:context=".Cosas.Dialog.EditContrasenaDialogActivity">
+    tools:context=".Cosas.Dialog.EditTinacoDialogActivity">
 
     <ImageView
         android:id="@+id/iconback"
@@ -40,46 +40,29 @@
                 android:id="@+id/editProfileTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/editar_contrase_a"
+                android:text="@string/editar_mi_tinaco"
                 android:textAlignment="center"
                 android:textColor="@color/purple"
                 android:textSize="36sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="20dp" />
             <EditText
-                android:id="@+id/edit_contra"
+                android:id="@+id/edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/custom_edittext"
-                android:hint="@string/contrase_a"
+                android:hint="Nombre"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:textColor="@color/black"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:maxLength="40"
                 android:singleLine="true"
                 android:scrollHorizontally="true" />
-            <!-- Campo de Nombre -->
-            <EditText
-                android:id="@+id/confir_contra"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/custom_edittext"
-                android:hint="@string/confirmar_contrase_a"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:textColor="@color/black"
-                android:inputType="textPassword"
-                android:maxLength="40"
-                android:singleLine="true"
-                android:scrollHorizontally="true" />
-            <!-- Botón Guardar -->
+
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="match_parent"
@@ -93,3 +76,4 @@
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

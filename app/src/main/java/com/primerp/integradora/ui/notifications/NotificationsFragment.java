@@ -5,7 +5,6 @@ import static android.app.Activity.RESULT_OK;
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -28,7 +27,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.primerp.integradora.Cosas.Api.ApiService;
 import com.primerp.integradora.Cosas.Class.RetrofitClient;
 import com.primerp.integradora.Cosas.Class.SessionManager;
-import com.primerp.integradora.Cosas.Class.User;
+import com.primerp.integradora.Cosas.Modelos.User;
 import com.primerp.integradora.Cosas.Dialog.EditContrasenaDialogActivity;
 import com.primerp.integradora.Cosas.Dialog.EditProfileDialogActivity;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
@@ -41,7 +40,6 @@ import com.primerp.integradora.ui.tinaco.TinacoActivity;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -150,8 +148,6 @@ public class NotificationsFragment extends Fragment {
                 Log.d("DEBUG", "Respuesta del servidor: " + response.code());
                 if (response.isSuccessful()) {
                     sessionManager.clearToken();
-
-                    // Muestra un mensaje al usuario
                     Toast.makeText(getContext(), "Sesión cerrada correctamente", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), Login.class);
@@ -181,17 +177,16 @@ public class NotificationsFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     User user = response.body().getUser();
                     if (user != null) {
-                        // Actualizar la interfaz de usuario con la información recibida
                         username.setText(user.getUsuarioNom());
                         nombre.setText(user.getPersona().getNombres() + " " + user.getPersona().getAP() + " " + user.getPersona().getAM());
                         telefono.setText(user.getPersona().getTelefono());
                         correo.setText(user.getEmail());
                         getUserImg();
+
                         /*Glide.with(NotificationsFragment.this)
                                 .load(user.getFotoPerfil())
-                                .apply(RequestOptions.circleCropTransform()) // Aplica la transformación circular
+                                .apply(RequestOptions.circleCropTransform())
                                 .into(profileImage);*/
-
                     }
                 } else {
                     Toast.makeText(getContext(), "Error al obtener información del usuario", Toast.LENGTH_SHORT).show();
@@ -211,7 +206,7 @@ public class NotificationsFragment extends Fragment {
         String authToken = "Bearer " + token;
 
         Log.d("DEBUG", "Token con prefijo Bearer: " + authToken);
-        Call<ApiResponse> call = apiService.getimagen(authToken); // Usar authToken con el prefijo
+        Call<ApiResponse> call = apiService.getimagen(authToken);
 
         call.enqueue(new Callback<ApiResponse>() {
             @Override
@@ -220,9 +215,9 @@ public class NotificationsFragment extends Fragment {
                     User user = response.body().getUser();
                     if (user != null) {
                         Glide.with(NotificationsFragment.this)
-                                .load(user.getFotoPerfil()) // La URL de la imagen devuelta por la API
-                                .apply(RequestOptions.circleCropTransform()) // Aplica la transformación circular
-                                .into(profileImage); // Carga la imagen en el ImageView
+                                .load(user.getFotoPerfil())
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(profileImage);
                     }
                 } else {
                     Toast.makeText(getContext(), "Error al obtener la imagen del usuario", Toast.LENGTH_SHORT).show();
@@ -241,27 +236,20 @@ public class NotificationsFragment extends Fragment {
         startActivity(intent);
     }
     private void showImageDialog() {
-        // Crear el diálogo
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.dialog_image_preview);
-
-        // Configurar el ancho del diálogo
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        // Referencias a los elementos del diálogo
         ImageView imagePreview = dialog.findViewById(R.id.image_preview);
         Button buttonEdit = dialog.findViewById(R.id.button_edit);
 
-        // Mostrar la imagen actual en el diálogo
         imagePreview.setImageDrawable(profileImage.getDrawable());
 
-        // Acción del botón para editar la imagen
         buttonEdit.setOnClickListener(v -> {
             dialog.dismiss();
-            openImagePicker(); // Abrir galería o cámara
+            openImagePicker();
         });
 
-        // Mostrar el diálogo
         dialog.show();
     }
     private void openImagePicker() {
@@ -274,27 +262,21 @@ public class NotificationsFragment extends Fragment {
 
         if (resultCode == RESULT_OK) {
             if (requestCode == PICK_IMAGE && data != null) {
-                // Obtener la URI de la imagen seleccionada
                 Uri selectedImageUri = data.getData();
                 profileImage.setImageURI(selectedImageUri);
-
-                // Subir la imagen al servidor
                 uploadImageToServer(selectedImageUri);
             }
         }
     }
     private void uploadImageToServer(Uri imageUri) {
-        // Convierte la Uri a un archivo
         File file = new File(getRealPathFromURI(imageUri));
         String token = sessionManager.getToken();
 
         String authToken = "Bearer " + token;
         Log.d("DEBUG", "Token con prefijo Bearer: " + authToken);
-        // Crear RequestBody para la imagen
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
-        // Realizar la llamada a la API usando Retrofit
         Call<ApiResponse> call = apiService.uploadImage(authToken, body);
 
         call.enqueue(new Callback<ApiResponse>() {
@@ -302,19 +284,13 @@ public class NotificationsFragment extends Fragment {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Imagen subida correctamente", Toast.LENGTH_SHORT).show();
-
-
-                    // String newImageUrl = response.body().getImageUrl();
-                    // updateProfileImageUrl(newImageUrl);
                 } else {
-                    // Manejar error
                     Toast.makeText(getContext(), "Error al subir la imagen", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                // Manejar fallo de conexión
                 Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
             }
         });

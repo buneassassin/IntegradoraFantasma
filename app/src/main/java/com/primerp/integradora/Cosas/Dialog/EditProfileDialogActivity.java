@@ -5,14 +5,16 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.primerp.integradora.Cosas.Api.ApiService;
 import com.primerp.integradora.Cosas.Class.RetrofitClient;
 import com.primerp.integradora.Cosas.Class.SessionManager;
-import com.primerp.integradora.Cosas.Class.User;
+import com.primerp.integradora.Cosas.Modelos.User;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Cosas.Responst.RegisterRequest;
 import com.primerp.integradora.R;
@@ -26,7 +28,7 @@ public class EditProfileDialogActivity extends AppCompatActivity {
     private ApiService apiService;
     private SessionManager sessionManager;
     private EditText editName, editEmail, editPhone, editUser;
-    private Button saveButton, cancelButton;
+    private Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +40,22 @@ public class EditProfileDialogActivity extends AppCompatActivity {
         editName = findViewById(R.id.edit_name);
         editEmail = findViewById(R.id.edit_email);
         editPhone = findViewById(R.id.edit_phone);
-
-        // Inicializar botones
         saveButton = findViewById(R.id.saveButton);
-        cancelButton = findViewById(R.id.cancelButton);
 
         sessionManager = new SessionManager(this);
         apiService = RetrofitClient.getInstance(this).getApiService();
 
         loadUserData();
 
-        // Lógica para el botón Guardar
         saveButton.setOnClickListener(v -> editProfile());
+        ImageView backIcon = findViewById(R.id.iconback);
 
-        cancelButton.setOnClickListener(v -> close());
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void editProfile() {
@@ -77,10 +81,8 @@ public class EditProfileDialogActivity extends AppCompatActivity {
         String authToken = "Bearer " + token;
         Log.d("DEBUG", "Token con prefijo Bearer: " + authToken);
 
-        // Crear objeto RegisterRequest
         RegisterRequest registerRequest = new RegisterRequest(user, name, email, phone);
 
-        // Llamar a la API
         Call<ApiResponse> call = apiService.updateUser(authToken, registerRequest);
         call.enqueue(new Callback<ApiResponse>() {
             @Override
@@ -102,11 +104,6 @@ public class EditProfileDialogActivity extends AppCompatActivity {
         });
     }
 
-    public void close() {
-        Intent intent = new Intent(this, NotificationsFragment.class);
-        startActivity(intent);
-        finish();
-    }
     private void loadUserData() {
         String token = sessionManager.getToken();
 

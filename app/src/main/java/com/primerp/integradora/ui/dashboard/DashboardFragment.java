@@ -41,18 +41,15 @@ public class DashboardFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        // Inicializa el ViewModel
         DashboardViewModel dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
 
 
-        // Infla el layout del fragmento
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         sessionManager = new SessionManager(getContext());
         apiService = RetrofitClient.getInstance(getContext()).getApiService();
-        // Inicializa el RecyclerView correctamente
         recyclerView = root.findViewById(R.id.rv_tinacos);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -65,7 +62,6 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-        // Configura el RecyclerView
         recyclerView();
 
         return root;
@@ -75,44 +71,41 @@ public class DashboardFragment extends Fragment {
     public void recyclerView() {
         String token = sessionManager.getToken();
 
-        Log.d("DEBUG", "Token recuperado: " + token);
-
         if (token == null || token.isEmpty()) {
             Toast.makeText(getContext(), "Token no válido", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Inicializa el adaptador con una lista vacía al inicio
         tinacoadapter = new TinacoAdapter(new ArrayList<>());
-        recyclerView.setAdapter(tinacoadapter); // Asigna el adaptador al RecyclerView
+        recyclerView.setAdapter(tinacoadapter);
 
         String authToken = "Bearer " + token;
-        Log.d("DEBUG", "Token con prefijo Bearer: " + authToken);
 
-        // Llamada a la API para obtener la lista de tinacos
         Call<List<Tinacos>> call = apiService.getTinaco(authToken);
         call.enqueue(new retrofit2.Callback<List<Tinacos>>() {
             @Override
             public void onResponse(Call<List<Tinacos>> call, retrofit2.Response<List<Tinacos>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // Obtener la lista de tinacos directamente
                     List<Tinacos> tinacosList = response.body();
 
-                    Log.d("DEBUG", "Cantidad de tinacos obtenidos: " + tinacosList.size());
-                    for (Tinacos tinaco : tinacosList) {
-                        Log.d("DEBUG", "Tinaco: " + tinaco.getNombre());
+                    if (tinacosList.isEmpty()) {
+                        recyclerView.setVisibility(View.GONE);
+                        binding.emptyStateLayout.setVisibility(View.VISIBLE);
+                    } else {
+                        tinacoadapter.updateTinacosList(tinacosList);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        binding.emptyStateLayout.setVisibility(View.GONE);
                     }
-
-                    // Actualiza la lista en el adaptador existente
-                    tinacoadapter.updateTinacosList(tinacosList);
                 } else {
                     Log.e("API_RESPONSE", "Error: " + response.message());
+                    Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Tinacos>> call, Throwable t) {
                 Log.d("DEBUG", "Error: " + t.getMessage());
+                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
             }
         });
     }

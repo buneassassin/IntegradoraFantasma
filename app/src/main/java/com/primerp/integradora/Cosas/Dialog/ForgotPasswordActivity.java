@@ -48,7 +48,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
     private void forgotPassword() {
         String email = emailInput.getText().toString();
-        //validate
         if (email.isEmpty()) {
             emailInput.setError("Por favor, ingrese su correo electrónico");
         }else{

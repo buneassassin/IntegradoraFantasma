@@ -1,14 +1,13 @@
 package com.primerp.integradora.Cosas.Responst;
 
-import com.primerp.integradora.Cosas.Class.User;
 import com.primerp.integradora.Cosas.Modelos.Tinacos;
-import java.util.List;
+import com.primerp.integradora.Cosas.Modelos.User;
 
 public class ApiResponse {
     private boolean success;
     private String message;
     private String token;
-    private User user; // Agrega esto para manejar la información del usuario
+    private User user;
 
     // Getters
     public boolean isSuccess() {
@@ -23,9 +22,13 @@ public class ApiResponse {
         return token;
     }
 
-    public User getUser() { // Getter para el objeto User
+    public User getUser() {
         return user;
     }
+
+
+
+
 
 
 }

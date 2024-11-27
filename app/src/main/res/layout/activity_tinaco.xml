@@ -7,6 +7,17 @@
     android:background="@drawable/wave"
     tools:context=".ui.tinaco.TinacoActivity">
 
+    <ImageView
+        android:id="@+id/iconback"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -80,15 +91,7 @@
                 android:backgroundTint="@color/purple"
                 android:text="Registrar"
                 android:textSize="18sp" />
-            <Button
-                android:id="@+id/cancelButton"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@android:color/darker_gray"
-                android:text="@string/cancelar"
-                android:textSize="18sp"
-                android:textColor="@android:color/white" />
+
 
 
 

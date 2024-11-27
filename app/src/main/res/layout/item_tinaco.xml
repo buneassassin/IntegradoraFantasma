@@ -1,88 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
     android:background="@drawable/custom_edittext"
     android:padding="16dp"
-    android:layout_marginBottom="5dp">
+    android:id="@+id/layaut">
 
     <!-- Título del tinaco -->
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/light_blue"
-        android:paddingEnd="100dp"
         android:background="@drawable/rounded_rectangle"
+        android:backgroundTint="@color/light_blue"
         android:padding="4dp"
+        android:paddingEnd="110dp"
         android:text="Tinaco 1"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Tinaco 1" />
 
-    <ImageView
-        android:id="@+id/iconWaterDrop"
-        android:layout_width="72dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/ic_water_drop"
-        app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Estado del tinaco -->
     <ImageView
         android:id="@+id/iconEdit"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="12dp"
         android:src="@drawable/ic_edit"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="ContentDescription" />
-
-    <!-- Estado del tinaco -->
-    <TextView
-        android:id="@+id/tvEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Estado: Apagado"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/tvTitle"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        tools:text="Estado: Apagado" />
 
 
     <LinearLayout
         android:id="@+id/tvNivelAgua"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="129dp"
+        android:layout_height="28dp"
         android:orientation="horizontal"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        app:layout_constraintStart_toStartOf="@id/tvEstado"
-        app:layout_constraintTop_toBottomOf="@id/tvEstado">
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
         <!-- Texto normal -->
+
+        <!-- Texto en negritas -->
         <TextView
             android:id="@+id/tvTextoNivelAgua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Nivel del agua:"
             android:textColor="@color/black"
-            android:textSize="14sp"
-            android:ellipsize="end"
-            android:maxLines="1" />
+            android:textSize="14sp" />
 
-        <!-- Texto en negritas -->
         <TextView
             android:id="@+id/tvNivelAguaPorcentaje"
             android:layout_width="wrap_content"
@@ -96,18 +83,19 @@
 
     <ImageView
         android:id="@+id/iconCircle"
-        android:layout_width="94dp"
-        android:layout_height="94dp"
+        android:layout_width="58dp"
+        android:layout_height="59dp"
         android:layout_marginEnd="48dp"
-        android:src="@drawable/imagen1"
-        android:scaleType="centerCrop"
         android:background="@drawable/circle_shape"
-        android:clipToOutline="true"
         android:elevation="4dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/imagen1"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:layout_constraintHorizontal_bias="0.698"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/containerSensores"
@@ -124,9 +112,9 @@
             android:id="@+id/btnSensor1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="1dp"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="1"
             android:backgroundTint="@color/light_blue_mas"
             android:text="Censor 1"
             android:textColor="@color/black"
@@ -136,9 +124,9 @@
             android:id="@+id/btnSensor2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="1dp"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="1"
             android:backgroundTint="@color/light_blue_mas"
             android:text="Censor 2"
             android:textColor="@color/black"
@@ -148,9 +136,9 @@
             android:id="@+id/btnSensor3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="1dp"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="1"
             android:backgroundTint="@color/light_blue_mas"
             android:text="Censor 3"
             android:textColor="@color/black"
@@ -160,9 +148,9 @@
             android:id="@+id/btnSensor4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="1dp"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="1"
             android:backgroundTint="@color/light_blue_mas"
             android:text="Censor 4"
             android:textColor="@color/black"
@@ -172,12 +160,33 @@
             android:id="@+id/btnSensor5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="1dp"
             android:layout_marginStart="4dp"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="1"
             android:backgroundTint="@color/light_blue_mas"
             android:text="Censor 5"
             android:textColor="@color/black"
             android:textSize="10sp" />
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="171dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="85dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="88dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

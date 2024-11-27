@@ -39,5 +39,14 @@
     <string name="hace_10_minutos">Hace 10 minutos</string>
     <string name="este_es_el_mensaje_de_la_notificaci_n">Este es el mensaje de la notificación.</string>
     <string name="notification_icon_desc">notification_icon_desc</string>
+    <string name="no_notifications_icon">no_notifications_icon</string>
+    <string name="no_hay_tinacos_icon">no_hay_tinacos_icon</string>
+    <string name="no_hay_tinacos">no_hay_tinacos</string>
+    <string name="no_hay_actuelamente_tinacos">No hay actuelamente tinacos</string>
+    <string name="opciones">Opciones</string>
+    <string name="nivel_del_agua">Nivel del agua</string>
+    <string name="editar">Editar</string>
+    <string name="nombre_del_tinaco">Nombre del tinaco</string>
+    <string name="editar_mi_tinaco">Editar Mi Tinaco</string>
 
 </resources>

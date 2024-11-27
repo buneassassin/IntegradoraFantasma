@@ -14,12 +14,12 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.primerp.integradora.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="Tinacos"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.primerp.integradora.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="Perfil"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

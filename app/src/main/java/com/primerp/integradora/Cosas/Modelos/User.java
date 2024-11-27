@@ -1,4 +1,4 @@
-package com.primerp.integradora.Cosas.Class;
+package com.primerp.integradora.Cosas.Modelos;
 
 public class User {
     private int id;
