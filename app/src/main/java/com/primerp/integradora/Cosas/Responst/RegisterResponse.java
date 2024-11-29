@@ -9,6 +9,9 @@ public class RegisterResponse {
         return success;
     }
 
+    public void setMessage(String usuarioRegistradoExitosamente) {
+        this.message = message;
+    };
     public String getMessage() {
         return message;
     }

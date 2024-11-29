@@ -15,9 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 
 public class RetrofitClient {
-    private static RetrofitClient instance = null;
-    private ApiService apiService;
-    private static final String BASE_URL = "http://192.168.1.4:8003/api/v1/";
+    private static RetrofitClient instance;
+    private final ApiService apiService;
+    private static final String BASE_URL = "https://conejosaltando.fun/api/v1/";
 
     private RetrofitClient(Context context) {
         OkHttpClient client = new OkHttpClient.Builder()
@@ -27,6 +27,7 @@ public class RetrofitClient {
                         Request originalRequest = chain.request();
                         Request.Builder builder = originalRequest.newBuilder();
 
+                        // Obtén el token usando SessionManager
                         String token = new SessionManager(context).getToken();
                         Log.d("DEBUG", "Token desde interceptor: " + token);
                         if (token != null) {
@@ -47,12 +48,14 @@ public class RetrofitClient {
 
         apiService = retrofit.create(ApiService.class);
     }
+
     public static synchronized RetrofitClient getInstance(Context context) {
         if (instance == null) {
             instance = new RetrofitClient(context);
         }
         return instance;
     }
+
     public ApiService getApiService() {
         return apiService;
     }

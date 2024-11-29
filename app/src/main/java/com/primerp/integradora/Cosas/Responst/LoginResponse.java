@@ -9,6 +9,9 @@ public class LoginResponse {
         return success;
     }
 
+    public void setMessage(String loginSuccessful){
+        this.message = message;
+    };
     public String getMessage() {
         return message;
     }

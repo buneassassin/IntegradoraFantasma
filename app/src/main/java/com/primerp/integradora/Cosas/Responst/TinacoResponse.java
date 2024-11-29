@@ -6,6 +6,11 @@ import java.util.List;
 
 public class TinacoResponse {
     private List<Tinacos> tinacosList;
+
+    public TinacoResponse(String s, int i, String tinacoName) {
+
+    }
+
     public List<Tinacos> getTinacosList() {
         return tinacosList;
     }

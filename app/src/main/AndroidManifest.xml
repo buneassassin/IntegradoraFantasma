@@ -50,7 +50,7 @@
             android:name=".Cosas.Dialog.EditProfileDialogActivity"
             android:exported="false" />
         <activity
-            android:name=".Register"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".Login"
