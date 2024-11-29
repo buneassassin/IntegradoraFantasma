@@ -25,7 +25,6 @@ import retrofit2.Response;
 public class Login extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText;
-    private TextView registrationPrompt;
 
 
     @Override
@@ -52,14 +51,7 @@ public class Login extends AppCompatActivity {
                 loginUser();
             }
         });
-        registrationPrompt = findViewById(R.id.registrationPrompt);
-        registrationPrompt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Login.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
     }
 
@@ -153,5 +145,10 @@ public class Login extends AppCompatActivity {
                 loginUser();
             }
         });
+    }
+
+    public void onForgotregistrationClick(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }

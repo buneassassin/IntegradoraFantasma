@@ -65,5 +65,9 @@ public class RegisterActivity extends AppCompatActivity {
                 telefonoEditText.getText().toString().trim()
         );
     }
+    public void onLoginClick(View view) {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
 
 }
