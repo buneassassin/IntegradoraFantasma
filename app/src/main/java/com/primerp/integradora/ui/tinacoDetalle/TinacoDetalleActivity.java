@@ -1,10 +1,13 @@
 package com.primerp.integradora.ui.tinacoDetalle;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +34,7 @@ public class TinacoDetalleActivity extends AppCompatActivity {
     private ApiService apiService;
     private SessionManager sessionManager;
     private TextView textTitulo,nombretinaco;
+    private Button btndelet;
     private int tinacoId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,9 @@ public class TinacoDetalleActivity extends AppCompatActivity {
         apiService = RetrofitClient.getInstance(this).getApiService();
         textTitulo = findViewById(R.id.textTituloTinaco);
         nombretinaco = findViewById(R.id.nombretinaco);
+        btndelet= findViewById(R.id.btn_delet);
+        ImageView backIcon = findViewById(R.id.iconback);
+        ImageView irGarfica = findViewById(R.id.irGarfica);
 
         Intent intents = getIntent();
         if (intents != null && intents.hasExtra("TINACO_ID")) {
@@ -48,8 +55,6 @@ public class TinacoDetalleActivity extends AppCompatActivity {
             Log.d("TINACO_ID", "ID del Tinaco seleccionado: " + tinacoId);
             this.tinacoId = tinacoId;
         }
-
-
         cardEditar.setOnClickListener(v -> {
             Intent intentedit = new Intent(TinacoDetalleActivity.this, EditTinacoDialogActivity.class);
 
@@ -58,10 +63,6 @@ public class TinacoDetalleActivity extends AppCompatActivity {
 
             startActivity(intentedit);
         });
-
-
-        ImageView backIcon = findViewById(R.id.iconback);
-        ImageView irGarfica = findViewById(R.id.irGarfica);
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +74,12 @@ public class TinacoDetalleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(TinacoDetalleActivity.this, TinacoGraficaActivity.class);
                  startActivity(intent);
+            }
+        });
+        btndelet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delettinaco();
             }
         });
         loadTinacoData();
@@ -103,4 +110,36 @@ public class TinacoDetalleActivity extends AppCompatActivity {
             }
         });
     }
+    private void delettinaco() {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirmar eliminación")
+                .setMessage("¿Estás seguro de que deseas eliminar este tinaco?")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String token = sessionManager.getToken();
+                        String authToken = "Bearer " + token;
+                        Call<TinacoResponse> call = apiService.deleteTinaco(authToken, tinacoId);
+                        call.enqueue(new retrofit2.Callback<TinacoResponse>() {
+                            @Override
+                            public void onResponse(Call<TinacoResponse> call, retrofit2.Response<TinacoResponse> response) {
+                                if (response.isSuccessful()) {
+                                    Log.d("DEBUG", "Tinaco eliminado correctamente");
+                                    finish(); // Cerrar la actividad
+                                } else {
+                                    Log.d("DEBUG", "Error en la respuesta de la API: " + response.message());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<TinacoResponse> call, Throwable t) {
+                                Log.d("DEBUG", "Error al eliminar el tinaco: " + t.getMessage());
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
 }
