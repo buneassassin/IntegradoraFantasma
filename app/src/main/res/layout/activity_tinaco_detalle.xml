@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wave4"
+    android:background="@drawable/wave9"
     android:padding="16dp"
     tools:context=".ui.tinacoDetalle.TinacoDetalleActivity">
     <ImageView
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:text="Opciones"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,7 +179,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="@drawable/shadow_background"
+        android:background="@drawable/custom_edittext"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintTop_toTopOf="@+id/guideline12"
         app:layout_constraintVertical_bias="0.0"
