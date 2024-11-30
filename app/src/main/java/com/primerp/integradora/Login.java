@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +26,6 @@ import retrofit2.Response;
 public class Login extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +37,6 @@ public class Login extends AppCompatActivity {
             setContentView(R.layout.activity_login);
             initViews();
         }
-        // Si no hay token, mostrar la pantalla de inicio de sesión
         setContentView(R.layout.activity_login);
 
         emailEditText = findViewById(R.id.username);
@@ -51,10 +49,19 @@ public class Login extends AppCompatActivity {
                 loginUser();
             }
         });
-
-
     }
+    private void initViews() {
+        emailEditText = findViewById(R.id.username);
+        passwordEditText = findViewById(R.id.password);
 
+        Button loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginUser();
+            }
+        });
+    }
     private void loginUser() {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
@@ -64,20 +71,28 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        LoginRequest loginRequest = new LoginRequest(email, password);
+        // Referencias al botón y al ProgressBar
+        Button loginButton = findViewById(R.id.loginButton);
+        ProgressBar progressBar = findViewById(R.id.progressBar);
 
+        // Ocultar el botón y mostrar el ProgressBar
+        loginButton.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+
+        LoginRequest loginRequest = new LoginRequest(email, password);
         ApiService apiService = RetrofitClient.getInstance(this).getApiService();
 
         Call<LoginResponse> call = apiService.loginUser(loginRequest);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                // Restaurar el estado original del botón y el ProgressBar
+                loginButton.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().isSuccess()) {
-                        // Obtén el token desde el objeto de respuesta
                         String token = response.body().getToken();
-
-                        // Guarda el token en SharedPreferences
                         getSharedPreferences("user_prefs", MODE_PRIVATE)
                                 .edit()
                                 .putString("auth_token", token)
@@ -99,14 +114,13 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
+                // Restaurar el estado original del botón y el ProgressBar
+                loginButton.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
                 Toast.makeText(Login.this, "Error en la conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public void onForgotPasswordClick(View view) {
-        Intent intent = new Intent(this, ForgotPasswordActivity.class);
-        startActivity(intent);
     }
     private void validateToken(String token) {
         ApiService apiService = RetrofitClient.getInstance(this).getApiService();
@@ -134,21 +148,13 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void initViews() {
-        emailEditText = findViewById(R.id.username);
-        passwordEditText = findViewById(R.id.password);
-
-        Button loginButton = findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginUser();
-            }
-        });
-    }
 
     public void onForgotregistrationClick(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+    public void onForgotPasswordClick(View view) {
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
 }

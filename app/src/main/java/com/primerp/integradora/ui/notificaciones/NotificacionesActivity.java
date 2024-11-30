@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class NotificacionesActivity extends AppCompatActivity {
     private LinearLayout emptyView; // Agrega esta línea
     private RecyclerView recyclerView;
     private NotificacionAdapter notificacionadapter;
+    private ProgressBar progressBar;
 
 
 
@@ -50,7 +52,8 @@ public class NotificacionesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificaciones);
-
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         sessionManager = new SessionManager(this);
         apiService = RetrofitClient.getInstance(this).getApiService();
         recyclerView = findViewById(R.id.rv_notificaciones);
@@ -79,6 +82,8 @@ public class NotificacionesActivity extends AppCompatActivity {
             public void onResponse(Call<NotificacionResponse> call, retrofit2.Response<NotificacionResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Notificaciones> notificacionesList = response.body().getData();
+                    progressBar.setVisibility(View.GONE);
+
                     if (notificacionesList.isEmpty()) {
                         emptyView.setVisibility(View.VISIBLE); // Muestra el mensaje vacío
                         recyclerView.setVisibility(View.GONE); // Oculta la lista
