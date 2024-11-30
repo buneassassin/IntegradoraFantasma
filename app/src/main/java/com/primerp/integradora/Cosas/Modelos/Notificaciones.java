@@ -10,13 +10,13 @@ public class Notificaciones {
     private int isRead;
 
     @SerializedName("formatted_created_at")
-    private int formattedcreatedat;
+    private String formattedcreatedat;
 
-    public int getformattedcreatedat() {
+    public String getformattedcreatedat() {
         return formattedcreatedat;
     }
 
-    public void setformattedcreatedat(int formattedcreatedat) {
+    public void setformattedcreatedat(String formattedcreatedat) {
         this.formattedcreatedat = formattedcreatedat;
     }
 

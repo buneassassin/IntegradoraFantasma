@@ -69,7 +69,8 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
             Intent intent = new Intent(holder.itemView.getContext(), NotificationDetailActivity.class);
             intent.putExtra("notification_title", notificacion.getTitle());
             intent.putExtra("notification_message", notificacion.getMessage());
-            intent.putExtra("notification_date", notificacion.getformattedcreatedat());intent.putExtra("id", notificacion.getId());
+            intent.putExtra("notification_date", notificacion.getformattedcreatedat());
+            intent.putExtra("id", notificacion.getId());
             holder.itemView.getContext().startActivity(intent);
         });
     }
@@ -114,7 +115,7 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
         public void setData(Notificaciones notificacion) {
             message.setText(notificacion.getMessage());
             title.setText(notificacion.getTitle());
-            String tiempo = "Hace " + notificacion.getformattedcreatedat() + " minutos";
+            String tiempo = "Hace " + notificacion.getformattedcreatedat();
             date.setText(tiempo);
         }
     }
