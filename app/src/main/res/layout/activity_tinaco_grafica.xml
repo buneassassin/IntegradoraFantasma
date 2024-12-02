@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!-- Título -->
+
     <TextView
         android:id="@+id/textTitulo"
         android:layout_width="wrap_content"
@@ -34,21 +34,23 @@
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChart"
-        android:layout_width="322dp"
-        android:layout_height="246dp"
+        android:layout_width="291dp"
+        android:layout_height="228dp"
         android:layout_margin="16dp"
         android:layout_marginTop="28dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="79dp" />
+        app:layout_constraintGuide_begin="64dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -62,7 +64,123 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="365dp" />
+        app:layout_constraintGuide_begin="316dp" />
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline9">
 
+        <ScrollView
+            android:layout_width="346dp"
+            android:layout_height="329dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/InfoText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Informacion"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple"
+
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Nivel del agua -->
+                <TextView
+                    android:id="@+id/Nivel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Nivel del agua:"
+                    android:textColor="#555"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/InfoText" />
+
+                <TextView
+                    android:id="@+id/SignificadoNivel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="(Porcentaje)"
+                    android:textColor="#888"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/Nivel"
+                    app:layout_constraintTop_toTopOf="@+id/Nivel" />
+
+                <!-- Temperatura -->
+                <TextView
+                    android:id="@+id/Temperatura"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Temperatura:"
+                    android:textColor="#555"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Nivel" />
+
+                <TextView
+                    android:id="@+id/SignificadoTemperatura"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="(°C)"
+                    android:textColor="#888"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/Temperatura"
+                    app:layout_constraintTop_toTopOf="@+id/Temperatura" />
+
+                <!-- Nivel de suciedad -->
+                <TextView
+                    android:id="@+id/Nivelsuciedad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Nivel de suciedad:"
+                    android:textColor="#555"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Temperatura" />
+
+                <TextView
+                    android:id="@+id/SignificadoNivelsuciedad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="(Gramos/Litro)"
+                    android:textColor="#888"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/Nivelsuciedad"
+                    app:layout_constraintTop_toTopOf="@+id/Nivelsuciedad" />
+
+                <com.github.mikephil.charting.charts.CombinedChart
+                    android:id="@+id/combinedChart"
+                    android:layout_width="336dp"
+                    android:layout_height="156dp"
+                    android:layout_margin="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SignificadoNivelsuciedad"
+                    app:layout_constraintVertical_bias="0.787" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

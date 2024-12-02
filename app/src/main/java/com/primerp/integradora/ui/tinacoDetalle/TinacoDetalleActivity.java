@@ -36,6 +36,7 @@ public class TinacoDetalleActivity extends AppCompatActivity {
     private TextView textTitulo,nombretinaco;
     private Button btndelet;
     private int tinacoId;
+    private String nombre;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,8 @@ public class TinacoDetalleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TinacoDetalleActivity.this, TinacoGraficaActivity.class);
-                 startActivity(intent);
+                intent.putExtra("tinaco_title", nombre);
+                startActivity(intent);
             }
         });
         btndelet.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +100,7 @@ public class TinacoDetalleActivity extends AppCompatActivity {
                     if (tinaco != null) {
                         textTitulo.setText(tinaco.getNombre());
                         nombretinaco.setText(tinaco.getNombre());
+                        nombre = tinaco.getNombre();
                     }
                 } else {
                     Log.d("DEBUG", "Error en la respuesta de la API: " + response.message());

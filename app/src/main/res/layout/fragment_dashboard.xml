@@ -58,8 +58,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tinacos"
-        android:layout_width="354dp"
-        android:layout_height="457dp"
+        android:layout_width="355dp"
+        android:layout_height="498dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:paddingStart="8dp"

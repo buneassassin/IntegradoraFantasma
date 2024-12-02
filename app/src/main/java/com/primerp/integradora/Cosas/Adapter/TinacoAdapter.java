@@ -5,11 +5,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.primerp.integradora.Cosas.Dialog.EditTinacoDialogActivity;
 import com.primerp.integradora.Cosas.Modelos.Tinacos;
 import com.primerp.integradora.R;
 import com.primerp.integradora.ui.tinacoDetalle.TinacoDetalleActivity;
@@ -51,14 +53,23 @@ public class TinacoAdapter extends RecyclerView.Adapter<TinacoAdapter.TinacoView
 
     static class TinacoViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;
+        ImageView iconEditor;
 
         public TinacoViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
+            iconEditor = itemView.findViewById(R.id.iconEdit);
         }
 
         public void setData(Tinacos tinacos) {
             tvTitle.setText(tinacos.getNombre());
+            iconEditor.setOnClickListener(view -> {
+                Intent intentedit = new Intent(view.getContext(), EditTinacoDialogActivity.class);
+
+                intentedit.putExtra("TINACO_ID", tinacos.getId());
+
+                view.getContext().startActivity(intentedit);
+            });
 
             itemView.setOnClickListener(view -> {
                 Intent intent = new Intent(view.getContext(), TinacoDetalleActivity.class);
