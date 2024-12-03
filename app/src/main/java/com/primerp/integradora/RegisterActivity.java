@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText usuario_nomEditText, emailEditText, passwordEditText, nombresEditText, apellidoPaternoEditText, apellidoMaternoEditText, telefonoEditText;
     private Button registerButton;
     private RegisterViewModel viewModel;
+    private ProgressBar registerProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         apellidoMaternoEditText = findViewById(R.id.a_m);
         telefonoEditText = findViewById(R.id.telefono);
         registerButton = findViewById(R.id.registerButton);
+        registerProgressBar = findViewById(R.id.registerProgressBar);
 
         // Crear la fábrica de ViewModel
         RegisterViewModelFactory factory = new RegisterViewModelFactory(this);
@@ -42,6 +45,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Observar resultados del registro
         viewModel.getRegistrationStatus().observe(this, success -> {
+            // Restaurar botón y ocultar ProgressBar
+            registerButton.setVisibility(View.VISIBLE);
+            registerProgressBar.setVisibility(View.GONE);
+
             if (success) {
                 Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, Login.class));
@@ -51,7 +58,11 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        registerButton.setOnClickListener(v -> registerUser());
+        registerButton.setOnClickListener(v -> {
+            registerButton.setVisibility(View.GONE);
+            registerProgressBar.setVisibility(View.VISIBLE); // Mostrar ProgressBar
+            registerUser();
+        });
     }
 
     private void registerUser() {
@@ -65,6 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
                 telefonoEditText.getText().toString().trim()
         );
     }
+
+
     public void onLoginClick(View view) {
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);

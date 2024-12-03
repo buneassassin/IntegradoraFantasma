@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,7 +36,7 @@ public class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
     private SessionManager sessionManager;
     private ApiService apiService;
-
+    private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private TinacoAdapter tinacoadapter;
 
@@ -47,6 +48,8 @@ public class DashboardFragment extends Fragment {
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        progressBar = root.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
 
         sessionManager = new SessionManager(getContext());
         apiService = RetrofitClient.getInstance(getContext()).getApiService();
@@ -87,6 +90,7 @@ public class DashboardFragment extends Fragment {
             public void onResponse(Call<List<Tinacos>> call, retrofit2.Response<List<Tinacos>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Tinacos> tinacosList = response.body();
+                    progressBar.setVisibility(View.GONE);
 
                     if (tinacosList.isEmpty()) {
                         recyclerView.setVisibility(View.GONE);

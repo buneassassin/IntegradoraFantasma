@@ -1,10 +1,11 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register">
+    android:background="@drawable/wave8"
+    tools:context=".RegisterActivity">
+
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
@@ -19,20 +20,24 @@
         app:lottie_rawRes="@raw/animacion" />
 
     <androidx.cardview.widget.CardView
+        android:layout_width="373dp"
+        android:layout_height="607dp"
         android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="604dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -43,6 +48,15 @@
                     android:id="@+id/registerText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Register"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
                     android:text="Registro"
                     android:textSize="28sp"
                     android:textStyle="bold"
@@ -70,13 +84,16 @@
                     android:id="@+id/email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_edittext"
                     android:hint="Correo Electrónico"
+                    android:inputType="textEmailAddress"
                     android:visibility="gone"
                     android:background="@drawable/custom_edittext"
                     android:padding="12dp"
-                    app:layout_constraintTop_toBottomOf="@id/usuario_nom"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/usuario_nom"
                     app:layout_constraintWidth_percent="0.9" />
 
                 <!-- Campo 3 -->
@@ -84,48 +101,131 @@
                     android:id="@+id/nombres"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:hint="Primer Nombre"
                     android:visibility="gone"
                     android:background="@drawable/custom_edittext"
+                    android:hint="Primer Nombre"
                     android:padding="12dp"
-                    app:layout_constraintTop_toBottomOf="@id/email"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/email"
+                    app:layout_constraintWidth_percent="0.9" />
+
+                <EditText
+                    android:id="@+id/a_p"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/custom_edittext"
+                    android:hint="Apellido Paterno"
+                    android:padding="12dp"
+                    app:layout_constraintEnd_toStartOf="@id/a_m"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/nombres"
+                    app:layout_constraintWidth_percent="0.43" />
+
+                <EditText
+                    android:id="@+id/a_m"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/custom_edittext"
+                    android:hint="Apellido Materno"
+                    android:padding="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/a_p"
+                    app:layout_constraintTop_toBottomOf="@id/nombres"
+                    app:layout_constraintWidth_percent="0.43" />
+
+                <EditText
+                    android:id="@+id/telefono"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_edittext"
+                    android:hint="Número de Teléfono"
+                    android:inputType="phone"
+                    android:padding="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/a_m"
+                    app:layout_constraintWidth_percent="0.9" />
+
+                <!-- Campo de Contraseña -->
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_edittext"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:padding="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/telefono"
                     app:layout_constraintWidth_percent="0.9" />
 
 
                 <Button
                     android:id="@+id/registerButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="16dp"
                     android:visibility="gone"
                     android:backgroundTint="@color/purple"
-                    android:text="Registrarse"
-                    android:textColor="@android:color/white"
+                    android:text="@string/registrarse"
                     android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintTop_toBottomOf="@id/nombres"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintWidth_percent="0.9" />
 
+                <ProgressBar
+                    android:id="@+id/registerProgressBar"
+                    style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/loginPrompt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/password" />
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="502dp" />
+
                 <TextView
                     android:id="@+id/loginPrompt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="44dp"
+                    android:layout_marginTop="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="onLoginClick"
                     android:text="@string/ya_tienes_una_cuenta_inicia_sesi_n"
                     android:textColor="@color/purple"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.495"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/registerButton"
-                android:clickable="true"
-                android:focusable="true"
-                    android:onClick="onLoginClick"
-                    />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/guideline15" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="431dp" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
