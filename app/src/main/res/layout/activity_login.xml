@@ -7,6 +7,18 @@
     android:background="@drawable/wave9"
     tools:context=".Login">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="1100dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="520dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.599"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/olachida" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"

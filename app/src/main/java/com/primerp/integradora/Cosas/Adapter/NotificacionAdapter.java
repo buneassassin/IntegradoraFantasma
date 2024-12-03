@@ -33,7 +33,6 @@ public class NotificacionAdapter extends RecyclerView.Adapter<NotificacionAdapte
         this.apiService = apiService;
         this.authToken = authToken;
     }
-
     public void updateNotificacionesList(List<Notificaciones> newNotificacionesList) {
         this.notificacionList = newNotificacionesList;
         notifyDataSetChanged();
