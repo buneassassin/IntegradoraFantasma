@@ -2,6 +2,7 @@ package com.primerp.integradora.Cosas.Api;
 
 import com.primerp.integradora.Cosas.Modelos.Tinacos;
 import com.primerp.integradora.Cosas.Modelos.User;
+import com.primerp.integradora.Cosas.Responst.AdminResponse;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Cosas.Responst.LoginRequest;
 import com.primerp.integradora.Cosas.Responst.LoginResponse;
@@ -147,6 +148,16 @@ public interface ApiService {
 
     @POST("cambiarRol")
     Call<ApiResponse> postcambiarRol(
+            @Header("Authorization") String token,
+            @Body Map<String, String> roleData // Aquí pasamos los datos del email y el rol
+    );
+
+    @GET("getUserStatistics")
+    Call<AdminResponse> getUserStatistics(
+            @Header("Authorization") String token
+    );
+    @GET("obtenerRol")
+    Call<AdminResponse> getobtenerRol(
             @Header("Authorization") String token
     );
 }

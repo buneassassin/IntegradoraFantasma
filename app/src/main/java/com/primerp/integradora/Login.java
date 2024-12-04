@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity {
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
             } else {
-                Toast.makeText(this, response != null ? response.getMessage() : "Credenciales invalidas", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, response != null ? response.getMessage() : "Error intentar logerse verefique las credenciales", Toast.LENGTH_SHORT).show();
             }
         });
     }

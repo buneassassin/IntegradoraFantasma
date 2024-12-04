@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.primerp.integradora.Cosas.Api.ApiService;
 import com.primerp.integradora.Cosas.Modelos.User;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
@@ -101,10 +102,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
-        private TextView userName;
-        private TextView userEmail;
-        private TextView userRegistrationDate;
-        private TextView userTinacosCount;
+        private TextView userName,userEmail,userRegistrationDate,userTinacosCount,user_role;
         private ImageView userProfilePicture;
         private ImageButton deleteUserButton;
 
@@ -118,6 +116,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             userTinacosCount = itemView.findViewById(R.id.user_tinacos_count);
             userProfilePicture = itemView.findViewById(R.id.user_profile_picture);
             deleteUserButton = itemView.findViewById(R.id.ban_user_button);
+            user_role = itemView.findViewById(R.id.user_role);
         }
 
         public void setData(User user) {
@@ -126,11 +125,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             userEmail.setText(user.getEmail());
             userRegistrationDate.setText(user.getTiempoRegistrado()); // Ejemplo, cambiar por cálculo real
             userTinacosCount.setText("Tinacos: " + String.valueOf(user.getNumeroTinacos()));
+            user_role.setText("Rol: " + user.getRol());  // Ejemplo, cambiar por cálculo real
 
             if (user.getFotoPerfil() != null && !user.getFotoPerfil().isEmpty()) {
                 Glide.with(itemView.getContext())
                         .load(user.getFotoPerfil())
                         .placeholder(R.drawable.ic_user) // Imagen por defecto
+                        .apply(RequestOptions.circleCropTransform())
                         .into(userProfilePicture);
             } else {
                 userProfilePicture.setImageResource(R.drawable.ic_user); // Imagen por defecto

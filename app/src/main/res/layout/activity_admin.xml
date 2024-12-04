@@ -7,124 +7,120 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wave4"
-    android:padding="16dp"
+
     tools:context=".ui.admin.AdminActivity">
 
-
-  <ImageView
-      android:id="@+id/iconback"
-      android:layout_width="42dp"
-      android:layout_height="42dp"
-      android:layout_marginTop="5dp"
-      android:src="@drawable/ic_back"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
+  <com.airbnb.lottie.LottieAnimationView
+      android:id="@+id/lottieAnimationView"
+      android:layout_width="1000dp"
+      android:layout_height="900dp"
+      app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintEnd_toEndOf="parent"
+      app:lottie_autoPlay="true"
+      app:lottie_loop="true"
+      app:lottie_rawRes="@raw/olachida" />
+  <!-- LinearLayout que agrupa los elementos -->
+  <LinearLayout
+      android:layout_width="356dp"
+      android:layout_height="590dp"
+      android:layout_centerInParent="true"
+      android:gravity="center"
+      android:orientation="vertical"
+      android:padding="16dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/lottieAnimationView"
+      app:layout_constraintVertical_bias="0.0">
 
-  <TextView
+    <!-- Icono de retroceso -->
+
+    <!-- Mensaje de bienvenida -->
+    <ImageView
+        android:id="@+id/iconback"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="start"
+        android:src="@drawable/ic_back" />
+
+    <!-- Imagen de perfil -->
+    <TextView
         android:id="@+id/welcome_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
         android:text="Bienvenido, Administrador"
         android:textColor="#000"
         android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_gravity="center"
         android:layout_marginTop="28dp"
-        android:background="@drawable/circle_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_message" />
+        android:background="@drawable/circle_background" />
 
+    <!-- Nombre del administrador -->
     <TextView
         android:id="@+id/admin_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="Nombre del Administrador"
-        android:textSize="18sp"
         android:textColor="#555"
-        app:layout_constraintTop_toBottomOf="@id/profile_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        android:textSize="18sp" />
 
-  <TextView
-      android:id="@+id/admin_email"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Correo del Administrador"
-      android:textSize="14sp"
-      android:textColor="#555"
-      app:layout_constraintTop_toBottomOf="@id/admin_name"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      android:layout_marginTop="8dp" />
-    <!-- Action Buttons -->
+    <!-- Correo del administrador -->
+    <TextView
+        android:id="@+id/admin_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Correo del Administrador"
+        android:textColor="#555"
+        android:textSize="14sp" />
 
+    <!-- Botón para gestionar usuarios -->
     <Button
         android:id="@+id/btn_manage_users"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#03A9F4"
         android:padding="12dp"
         android:text="Gestionar Usuarios"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/admin_name" />
+        android:textColor="#FFFFFF" />
 
+    <!-- Botón para ver reportes -->
     <Button
         android:id="@+id/btn_view_reports"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver Reportes"
-        android:textColor="#FFFFFF"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#00BCD4"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_manage_users"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        android:text="Ver Reportes"
+        android:textColor="#FFFFFF" />
 
+    <!-- Botón para enviar notificación -->
     <Button
-        android:id="@+id/btn_settings"
-        android:layout_width="0dp"
+        android:id="@+id/btn_rol"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enviar Notificacion"
-        android:textColor="#FFFFFF"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#FF9800"
         android:drawableStart="@drawable/ic_settings"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_view_reports"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        android:text="Cambir Rol"
+        android:textColor="#FFFFFF" />
 
-    <!-- Logout Button -->
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Cerrar Sesión"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#F44336"
-        android:drawableStart="@drawable/ic_logout"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_settings"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+  </LinearLayout>
+
+  <!-- Logout Button -->
   </androidx.constraintlayout.widget.ConstraintLayout>

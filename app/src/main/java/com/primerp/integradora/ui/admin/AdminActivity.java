@@ -1,5 +1,6 @@
 package com.primerp.integradora.ui.admin;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,7 @@ public class AdminActivity extends AppCompatActivity {
         ImageView backIcon = findViewById(R.id.iconback);
         Button btnmanageusers = findViewById(R.id.btn_manage_users);
         Button btnviewreports = findViewById(R.id.btn_view_reports);
+        Button btnviewrol = findViewById(R.id.btn_rol);
 
         profileImage = findViewById(R.id.profile_image);
         username = findViewById(R.id.admin_name);
@@ -67,6 +69,12 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 viewreports();
+            }
+        });
+        btnviewrol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewrol();
             }
         });
     }
@@ -141,6 +149,10 @@ public class AdminActivity extends AppCompatActivity {
     }
     public void viewreports() {
         Intent intent = new Intent(this, AdminReportsActivity.class);
+        startActivity(intent);
+    }
+    public void viewrol() {
+        Intent intent = new Intent(this, AdminRolActivity.class);
         startActivity(intent);
     }
 }
