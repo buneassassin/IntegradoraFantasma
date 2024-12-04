@@ -11,4 +11,6 @@ public class Persona {
     public String getAP() { return a_p; }
     public String getAM() { return a_m; }
     public String getTelefono() { return telefono; }
+
+
 }

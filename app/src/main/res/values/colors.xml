@@ -15,4 +15,6 @@
     <color name="light_blue">#D0E8FF</color> <!-- Fondo de botones o encabezado -->
     <color name="gray">#757575</color> <!-- Texto secundario -->
     <color name="background_gray">#F5F5F5</color> <!-- Fondo del layout -->
+    <color name="bg">#9677B2</color>
+
 </resources>
