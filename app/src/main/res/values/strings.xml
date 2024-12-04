@@ -49,5 +49,6 @@
     <string name="nombre_del_tinaco">Nombre del tinaco</string>
     <string name="editar_mi_tinaco">Editar Mi Tinaco</string>
     <string name="registrarse">Registrarse</string>
+    <string name="sensor">Sensor</string>
 
 </resources>
