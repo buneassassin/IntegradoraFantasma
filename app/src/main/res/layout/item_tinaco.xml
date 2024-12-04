@@ -2,12 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layaut"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
     android:background="@drawable/custom_edittext"
-    android:padding="16dp"
-    android:id="@+id/layaut">
+    android:padding="16dp">
 
     <!-- Título del tinaco -->
 
@@ -45,47 +45,11 @@
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="ContentDescription" />
 
-    <LinearLayout
-        android:id="@+id/tvNivelAgua"
-        android:layout_width="129dp"
-        android:layout_height="28dp"
-        android:orientation="horizontal"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
-
-        <!-- Texto normal -->
-
-        <!-- Texto en negritas -->
-        <TextView
-            android:id="@+id/tvTextoNivelAgua"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Nivel del agua:"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tvNivelAguaPorcentaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text=" 50%"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-    </LinearLayout>
 
     <ImageView
         android:id="@+id/iconCircle"
-        android:layout_width="58dp"
-        android:layout_height="59dp"
+        android:layout_width="53dp"
+        android:layout_height="43dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/circle_shape"
         android:elevation="4dp"
@@ -93,7 +57,7 @@
         android:src="@drawable/imagen1"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.608"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -107,7 +71,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNivelAgua">
+        app:layout_constraintTop_toTopOf="@+id/guideline13">
 
         <Button
             android:id="@+id/btnSensor1"
@@ -190,4 +154,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="88dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="46dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

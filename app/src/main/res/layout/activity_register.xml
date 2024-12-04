@@ -12,7 +12,6 @@
         android:layout_width="1000dp"
         android:layout_height="900dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cardView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:lottie_autoPlay="true"
@@ -23,8 +22,7 @@
         android:layout_width="373dp"
         android:layout_height="607dp"
         android:id="@+id/cardView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+
         android:layout_margin="16dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
@@ -36,7 +34,7 @@
         app:layout_constraintWidth_percent="0.9">
 
         <ScrollView
-            android:layout_width="match_parent"
+            android:layout_width="379dp"
             android:layout_height="604dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,34 +47,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="Register"
-                    android:textAlignment="center"
+                    android:text="Registro"
                     android:textColor="@color/purple"
                     android:textSize="28sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-                    android:text="Registro"
-                    android:textSize="28sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/purple"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <!-- Campo 1 -->
                 <EditText
                     android:id="@+id/usuario_nom"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Nombre de Usuario"
-                    android:visibility="visible"
                     android:background="@drawable/custom_edittext"
+                    android:hint="Nombre de Usuario"
                     android:padding="12dp"
-                    app:layout_constraintTop_toBottomOf="@id/registerText"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/registerText"
                     app:layout_constraintWidth_percent="0.9" />
 
                 <!-- Campo 2 -->
@@ -88,8 +78,6 @@
                     android:background="@drawable/custom_edittext"
                     android:hint="Correo Electrónico"
                     android:inputType="textEmailAddress"
-                    android:visibility="gone"
-                    android:background="@drawable/custom_edittext"
                     android:padding="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,8 +90,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:hint="Primer Nombre"
-                    android:visibility="gone"
                     android:background="@drawable/custom_edittext"
                     android:hint="Primer Nombre"
                     android:padding="12dp"
@@ -172,16 +158,14 @@
                     android:id="@+id/registerButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="16dp"
-                    android:visibility="gone"
                     android:backgroundTint="@color/purple"
                     android:text="@string/registrarse"
                     android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/loginPrompt"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintTop_toBottomOf="@id/nombres"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/guideline17"
                     app:layout_constraintWidth_percent="0.9" />
 
                 <ProgressBar
@@ -202,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="502dp" />
+                    app:layout_constraintGuide_begin="480dp" />
 
                 <TextView
                     android:id="@+id/loginPrompt"
@@ -225,11 +209,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="431dp" />
+                    app:layout_constraintGuide_begin="418dp" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
