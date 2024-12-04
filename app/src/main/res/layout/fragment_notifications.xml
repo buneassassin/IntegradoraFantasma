@@ -26,6 +26,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/button_admin"
+        android:layout_width="50dp"
+        android:layout_height="46dp"
+        android:layout_margin="4dp"
+        android:layout_marginTop="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_admin"
+        android:focusable="true"
+        android:onClick="ondmin"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/edit_profile"
         android:layout_width="50dp"
         android:layout_height="46dp"
@@ -35,7 +50,6 @@
         android:drawableLeft="@drawable/ic_edit"
         android:focusable="true"
         android:onClick="onEditClick"
-        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
