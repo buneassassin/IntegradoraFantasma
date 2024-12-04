@@ -54,8 +54,10 @@ public class NotificacionesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notificaciones);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
+
         sessionManager = new SessionManager(this);
         apiService = RetrofitClient.getInstance(this).getApiService();
+
         recyclerView = findViewById(R.id.rv_notificaciones);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         emptyView = findViewById(R.id.empty_view); // Vincula la vista de mensaje vacío

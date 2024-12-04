@@ -1,10 +1,11 @@
 package com.primerp.integradora.Cosas.Api;
 
 import com.primerp.integradora.Cosas.Modelos.Tinacos;
+import com.primerp.integradora.Cosas.Modelos.User;
+import com.primerp.integradora.Cosas.Responst.AdminResponse;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Cosas.Responst.LoginRequest;
 import com.primerp.integradora.Cosas.Responst.LoginResponse;
-import com.primerp.integradora.Cosas.Responst.NotificacionRequest;
 import com.primerp.integradora.Cosas.Responst.NotificacionResponse;
 import com.primerp.integradora.Cosas.Responst.PassaworRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterRequest;
@@ -13,6 +14,7 @@ import com.primerp.integradora.Cosas.Responst.TinacoRequest;
 import com.primerp.integradora.Cosas.Responst.TinacoResponse;
 
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -130,8 +132,32 @@ public interface ApiService {
             @Header("Authorization") String authToken,
             @Path("id") int notificationId
     );
+    //----------------------------------------------------------------//
+    //          TODO Link de admin                                    //
+    //----------------------------------------------------------------//
+    @GET("admin-action")
+    Call<ApiResponse> getAdmin(
+            @Header("Authorization") String token
+    );
+    @GET("usuariosConTinacos")
+    Call<List<User>> getusuariosConTinacos(
+            @Header("Authorization") String token
+    );
+    @POST("desactivarUsuario")
+    Call<ApiResponse> postdesactivarUsuario(@Header("Authorization") String authHeader, @Body Map<String, String> email);
 
+    @POST("cambiarRol")
+    Call<ApiResponse> postcambiarRol(
+            @Header("Authorization") String token,
+            @Body Map<String, String> roleData // Aquí pasamos los datos del email y el rol
+    );
 
-
-
+    @GET("getUserStatistics")
+    Call<AdminResponse> getUserStatistics(
+            @Header("Authorization") String token
+    );
+    @GET("obtenerRol")
+    Call<AdminResponse> getobtenerRol(
+            @Header("Authorization") String token
+    );
 }

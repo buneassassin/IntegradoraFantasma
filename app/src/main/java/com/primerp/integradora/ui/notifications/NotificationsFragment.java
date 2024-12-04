@@ -34,6 +34,7 @@ import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Login;
 import com.primerp.integradora.R;
 import com.primerp.integradora.databinding.FragmentNotificationsBinding;
+import com.primerp.integradora.ui.admin.AdminActivity;
 import com.primerp.integradora.ui.notificaciones.NotificacionesActivity;
 import com.primerp.integradora.ui.tinaco.TinacoActivity;
 
@@ -73,6 +74,9 @@ public class NotificationsFragment extends Fragment {
 
         sessionManager = new SessionManager(getContext());
         apiService = RetrofitClient.getInstance(getContext()).getApiService();
+
+
+        Button admin = binding.buttonAdmin;
         Button AgregarButton = binding.btnAddNew;
         Button logoutButton = binding.btnLogout;
         Button editperfil = binding.editProfile;
@@ -82,6 +86,7 @@ public class NotificationsFragment extends Fragment {
 
         getUserImg();
         getUserInfo();
+        getAdimInfo();
 
         editperfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,11 +128,42 @@ public class NotificationsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Admin();
+            }
+        });
         return root;
     }
 
+    private void getAdimInfo(){
+        Button admin = binding.buttonAdmin;
+        String token = sessionManager.getToken();
 
+        if (token == null || token.isEmpty()) {
+            return;
+        }
+
+        String authToken = "Bearer " + token;
+        Call<ApiResponse> call = apiService.getAdmin(authToken);
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                Log.d("DEBUG", "Respuesta del servidor: " + response.code());
+                if (response.isSuccessful()) {
+                    admin.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Log.e("DEBUG", "Error al intentar obtener información del administrador", t);
+                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
     private void logoutUser() {
         String token = sessionManager.getToken();
 
@@ -233,6 +269,10 @@ public class NotificationsFragment extends Fragment {
     }
     public void editarContrasena() {
         Intent intent = new Intent(getActivity(), EditContrasenaDialogActivity.class);
+        startActivity(intent);
+    }
+    public void Admin() {
+        Intent intent = new Intent(getActivity(), AdminActivity.class);
         startActivity(intent);
     }
     private void showImageDialog() {
