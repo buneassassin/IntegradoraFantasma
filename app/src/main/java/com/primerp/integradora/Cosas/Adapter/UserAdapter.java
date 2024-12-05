@@ -1,6 +1,8 @@
 package com.primerp.integradora.Cosas.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,6 +107,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         private TextView userName,userEmail,userRegistrationDate,userTinacosCount,user_role;
         private ImageView userProfilePicture;
         private ImageButton deleteUserButton;
+        private View layout;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -117,6 +120,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             userProfilePicture = itemView.findViewById(R.id.user_profile_picture);
             deleteUserButton = itemView.findViewById(R.id.ban_user_button);
             user_role = itemView.findViewById(R.id.user_role);
+            layout = itemView.findViewById(R.id.layaut);
         }
 
         public void setData(User user) {
@@ -135,6 +139,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                         .into(userProfilePicture);
             } else {
                 userProfilePicture.setImageResource(R.drawable.ic_user); // Imagen por defecto
+            }
+
+            if (user.getIsInactive() == 0) {
+                deleteUserButton.setVisibility(View.GONE);
+                layout.setBackgroundResource(R.drawable.custom_background_gray);
             }
 
             // Evento para bloquear al usuario con confirmación
