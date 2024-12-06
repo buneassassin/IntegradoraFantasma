@@ -150,6 +150,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
+
     public void manageusers() {
         Intent intent = new Intent(this, AdminManageActivity.class);
         startActivity(intent);

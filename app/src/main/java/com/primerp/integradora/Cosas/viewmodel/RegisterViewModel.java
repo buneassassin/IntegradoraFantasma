@@ -6,16 +6,16 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.primerp.integradora.Cosas.repository.RegisterRepository;
+import com.primerp.integradora.Cosas.repository.Repository;
 
 
 public class RegisterViewModel extends ViewModel {
 
-    private final RegisterRepository repository;
+    private final Repository repository;
     private final MutableLiveData<Boolean> registrationStatus = new MutableLiveData<>();
 
     public RegisterViewModel(Context context) {
-        repository = new RegisterRepository(context);
+        repository = new Repository(context);
     }
 
     public LiveData<Boolean> getRegistrationStatus() {

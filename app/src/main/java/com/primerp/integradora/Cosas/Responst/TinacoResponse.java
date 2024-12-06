@@ -6,6 +6,18 @@ import java.util.List;
 
 public class TinacoResponse {
     private List<Tinacos> tinacosList;
+    private boolean success;
+    private String message;
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setMessage(String loginSuccessful){
+        this.message = message;
+    };
+    public String getMessage() {
+        return message;
+    }
 
     public TinacoResponse(String s, int i, String tinacoName) {
 

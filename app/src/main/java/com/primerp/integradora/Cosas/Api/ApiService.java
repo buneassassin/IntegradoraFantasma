@@ -1,5 +1,6 @@
 package com.primerp.integradora.Cosas.Api;
 
+import com.primerp.integradora.Cosas.Modelos.Notificaciones;
 import com.primerp.integradora.Cosas.Modelos.Tinacos;
 import com.primerp.integradora.Cosas.Modelos.User;
 import com.primerp.integradora.Cosas.Responst.AdminResponse;
@@ -121,11 +122,13 @@ public interface ApiService {
     Call<NotificacionResponse> getNotifications(
             @Header("Authorization") String token
     );
+
     @DELETE("notifications/{id}")
     Call<Void> deleteNotification(
             @Header("Authorization") String authToken,
             @Path("id") int notificationId
     );
+
     //----------------------------------------------------------------//
     //          TODO Link de admin                                    //
     //----------------------------------------------------------------//
