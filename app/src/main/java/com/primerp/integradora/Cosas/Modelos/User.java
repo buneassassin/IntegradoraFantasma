@@ -8,6 +8,7 @@ public class User {
     private Persona persona;
     private int numero_tinacos;
     private String tiempo_registrado;
+    private int is_Inactive;
     private String rol;
 
     // Getters y Setters
@@ -18,6 +19,7 @@ public class User {
     public Persona getPersona() { return persona; }
     public int getNumeroTinacos() { return numero_tinacos; }
     public String getTiempoRegistrado() { return tiempo_registrado; }
+    public int getIsInactive() { return is_Inactive; }
     public String getRol() {
         return rol;
     }

@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     android:background="@drawable/custom_background"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:id="@+id/layaut">
 
     <!-- User Profile Picture -->
     <ImageView

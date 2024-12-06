@@ -36,14 +36,6 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String token = getSharedPreferences("user_prefs", MODE_PRIVATE).getString("auth_token", null);
-        if (token != null) {
-            validateToken(token);
-        } else {
-            setContentView(R.layout.activity_login);
-            initViews();
-        }
-
         setContentView(R.layout.activity_login);
 
         // Configurar ViewModel
@@ -87,8 +79,6 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
-
     private void initViews() {
         emailEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
@@ -98,34 +88,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loginUser();
-            }
-        });
-    }
-    private void validateToken(String token) {
-
-        ApiService apiService = RetrofitClient.getInstance(this).getApiService();
-        Call<ApiResponse> call = apiService.getMe("Bearer " + token);
-        call.enqueue(new Callback<ApiResponse>() {
-            @Override
-            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-
-                if (response.isSuccessful() && response.body() != null) {
-
-                    Intent intent = new Intent(Login.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-
-                    setContentView(R.layout.activity_login);
-                    initViews();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApiResponse> call, Throwable t) {
-                Toast.makeText(Login.this, "Error al validar el token: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                setContentView(R.layout.activity_login);
-                initViews();
             }
         });
     }

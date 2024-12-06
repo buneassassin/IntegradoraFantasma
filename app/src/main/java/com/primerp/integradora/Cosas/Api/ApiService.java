@@ -121,12 +121,6 @@ public interface ApiService {
     Call<NotificacionResponse> getNotifications(
             @Header("Authorization") String token
     );
-
-    @GET("notification/{id}")
-    Call<Void> getNotificationById(
-            @Header("Authorization") String authToken,
-            @Path("id") int notificationId
-    );
     @DELETE("notifications/{id}")
     Call<Void> deleteNotification(
             @Header("Authorization") String authToken,
@@ -159,5 +153,14 @@ public interface ApiService {
     @GET("obtenerRol")
     Call<AdminResponse> getobtenerRol(
             @Header("Authorization") String token
+    );
+    @POST("EnviarNotificacionesGeneral")
+    Call<ApiResponse> postEnviarNotificacionesGeneral(
+            @Header("Authorization") String authToken,
+            @Body Map<String, String> notification
+    );
+    @GET("gettype")
+    Call<AdminResponse> getgettype(
+            @Header("Authorization") String authToken
     );
 }
