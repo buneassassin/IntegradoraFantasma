@@ -19,23 +19,22 @@
         app:lottie_rawRes="@raw/animacion" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="373dp"
-        android:layout_height="607dp"
         android:id="@+id/cardView"
-
+        android:layout_width="318dp"
+        android:layout_height="614dp"
         android:layout_margin="16dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.588"
         app:layout_constraintWidth_percent="0.9">
 
         <ScrollView
-            android:layout_width="379dp"
-            android:layout_height="604dp">
+            android:layout_width="318dp"
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -55,36 +54,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Campo 1 -->
-                <EditText
-                    android:id="@+id/usuario_nom"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/custom_edittext"
-                    android:hint="Nombre de Usuario"
-                    android:padding="12dp"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/registerText"
-                    app:layout_constraintWidth_percent="0.9" />
+                <!-- Campos de datos personales -->
 
-                <!-- Campo 2 -->
-                <EditText
-                    android:id="@+id/email"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/custom_edittext"
-                    android:hint="Correo Electrónico"
-                    android:inputType="textEmailAddress"
-                    android:padding="12dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/usuario_nom"
-                    app:layout_constraintWidth_percent="0.9" />
 
-                <!-- Campo 3 -->
                 <EditText
                     android:id="@+id/nombres"
                     android:layout_width="0dp"
@@ -95,7 +67,7 @@
                     android:padding="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/email"
+                    app:layout_constraintTop_toBottomOf="@id/registerText"
                     app:layout_constraintWidth_percent="0.9" />
 
                 <EditText
@@ -137,35 +109,86 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/a_m"
                     app:layout_constraintWidth_percent="0.9" />
+                <!-- Separador con línea y texto -->
+                <TextView
+                    android:id="@+id/separadorUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Datos de Usuario"
+                    android:textColor="@color/gray"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/telefono" />
 
-                <!-- Campo de Contraseña -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/separadorUsuario"
+                    app:layout_constraintWidth_percent="0.9" />
+
+                <!-- Correo y Contraseña debajo -->
+                <EditText
+                    android:id="@+id/usuario_nom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/custom_edittext"
+                    android:hint="Nombre de Usuario"
+                    android:padding="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.517"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/separadorUsuario"
+                    app:layout_constraintWidth_percent="0.9" />
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_edittext"
+                    android:hint="@string/correo_electr_nico"
+                    android:inputType="textEmailAddress"
+                    android:padding="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/usuario_nom"
+                    app:layout_constraintWidth_percent="0.9" />
+
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/custom_edittext"
-                    android:hint="Contraseña"
+                    android:hint="@string/contrase_a"
                     android:inputType="textPassword"
                     android:padding="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/telefono"
+                    app:layout_constraintTop_toBottomOf="@id/email"
                     app:layout_constraintWidth_percent="0.9" />
-
 
                 <Button
                     android:id="@+id/registerButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="279dp"
+                    android:layout_height="50dp"
                     android:backgroundTint="@color/purple"
                     android:text="@string/registrarse"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@+id/loginPrompt"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline17"
+                    app:layout_constraintVertical_bias="0.833"
                     app:layout_constraintWidth_percent="0.9" />
 
                 <ProgressBar
@@ -192,7 +215,7 @@
                     android:id="@+id/loginPrompt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="48dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="onLoginClick"
@@ -201,6 +224,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.566"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/guideline15" />
 
