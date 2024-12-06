@@ -43,6 +43,7 @@ public class AdminActivity extends AppCompatActivity {
         Button btnmanageusers = findViewById(R.id.btn_manage_users);
         Button btnviewreports = findViewById(R.id.btn_view_reports);
         Button btnviewrol = findViewById(R.id.btn_rol);
+        Button btnviewnotifications=findViewById(R.id.btn_notificacion);
 
         profileImage = findViewById(R.id.profile_image);
         username = findViewById(R.id.admin_name);
@@ -75,6 +76,12 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 viewrol();
+            }
+        });
+        btnviewnotifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewnotification();
             }
         });
     }
@@ -155,4 +162,9 @@ public class AdminActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AdminRolActivity.class);
         startActivity(intent);
     }
+    public void viewnotification() {
+        Intent intent = new Intent(this, AdminNotifiacaionesActivity.class);
+        startActivity(intent);
+    }
+
 }

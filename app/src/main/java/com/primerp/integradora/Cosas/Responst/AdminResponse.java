@@ -1,5 +1,6 @@
 package com.primerp.integradora.Cosas.Responst;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class AdminResponse {
@@ -9,6 +10,7 @@ public class AdminResponse {
     private int inactiveUsers;    // Usuarios inactivos
     private List<UserByMonth> usersByMonth; // Lista de usuarios por mes
     private List<String> roles; // Lista de roles (ahora es una lista de cadenas)
+    private List<String> types;
 
     // Getters y setters
     public int getTotalUsers() {
@@ -49,6 +51,15 @@ public class AdminResponse {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+
+    public List<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<String> types) {
+        this.types = types;
     }
 
     // Clase interna para representar la lista de usuarios por mes
