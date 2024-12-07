@@ -241,4 +241,64 @@ public class Repository {
             }
         });
     }
+    ////////////////////////////////////////////////
+    public LiveData<User> loadUserData() {
+        MutableLiveData<User> userLiveData = new MutableLiveData<>();
+        String token = sessionManager.getToken();
+        if (token == null || token.isEmpty()) {
+            return userLiveData;
+        }
+
+        String authToken = "Bearer " + token;
+        apiService.getMe(authToken).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    userLiveData.setValue(response.body().getUser());
+                } else {
+                    userLiveData.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                userLiveData.setValue(null);
+            }
+        });
+
+        return userLiveData;
+    }
+
+    public LiveData<Boolean> updateUser(RegisterRequest request) {
+        MutableLiveData<Boolean> updateStatus = new MutableLiveData<>();
+        String token = sessionManager.getToken();
+
+        if (token == null || token.isEmpty()) {
+            updateStatus.setValue(false);
+            return updateStatus;
+        }
+
+        String authToken = "Bearer " + token;
+        apiService.updateUser(authToken, request).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                updateStatus.setValue(response.isSuccessful());
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                updateStatus.setValue(false);
+            }
+        });
+
+        return updateStatus;
+    }
+    ////////////////////////////////////////////////
+    public Call<TinacoResponse> getTinacoById(String authToken, int tinacoId) {
+        return apiService.getTinacoById(authToken, tinacoId);
+    }
+
+    public Call<TinacoResponse> updateTinaco(String authToken, int tinacoId, TinacoRequest request) {
+        return apiService.updateTinaco(authToken, tinacoId, request);
+    }
 }
