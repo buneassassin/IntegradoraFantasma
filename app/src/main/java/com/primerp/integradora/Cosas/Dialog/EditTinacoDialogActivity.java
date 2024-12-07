@@ -42,7 +42,6 @@ public class EditTinacoDialogActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("TINACO_ID")) {
             int tinacoId = intent.getIntExtra("TINACO_ID", -1);
-            Log.d("TINACO_ID", "ID del Tinaco seleccionado desde edit: " + tinacoId);
             this.tinacoId = tinacoId;
         }
         loadTinacoData();

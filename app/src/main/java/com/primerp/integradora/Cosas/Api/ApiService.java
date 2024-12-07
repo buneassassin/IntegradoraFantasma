@@ -92,8 +92,8 @@ public interface ApiService {
     @GET("tinaco")
     Call<List<Tinacos>> getTinaco(
             @Header("Authorization")
-            String authToken)
-            ;
+            String authToken
+    );
     @POST("tinaco")
     Call<TinacoResponse> addTinaco(
             @Header("Authorization") String authToken,

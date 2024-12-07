@@ -63,21 +63,16 @@ public class EditProfileDialogActivity extends AppCompatActivity {
         String name = editName.getText().toString();
         String email = editEmail.getText().toString();
         String phone = editPhone.getText().toString();
-
         if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || user.isEmpty()) {
             Toast.makeText(EditProfileDialogActivity.this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
-
         String token = sessionManager.getToken();
-
-        Log.d("DEBUG", "Token recuperado: " + token);
 
         if (token == null || token.isEmpty()) {
             Toast.makeText(this, "Token no válido", Toast.LENGTH_SHORT).show();
             return;
         }
-
         String authToken = "Bearer " + token;
         Log.d("DEBUG", "Token con prefijo Bearer: " + authToken);
 

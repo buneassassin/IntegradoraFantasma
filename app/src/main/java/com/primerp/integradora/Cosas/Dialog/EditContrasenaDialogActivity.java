@@ -24,12 +24,10 @@ public class EditContrasenaDialogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contrasena_dialog);
 
-        // Initialize UI components
         editcontra = findViewById(R.id.edit_contra);
         confircontra = findViewById(R.id.confir_contra);
         ImageView backIcon = findViewById(R.id.iconback);
 
-        // Setup ViewModel
         EditContrasenaDialogViewModelFactory factory = new EditContrasenaDialogViewModelFactory(this);
         viewModel = new ViewModelProvider(this, factory).get(EditContrasenaDialogViewModel.class);
 
@@ -50,7 +48,6 @@ public class EditContrasenaDialogActivity extends AppCompatActivity {
             String token = "Bearer " + new SessionManager(this).getToken();
             PassaworRequest request = new PassaworRequest(password, password_confirmation);
 
-            // Call ViewModel method and observe result
             viewModel.updatePassword(token, request).observe(this, response -> {
                 if (response != null && response.getMessage() != null) {
                     if (response.getMessage().toLowerCase().contains("error")) {

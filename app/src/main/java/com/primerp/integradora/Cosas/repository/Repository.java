@@ -2,6 +2,7 @@ package com.primerp.integradora.Cosas.repository;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,6 +10,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.primerp.integradora.Cosas.Api.ApiService;
 import com.primerp.integradora.Cosas.Class.RetrofitClient;
 import com.primerp.integradora.Cosas.Class.SessionManager;
+import com.primerp.integradora.Cosas.Modelos.Tinacos;
+import com.primerp.integradora.Cosas.Modelos.User;
 import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Cosas.Responst.LoginRequest;
 import com.primerp.integradora.Cosas.Responst.LoginResponse;
@@ -17,6 +20,8 @@ import com.primerp.integradora.Cosas.Responst.RegisterRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterResponse;
 import com.primerp.integradora.Cosas.Responst.TinacoRequest;
 import com.primerp.integradora.Cosas.Responst.TinacoResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -187,5 +192,53 @@ public class Repository {
             }
         });
         return responseLiveData;
+    }
+    /////////////////////////////////////////////////
+    public LiveData<List<Tinacos>> getTinacos() {
+        MutableLiveData<List<Tinacos>> liveData = new MutableLiveData<>();
+        String token = sessionManager.getToken();
+        String authToken = "Bearer " + token;
+        apiService.getTinaco(authToken).enqueue(new Callback<List<Tinacos>>() {
+            @Override
+            public void onResponse(Call<List<Tinacos>> call, Response<List<Tinacos>> response) {
+                if (response.isSuccessful() && response.body()!= null) {
+                    liveData.postValue(response.body());
+                } else {
+                    liveData.postValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Tinacos>> call, Throwable t) {
+                liveData.postValue(null);
+            }
+        });
+        return liveData;
+    }
+    /////////////////////////////////////////////////
+
+    public interface UsersCallback {
+        void onSuccess(List<User> users);
+        void onError(String errorMessage);
+    }
+
+    public void getUsersWithTinacos(UsersCallback callback) {
+        String token = sessionManager.getToken();
+        String authToken = "Bearer " + token;
+        apiService.getusuariosConTinacos(authToken).enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onError("Error al obtener usuarios");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                callback.onError("Error de red: " + t.getMessage());
+            }
+        });
     }
 }

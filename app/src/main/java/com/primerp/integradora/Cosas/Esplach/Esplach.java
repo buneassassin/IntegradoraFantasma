@@ -37,7 +37,6 @@ public class Esplach extends AppCompatActivity {
         if (token != null) {
             validateToken(token, handler, startTime);
         } else {
-            // Si no hay token, redirigir después del tiempo mínimo
             handler.postDelayed(() -> redirectToLogin(), MIN_SPLASH_TIME_MS);
         }
     }
@@ -60,7 +59,7 @@ public class Esplach extends AppCompatActivity {
                             redirectToLogin();
                         }
                     }
-                }, Math.max(remainingTime, 0)); // Esperar el tiempo restante si es necesario
+                }, Math.max(remainingTime, 0));
             }
 
             @Override

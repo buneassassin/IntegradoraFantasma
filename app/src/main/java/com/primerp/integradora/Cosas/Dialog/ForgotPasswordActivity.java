@@ -24,16 +24,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        // Initialize Views
         emailInput = findViewById(R.id.emailInput);
         sendEmailButton = findViewById(R.id.sendEmailButton);
         backToLogin = findViewById(R.id.backToLogin);
 
-        // Initialize ViewModel
         viewModel = new ViewModelProvider(this, new ForgotPasswordViewModelFactory(this))
                 .get(ForgotPasswordViewModel.class);
 
-        // Handle Button Clicks
         sendEmailButton.setOnClickListener(v -> forgotPassword());
         backToLogin.setOnClickListener(v -> finish());
 
@@ -41,7 +38,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     private void observeViewModel() {
-        // Observe email validation errors
         viewModel.getEmailError().observe(this, error -> {
             if (error != null) {
                 emailInput.setError(error);

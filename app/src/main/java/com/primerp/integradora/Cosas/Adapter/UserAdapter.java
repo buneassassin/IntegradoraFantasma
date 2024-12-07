@@ -1,6 +1,8 @@
 package com.primerp.integradora.Cosas.Adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.text.Layout;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -40,8 +43,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         this.userlist = userlist;
     }*/
 
-    public UserAdapter(List<User> userlist, ApiService apiService, String authToken) {
-        this.userlist = userlist;
+    public UserAdapter(List<User> users, ApiService apiService, String authToken) {
+        this.userlist = users;
         this.apiService = apiService;
         this.authToken = authToken;
     }
@@ -69,19 +72,28 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         return userlist.size();
     }
 
-    private void blockUser(String userEmail) {
-        // Crear un mapa con el correo del usuario
+    private void blockUser(String userEmail, Context context) {
+        if (apiService == null) {
+            Log.d("DEBUG", "ApiService is null, cannot block user");
+            return;
+        }
+
         Map<String, String> emailData = new HashMap<>();
         emailData.put("email", userEmail);
 
-        // Llamar al servicio pasando el token y el mapa con el correo
-        Call<ApiResponse> call = apiService.postdesactivarUsuario("Bearer " + authToken, emailData);        call.enqueue(new Callback<ApiResponse>() {
+        Call<ApiResponse> call = apiService.postdesactivarUsuario("Bearer " + authToken, emailData);
+        call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d("DEBUG", "Usuario bloqueado con éxito");
+
+                    // Mostrar mensaje de éxito con un Toast
+                    Toast.makeText(context, "Usuario bloqueado con éxito", Toast.LENGTH_SHORT).show();
+
+                    // Cerrar la actividad
+                    ((Activity) context).finish(); // Finaliza la actividad actual
                 } else {
-                    // Aquí mostramos más detalles sobre la respuesta de error
                     Log.d("DEBUG", "Error al bloquear al usuario: " + response.code());
                     Log.d("DEBUG", "Mensaje de error: " + response.message());
                     if (response.errorBody() != null) {
@@ -94,10 +106,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 }
             }
 
-
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                // Error de red o otro problema
                 Log.d("DEBUG", "Error de red al bloquear al usuario: " + t.getMessage());
             }
         });
@@ -157,7 +167,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                             .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    blockUser(user.getEmail());  // Bloquear al usuario si confirma
+                                    // Pasar el contexto actual y bloquear al usuario
+                                    blockUser(user.getEmail(), itemView.getContext());
                                 }
                             })
                             .setNegativeButton("No", null)
