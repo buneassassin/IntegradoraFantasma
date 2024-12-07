@@ -35,6 +35,13 @@ public class ApiResponse {
         return users;
     }
 
-
-
+    public void setMessage(String s) {
+        this.message = s;
+    }
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

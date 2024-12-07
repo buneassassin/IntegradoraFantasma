@@ -1,6 +1,7 @@
 package com.primerp.integradora.Cosas.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,8 +9,10 @@ import androidx.lifecycle.MutableLiveData;
 import com.primerp.integradora.Cosas.Api.ApiService;
 import com.primerp.integradora.Cosas.Class.RetrofitClient;
 import com.primerp.integradora.Cosas.Class.SessionManager;
+import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Cosas.Responst.LoginRequest;
 import com.primerp.integradora.Cosas.Responst.LoginResponse;
+import com.primerp.integradora.Cosas.Responst.PassaworRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterResponse;
 import com.primerp.integradora.Cosas.Responst.TinacoRequest;
@@ -140,5 +143,49 @@ public class Repository {
         void onError(String error);
     }
     //////////////////////////////////////////////////
+    public LiveData<ApiResponse> resetPassword(String email) {
+        MutableLiveData<ApiResponse> result = new MutableLiveData<>();
+        RegisterRequest request = new RegisterRequest(email);
+        apiService.resetPassword(request).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful()) {
+                    result.postValue(response.body());
+                } else {
+                    result.postValue(null); // or custom error handling
+                    Log.e("ForgotPasswordRepo", "Error: " + response.message());
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                result.postValue(null); // Handle failure
+                Log.e("ForgotPasswordRepo", "Failure: " + t.getMessage(), t);
+            }
+        });
+        return result;
+    }
+    public LiveData<ApiResponse> updatePassword(String token, PassaworRequest request) {
+        MutableLiveData<ApiResponse> responseLiveData = new MutableLiveData<>();
+        apiService.updatePassword(token, request).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful()) {
+                    responseLiveData.postValue(response.body());
+                } else {
+                    ApiResponse errorResponse = new ApiResponse();
+                    errorResponse.setMessage("Error: " + response.message());
+                    responseLiveData.postValue(errorResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                ApiResponse errorResponse = new ApiResponse();
+                errorResponse.setMessage("Error: " + t.getMessage());
+                responseLiveData.postValue(errorResponse);
+            }
+        });
+        return responseLiveData;
+    }
 }
