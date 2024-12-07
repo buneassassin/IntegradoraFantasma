@@ -16,6 +16,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.primerp.integradora.Cosas.Adapter.CarruselAdapter;
 
 import com.primerp.integradora.Cosas.Dialog.EditProfileDialogActivity;
+import com.primerp.integradora.Cosas.ViewModelFactory.HomeViewModelFactory;
+import com.primerp.integradora.Cosas.viewmodel.HomeViewModel;
 import com.primerp.integradora.R;
 import com.primerp.integradora.databinding.FragmentHomeBinding;
 import com.primerp.integradora.ui.tinaco.TinacoActivity;
@@ -31,48 +33,38 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        HomeViewModelFactory factory = new HomeViewModelFactory();
         HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+                new ViewModelProvider(this, factory).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Button AgregarButton = binding.btnAddNew;
-        AgregarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TinacoActivity.class);
-                startActivity(intent);
-            }
+        homeViewModel.getCarruselImages().observe(getViewLifecycleOwner(), carruselImages -> {
+            configureCarrusel(carruselImages);
         });
 
-        configureCarrusel();
+        Button AgregarButton = binding.btnAddNew;
+        AgregarButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), TinacoActivity.class);
+            startActivity(intent);
+        });
 
         return root;
     }
 
-    private void configureCarrusel() {
-        // Lista de imágenes para el carrusel
-        List<Integer> carruselImages = Arrays.asList(
-                R.drawable.imagen1,
-                R.drawable.imagen2,
-                R.drawable.imagen3
-        );
-
-        // Configura el adaptador del carrusel
+    private void configureCarrusel(List<Integer> carruselImages) {
         CarruselAdapter adapter = new CarruselAdapter(requireContext(), carruselImages);
         binding.vpCarrusel.setAdapter(adapter);
 
-        // Configura los indicadores (TabLayout) para el carrusel
-        TabLayout tabLayout = binding.tabsCarrusel; // Accediendo directamente a la vista desde el binding
-        tabLayout.setupWithViewPager(binding.vpCarrusel, true); // Sincroniza TabLayout con ViewPager
+        TabLayout tabLayout = binding.tabsCarrusel;
+        tabLayout.setupWithViewPager(binding.vpCarrusel, true);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null; // Desreferencia el binding para evitar fugas de memoria
+        binding = null;
     }
-
-
 }
+
