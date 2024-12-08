@@ -14,13 +14,17 @@
 
     <!-- LottieAnimationView como fondo -->
 
+
+    <!-- Estado del tinaco -->
+
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationBackground"
         android:layout_width="76dp"
         android:layout_height="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintHorizontal_bias="0.834"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -28,15 +32,10 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/olacircul" />
 
-
-    <!-- Estado del tinaco -->
-
-
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_rectangle"
         android:backgroundTint="@color/light_blue"
         android:padding="7dp"
@@ -45,6 +44,7 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,97 +58,9 @@
         android:layout_height="24dp"
         android:layout_marginEnd="5dp"
         android:src="@drawable/ic_edit"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/containerSensores"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline13">
-
-        <TextView
-            android:id="@+id/tvSensor1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/custom_textview"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/sensor"
-            android:textColor="@color/black"
-            android:textSize="10sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvSensor2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/custom_textview"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/sensor"
-            android:textColor="@color/black"
-            android:textSize="10sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvSensor3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/custom_textview"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/sensor"
-            android:textColor="@color/black"
-            android:textSize="10sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvSensor4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/custom_textview"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/sensor"
-            android:textColor="@color/black"
-            android:textSize="10sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvSensor5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/custom_textview"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/sensor"
-            android:textColor="@color/black"
-            android:textSize="10sp"
-            android:textStyle="bold" />
-    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -164,17 +76,4 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="85dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="88dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="56dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

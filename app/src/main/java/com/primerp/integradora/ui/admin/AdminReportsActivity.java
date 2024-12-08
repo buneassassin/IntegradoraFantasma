@@ -84,7 +84,6 @@ public class AdminReportsActivity extends AppCompatActivity {
     private void populateReports(AdminResponse adminResponse) {
         LinearLayout reportContainer = findViewById(R.id.reportContainer);
 
-        // Configurar PieChart
         PieChart pieChart = findViewById(R.id.pieChartUsers);
         List<PieEntry> pieEntries = new ArrayList<>();
         pieEntries.add(new PieEntry(adminResponse.getActiveUsers(), "Activos"));

@@ -39,6 +39,7 @@ public class AdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+
         ImageView backIcon = findViewById(R.id.iconback);
         Button btnmanageusers = findViewById(R.id.btn_manage_users);
         Button btnviewreports = findViewById(R.id.btn_view_reports);
@@ -121,8 +122,6 @@ public class AdminActivity extends AppCompatActivity {
     private void getUserImg() {
         String token = sessionManager.getToken();
         String authToken = "Bearer " + token;
-
-        Log.d("DEBUG", "Token con prefijo Bearer: " + authToken);
         Call<ApiResponse> call = apiService.getimagen(authToken);
 
         call.enqueue(new Callback<ApiResponse>() {
@@ -150,6 +149,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
     }
+
     public void manageusers() {
         Intent intent = new Intent(this, AdminManageActivity.class);
         startActivity(intent);

@@ -5,15 +5,16 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.primerp.integradora.Cosas.Api.ApiService;
 import com.primerp.integradora.Cosas.Responst.LoginRequest;
 import com.primerp.integradora.Cosas.Responst.LoginResponse;
-import com.primerp.integradora.Cosas.repository.LoginRepository;
+import com.primerp.integradora.Cosas.repository.Repository;
 
 public class LoginViewModel extends ViewModel {
-    private final LoginRepository repository;
+    private final Repository repository;
 
     public LoginViewModel(Context context) {
-        this.repository = new LoginRepository(context);
+        this.repository = new Repository(context);
     }
 
     public LiveData<LoginResponse> loginUser(LoginRequest request) {

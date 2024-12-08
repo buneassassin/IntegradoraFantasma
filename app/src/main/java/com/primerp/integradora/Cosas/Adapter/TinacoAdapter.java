@@ -19,20 +19,20 @@ import com.primerp.integradora.ui.tinacoDetalle.TinacoDetalleActivity;
 import java.util.List;
 
 public class TinacoAdapter extends RecyclerView.Adapter<TinacoAdapter.TinacoViewHolder> {
-    private List<Tinacos> tinacoslist;
+    private List<Tinacos> tinacosList;
 
-    public TinacoAdapter(List<Tinacos> tinacoslist) {
-        this.tinacoslist = tinacoslist;
+    public TinacoAdapter(List<Tinacos> tinacosList) {
+        this.tinacosList = tinacosList;
     }
 
     public void updateTinacosList(List<Tinacos> newTinacosList) {
-        this.tinacoslist = newTinacosList;
+        this.tinacosList = newTinacosList;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public TinacoAdapter.TinacoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TinacoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_tinaco, parent, false);
         return new TinacoViewHolder(view);
@@ -40,20 +40,20 @@ public class TinacoAdapter extends RecyclerView.Adapter<TinacoAdapter.TinacoView
 
     @Override
     public void onBindViewHolder(@NonNull TinacoViewHolder holder, int position) {
-        Tinacos tinaco = tinacoslist.get(position);
-        Log.d("DEBUG", "Asignando nombre: " + tinaco.getNombre());
-        holder.setData(tinaco);
+        if (tinacosList != null && !tinacosList.isEmpty()) {
+            Tinacos tinaco = tinacosList.get(position);
+            holder.setData(tinaco);
+        }
     }
-
 
     @Override
     public int getItemCount() {
-        return tinacoslist.size();
+        return (tinacosList != null) ? tinacosList.size() : 0;
     }
 
-    static class TinacoViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle;
-        ImageView iconEditor;
+    class TinacoViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvTitle;
+        private final ImageView iconEditor;
 
         public TinacoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,24 +61,32 @@ public class TinacoAdapter extends RecyclerView.Adapter<TinacoAdapter.TinacoView
             iconEditor = itemView.findViewById(R.id.iconEdit);
         }
 
-        public void setData(Tinacos tinacos) {
-            tvTitle.setText(tinacos.getNombre());
+        public void setData(Tinacos tinaco) {
+            tvTitle.setText(tinaco.getNombre());
+
+            // Listener para editar
             iconEditor.setOnClickListener(view -> {
-                Intent intentedit = new Intent(view.getContext(), EditTinacoDialogActivity.class);
-
-                intentedit.putExtra("TINACO_ID", tinacos.getId());
-
-                view.getContext().startActivity(intentedit);
+                Intent editIntent = createEditIntent(view, tinaco.getId());
+                view.getContext().startActivity(editIntent);
             });
 
+            // Listener para detalles
             itemView.setOnClickListener(view -> {
-                Intent intent = new Intent(view.getContext(), TinacoDetalleActivity.class);
-
-                intent.putExtra("TINACO_ID", tinacos.getId());
-
-                view.getContext().startActivity(intent);
+                Intent detailIntent = createDetailIntent(view, tinaco.getId());
+                view.getContext().startActivity(detailIntent);
             });
+        }
+
+        private Intent createEditIntent(View view, int tinacoId) {
+            Intent intent = new Intent(view.getContext(), EditTinacoDialogActivity.class);
+            intent.putExtra("TINACO_ID", tinacoId);
+            return intent;
+        }
+
+        private Intent createDetailIntent(View view, int tinacoId) {
+            Intent intent = new Intent(view.getContext(), TinacoDetalleActivity.class);
+            intent.putExtra("TINACO_ID", tinacoId);
+            return intent;
         }
     }
 }
-

@@ -7,106 +7,81 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.primerp.integradora.Cosas.Api.ApiService;
-import com.primerp.integradora.Cosas.Class.RetrofitClient;
 import com.primerp.integradora.Cosas.Class.SessionManager;
-import com.primerp.integradora.Cosas.Modelos.Tinacos;
-import com.primerp.integradora.Cosas.Modelos.User;
-import com.primerp.integradora.Cosas.Responst.ApiResponse;
 import com.primerp.integradora.Cosas.Responst.TinacoRequest;
-import com.primerp.integradora.Cosas.Responst.TinacoResponse;
+import com.primerp.integradora.Cosas.viewmodel.EditTinacoDialogViewModel;
+import com.primerp.integradora.Cosas.ViewModelFactory.EditTinacoDialogViewModelFactory;
 import com.primerp.integradora.R;
 
-import retrofit2.Call;
-
 public class EditTinacoDialogActivity extends AppCompatActivity {
-    private ApiService apiService;
-    private SessionManager sessionManager;
+    private EditTinacoDialogViewModel viewModel;
     private EditText editName;
     private Button saveButton;
+    private SessionManager sessionManager;
     private int tinacoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_tinaco_dialog);
+
         editName = findViewById(R.id.edit_name);
         saveButton = findViewById(R.id.saveButton);
         sessionManager = new SessionManager(this);
-        apiService = RetrofitClient.getInstance(this).getApiService();
 
+        // Inicializar ViewModel
+        viewModel = new ViewModelProvider(this, new EditTinacoDialogViewModelFactory(this)).get(EditTinacoDialogViewModel.class);
 
+        // Obtener el ID del tinaco
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("TINACO_ID")) {
-            int tinacoId = intent.getIntExtra("TINACO_ID", -1);
-            Log.d("TINACO_ID", "ID del Tinaco seleccionado desde edit: " + tinacoId);
-            this.tinacoId = tinacoId;
+            tinacoId = intent.getIntExtra("TINACO_ID", -1);
         }
+
         loadTinacoData();
+        setupObservers();
+
+        // Botón para guardar cambios
+        saveButton.setOnClickListener(v -> updateTinaco());
 
         ImageView backIcon = findViewById(R.id.iconback);
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        saveButton.setOnClickListener(v -> editProfile());
-
+        backIcon.setOnClickListener(v -> finish());
     }
+
     private void loadTinacoData() {
         String token = sessionManager.getToken();
         String authToken = "Bearer " + token;
+        viewModel.fetchTinacoById(authToken, tinacoId);
+    }
 
-        Call<TinacoResponse> call = apiService.getTinacoById(authToken, tinacoId);
-        call.enqueue(new retrofit2.Callback<TinacoResponse>() {
-            @Override
-            public void onResponse(Call<TinacoResponse> call, retrofit2.Response<TinacoResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Tinacos tinaco = response.body().getTinaco();
-
-                    if (tinaco != null) {
-                        Log.d("DEBUG", "Nombre del Tinaco: " + tinaco.getNombre());
-                        editName.setText(tinaco.getNombre());
-                    }
-                } else {
-                    Log.d("DEBUG", "Error en la respuesta de la API: " + response.message());
-                }
+    private void setupObservers() {
+        viewModel.getTinacoLiveData().observe(this, tinaco -> {
+            if (tinaco != null) {
+                editName.setText(tinaco.getNombre());
             }
+        });
 
-            @Override
-            public void onFailure(Call<TinacoResponse> call, Throwable t) {
-                Log.d("DEBUG", "Error al cargar los datos del tinaco: " + t.getMessage());
+        viewModel.getErrorLiveData().observe(this, error -> {
+            if (error != null) {
+                Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
             }
         });
     }
-    private void editProfile() {
+
+    private void updateTinaco() {
         String token = sessionManager.getToken();
         String authToken = "Bearer " + token;
 
         String nombre = editName.getText().toString();
-        TinacoRequest tinacoRequest = new TinacoRequest(nombre);
+        TinacoRequest request = new TinacoRequest(nombre);
 
-        Call<TinacoResponse> call = apiService.updateTinaco(authToken, tinacoId, tinacoRequest);
-        call.enqueue(new retrofit2.Callback<TinacoResponse>() {
-            @Override
-            public void onResponse(Call<TinacoResponse> call, retrofit2.Response<TinacoResponse> response) {
-                if (response.isSuccessful()) {
-                    Log.d("DEBUG", "Tinaco editado correctamente");
-                    finish();
-                } else {
-                    Log.d("DEBUG", "Error al editar el tinaco: " + response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<TinacoResponse> call, Throwable t) {
-                Log.d("DEBUG", "Error al editar el tinaco: " + t.getMessage());
-            }
-        });
+        viewModel.updateTinaco(authToken, tinacoId, request);
+        Toast.makeText(this, "Tinaco actualizado correctamente", Toast.LENGTH_SHORT).show();
+        finish();
     }
-
 }

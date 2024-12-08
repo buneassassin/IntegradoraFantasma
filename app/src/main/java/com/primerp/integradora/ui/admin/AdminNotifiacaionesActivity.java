@@ -75,17 +75,13 @@ public class AdminNotifiacaionesActivity extends AppCompatActivity {
 
     private void loadTypes() {
         String token = sessionManager.getToken();
-
-        // Verificar si el token es válido
         if (token == null || token.isEmpty()) {
             Toast.makeText(this, "Token no válido", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Agregar el token de autorización
         String authToken = "Bearer " + token;
 
-        // Llamada a la API
         Call<AdminResponse> call = apiService.getgettype(authToken);
         call.enqueue(new Callback<AdminResponse>() {
             @Override
@@ -109,7 +105,6 @@ public class AdminNotifiacaionesActivity extends AppCompatActivity {
         });
     }
     private void populateSpinner(List<String> types) {
-        // Adaptador para el Spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -122,7 +117,6 @@ public class AdminNotifiacaionesActivity extends AppCompatActivity {
     private void sendNotification(String type) {
         String token = sessionManager.getToken();
 
-        // Verificar si el token es válido
         if (token == null || token.isEmpty()) {
             Toast.makeText(this, "Token no válido", Toast.LENGTH_SHORT).show();
             return;
@@ -139,7 +133,6 @@ public class AdminNotifiacaionesActivity extends AppCompatActivity {
             Toast.makeText(AdminNotifiacaionesActivity.this, "Por favor, ingrese un email", Toast.LENGTH_SHORT).show();
             return;
         }
-        // Crear un mapa para los datos que se van a enviar
         Map<String, String> messagData = new HashMap<>();
         messagData.put("title", title);
         messagData.put("mesaje", messag);

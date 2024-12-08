@@ -2,12 +2,9 @@ package com.primerp.integradora.ui.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,106 +14,63 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.primerp.integradora.Cosas.Adapter.TinacoAdapter;
-import com.primerp.integradora.Cosas.Api.ApiService;
-import com.primerp.integradora.Cosas.Class.SessionManager;
-import com.primerp.integradora.Cosas.Modelos.Tinacos;
-import com.primerp.integradora.R;
+import com.primerp.integradora.Cosas.ViewModelFactory.DashboardViewModelFactory;
+import com.primerp.integradora.Cosas.viewmodel.DashboardViewModel;
 import com.primerp.integradora.databinding.FragmentDashboardBinding;
-import com.primerp.integradora.Cosas.Class.RetrofitClient;
 import com.primerp.integradora.ui.tinaco.TinacoActivity;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-
 
 public class DashboardFragment extends Fragment {
-
     private FragmentDashboardBinding binding;
-    private SessionManager sessionManager;
-    private ApiService apiService;
-    private ProgressBar progressBar;
-    private RecyclerView recyclerView;
-    private TinacoAdapter tinacoadapter;
+    private TinacoAdapter tinacoAdapter;
+    private DashboardViewModel viewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-
-
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        progressBar = root.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
 
-        sessionManager = new SessionManager(getContext());
-        apiService = RetrofitClient.getInstance(getContext()).getApiService();
-        recyclerView = root.findViewById(R.id.rv_tinacos);
+        // Configurar RecyclerView
+        RecyclerView recyclerView = binding.rvTinacos;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        Button AgregarButton = binding.btnAddNew;
-        AgregarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TinacoActivity.class);
-                startActivity(intent);
+        tinacoAdapter = new TinacoAdapter(new ArrayList<>());
+        recyclerView.setAdapter(tinacoAdapter);
+
+        // ViewModel
+        viewModel = new ViewModelProvider(this, new DashboardViewModelFactory(requireContext()))
+                .get(DashboardViewModel.class);
+
+        // Observar datos
+        viewModel.getTinacos().observe(getViewLifecycleOwner(), tinacos -> {
+            if (tinacos != null && !tinacos.isEmpty()) {
+                tinacoAdapter.updateTinacosList(tinacos);
+                binding.emptyStateLayout.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+            } else {
+                binding.emptyStateLayout.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
             }
         });
 
-        recyclerView();
+        // Manejo de errores
+        viewModel.getErrorLiveData().observe(getViewLifecycleOwner(), errorMessage -> {
+            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+        });
+
+        // Botón para agregar nuevo
+        binding.btnAddNew.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), TinacoActivity.class);
+            startActivity(intent);
+        });
 
         return root;
     }
 
-
-    public void recyclerView() {
-        String token = sessionManager.getToken();
-
-        if (token == null || token.isEmpty()) {
-            Toast.makeText(getContext(), "Token no válido", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        tinacoadapter = new TinacoAdapter(new ArrayList<>());
-        recyclerView.setAdapter(tinacoadapter);
-
-        String authToken = "Bearer " + token;
-
-        Call<List<Tinacos>> call = apiService.getTinaco(authToken);
-        call.enqueue(new retrofit2.Callback<List<Tinacos>>() {
-            @Override
-            public void onResponse(Call<List<Tinacos>> call, retrofit2.Response<List<Tinacos>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Tinacos> tinacosList = response.body();
-                    progressBar.setVisibility(View.GONE);
-
-                    if (tinacosList.isEmpty()) {
-                        recyclerView.setVisibility(View.GONE);
-                        binding.emptyStateLayout.setVisibility(View.VISIBLE);
-                    } else {
-                        tinacoadapter.updateTinacosList(tinacosList);
-                        recyclerView.setVisibility(View.VISIBLE);
-                        binding.emptyStateLayout.setVisibility(View.GONE);
-                    }
-                } else {
-                    Log.e("API_RESPONSE", "Error: " + response.message());
-                    Toast.makeText(getContext(), "Error al obtener los datos", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Tinacos>> call, Throwable t) {
-                Log.d("DEBUG", "Error: " + t.getMessage());
-                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }

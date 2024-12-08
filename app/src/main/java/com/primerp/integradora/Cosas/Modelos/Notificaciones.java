@@ -8,17 +8,10 @@ public class Notificaciones {
     private String title;
     @SerializedName("is_read")
     private int isRead;
-
     @SerializedName("formatted_created_at")
     private String formattedcreatedat;
 
-    public String getformattedcreatedat() {
-        return formattedcreatedat;
-    }
 
-    public void setformattedcreatedat(String formattedcreatedat) {
-        this.formattedcreatedat = formattedcreatedat;
-    }
 
     // Getters y Setters
     public String getMessage() {
@@ -56,4 +49,11 @@ public class Notificaciones {
         this.id = id;
     }
 
+    public String getformattedcreatedat() {
+        return formattedcreatedat;
+    }
+
+    public void setformattedcreatedat(String formattedcreatedat) {
+        this.formattedcreatedat = formattedcreatedat;
+    }
 }

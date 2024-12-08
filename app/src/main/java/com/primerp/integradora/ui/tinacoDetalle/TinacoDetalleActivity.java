@@ -4,145 +4,154 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.primerp.integradora.Cosas.Api.ApiService;
-import com.primerp.integradora.Cosas.Class.RetrofitClient;
-import com.primerp.integradora.Cosas.Class.SessionManager;
-import com.primerp.integradora.Cosas.Dialog.EditTinacoDialogActivity;
-import com.primerp.integradora.Cosas.Modelos.Tinacos;
-import com.primerp.integradora.Cosas.Responst.TinacoResponse;
+import com.primerp.integradora.Cosas.Dialog.SensoresActivity;
+import com.primerp.integradora.Cosas.ViewModelFactory.TinacoDetalleViewModelFactory;
+import com.primerp.integradora.Cosas.ViewModelFactory.TinacoViewModelFactory;
+import com.primerp.integradora.Cosas.viewmodel.TinacoViewModel;
 import com.primerp.integradora.R;
-import com.primerp.integradora.databinding.ActivityTinacoGraficaBinding;
+import com.primerp.integradora.Cosas.Dialog.EditTinacoDialogActivity;
+import com.primerp.integradora.Cosas.viewmodel.TinacoDetalleViewModel;
 import com.primerp.integradora.ui.tinacoGrafica.TinacoGraficaActivity;
 
-import retrofit2.Call;
-
 public class TinacoDetalleActivity extends AppCompatActivity {
-    private ApiService apiService;
-    private SessionManager sessionManager;
-    private TextView textTitulo,nombretinaco;
+    private TinacoDetalleViewModel viewModel;
+    private TextView textTitulo, nombretinaco;
     private Button btndelet;
     private int tinacoId;
     private String nombre;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tinaco_detalle);
+
+        // Inicializar UI
         CardView cardEditar = findViewById(R.id.cardEditar);
-        sessionManager = new SessionManager(this);
-        apiService = RetrofitClient.getInstance(this).getApiService();
+        ImageView backIcon = findViewById(R.id.iconback);
+        CardView irGarfica = findViewById(R.id.cardEstadistica);
         textTitulo = findViewById(R.id.textTituloTinaco);
         nombretinaco = findViewById(R.id.nombretinaco);
-        btndelet= findViewById(R.id.btn_delet);
-        ImageView backIcon = findViewById(R.id.iconback);
-        ImageView irGarfica = findViewById(R.id.irGarfica);
+        btndelet = findViewById(R.id.btn_delet);
 
+        // Obtener los botones de los sensores
+        Button btnPh = findViewById(R.id.btn_Ph);
+        Button btnTurbidez = findViewById(R.id.btn_Turbidez);
+        Button btnUltrasonico = findViewById(R.id.btn_Ultrasonico);
+        Button btnTemperatura = findViewById(R.id.btn_Temperatura);
+        Button btnTds = findViewById(R.id.btn_TDS);
+
+        // Inicializar ViewModel
+        viewModel = new ViewModelProvider(this, new TinacoDetalleViewModelFactory(this))
+                .get(TinacoDetalleViewModel.class);
+        // Obtener ID del intent
         Intent intents = getIntent();
         if (intents != null && intents.hasExtra("TINACO_ID")) {
-            int tinacoId = intents.getIntExtra("TINACO_ID", -1);
-            Log.d("TINACO_ID", "ID del Tinaco seleccionado: " + tinacoId);
-            this.tinacoId = tinacoId;
+            tinacoId = intents.getIntExtra("TINACO_ID", -1);
         }
+
+        // Configurar observadores
+        observeViewModel();
+
+        // Cargar datos del tinaco
+        viewModel.loadTinacoData(tinacoId);
+        backIcon.setOnClickListener(v -> finish());
+
         cardEditar.setOnClickListener(v -> {
-            Intent intentedit = new Intent(TinacoDetalleActivity.this, EditTinacoDialogActivity.class);
-
-            intentedit.putExtra("TINACO_ID", this.tinacoId);
-            Log.d("TINACO_ID", "ID del Tinaco seleccionado: " + this.tinacoId);
-
+            Intent intentedit = new Intent(this, EditTinacoDialogActivity.class);
+            intentedit.putExtra("TINACO_ID", tinacoId);
             startActivity(intentedit);
         });
-        backIcon.setOnClickListener(new View.OnClickListener() {
+        irGarfica.setOnClickListener(v -> {
+            Intent intent = new Intent(this, TinacoGraficaActivity.class);
+            intent.putExtra("TINACO_ID", tinacoId);
+            intent.putExtra("tinaco_title", nombre);
+            startActivity(intent);
+        });
+        btndelet.setOnClickListener(v -> confirmDeleteTinaco());
+
+        // Configurar el OnClickListener para cada botón
+        btnPh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                irAActividadConSensor("Ph");
+            }
+        });
+
+        btnTurbidez.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irAActividadConSensor("Turbidez");
+            }
+        });
+
+        btnUltrasonico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irAActividadConSensor("Ultrasonico");
+            }
+        });
+
+        btnTemperatura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irAActividadConSensor("Temperatura");
+            }
+        });
+
+        btnTds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irAActividadConSensor("TDS");
+            }
+        });
+    }
+
+    private void observeViewModel() {
+        viewModel.getTinacoLiveData().observe(this, tinaco -> {
+            if (tinaco != null) {
+                textTitulo.setText(tinaco.getNombre());
+                nombretinaco.setText(tinaco.getNombre());
+                nombre = tinaco.getNombre();
+            }
+        });
+
+        viewModel.getErrorMessage().observe(this, error -> {
+            if (error != null) {
+                Log.d("DEBUG", "Error: " + error);
+            }
+        });
+
+        viewModel.getDeleteSuccess().observe(this, success -> {
+            if (success) {
+                Toast.makeText(this, "Eliminado con éxito", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
-        irGarfica.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TinacoDetalleActivity.this, TinacoGraficaActivity.class);
-                intent.putExtra("tinaco_title", nombre);
-                startActivity(intent);
-            }
-        });
-        btndelet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                delettinaco();
-            }
-        });
-        loadTinacoData();
     }
-    private void loadTinacoData(){
-        String token = sessionManager.getToken();
-        String authToken = "Bearer " + token;
 
-        Call<TinacoResponse> call = apiService.getTinacoById(authToken, tinacoId);
-        call.enqueue(new retrofit2.Callback<TinacoResponse>() {
-            @Override
-            public void onResponse(Call<TinacoResponse> call, retrofit2.Response<TinacoResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Tinacos tinaco = response.body().getTinaco();
-
-                    if (tinaco != null) {
-                        textTitulo.setText(tinaco.getNombre());
-                        nombretinaco.setText(tinaco.getNombre());
-                        nombre = tinaco.getNombre();
-                    }
-                } else {
-                    Log.d("DEBUG", "Error en la respuesta de la API: " + response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<TinacoResponse> call, Throwable t) {
-                Log.d("DEBUG", "Error al cargar los datos del tinaco: " + t.getMessage());
-            }
-        });
-    }
-    private void delettinaco() {
+    private void confirmDeleteTinaco() {
         new AlertDialog.Builder(this)
                 .setTitle("Confirmar eliminación")
                 .setMessage("¿Estás seguro de que deseas eliminar este tinaco?")
-                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String token = sessionManager.getToken();
-                        String authToken = "Bearer " + token;
-                        Call<TinacoResponse> call = apiService.deleteTinaco(authToken, tinacoId);
-                        call.enqueue(new retrofit2.Callback<TinacoResponse>() {
-                            @Override
-                            public void onResponse(Call<TinacoResponse> call, retrofit2.Response<TinacoResponse> response) {
-                                if (response.isSuccessful()) {
-                                    Log.d("DEBUG", "Tinaco eliminado correctamente");
-                                    finish(); // Cerrar la actividad
-                                } else {
-                                    Log.d("DEBUG", "Error en la respuesta de la API: " + response.message());
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<TinacoResponse> call, Throwable t) {
-                                Log.d("DEBUG", "Error al eliminar el tinaco: " + t.getMessage());
-                            }
-                        });
-                    }
-                })
+                .setPositiveButton("Sí", (dialog, which) -> viewModel.deleteTinaco(tinacoId))
                 .setNegativeButton("No", null)
                 .show();
+    }
+    private void irAActividadConSensor(String nombreSensor) {
+        Intent intent = new Intent(TinacoDetalleActivity.this, SensoresActivity.class);  // Cambia 'OtraActividad' por la actividad de destino
+        intent.putExtra("nombre_sensor", nombreSensor);  // Enviar el nombre del sensor
+        startActivity(intent);
     }
 
 }

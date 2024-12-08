@@ -1,5 +1,6 @@
 package com.primerp.integradora.Cosas.Api;
 
+import com.primerp.integradora.Cosas.Modelos.Sensores;
 import com.primerp.integradora.Cosas.Modelos.Tinacos;
 import com.primerp.integradora.Cosas.Modelos.User;
 import com.primerp.integradora.Cosas.Responst.AdminResponse;
@@ -10,6 +11,8 @@ import com.primerp.integradora.Cosas.Responst.NotificacionResponse;
 import com.primerp.integradora.Cosas.Responst.PassaworRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterRequest;
 import com.primerp.integradora.Cosas.Responst.RegisterResponse;
+import com.primerp.integradora.Cosas.Responst.ReporteResponse;
+import com.primerp.integradora.Cosas.Responst.ReporteResponsePorFecha;
 import com.primerp.integradora.Cosas.Responst.TinacoRequest;
 import com.primerp.integradora.Cosas.Responst.TinacoResponse;
 
@@ -91,8 +94,8 @@ public interface ApiService {
     @GET("tinaco")
     Call<List<Tinacos>> getTinaco(
             @Header("Authorization")
-            String authToken)
-            ;
+            String authToken
+    );
     @POST("tinaco")
     Call<TinacoResponse> addTinaco(
             @Header("Authorization") String authToken,
@@ -115,17 +118,62 @@ public interface ApiService {
             @Body TinacoRequest request
     );
     //----------------------------------------------------------------//
+    //            TODO Links para el Sensores;                         //
+    //----------------------------------------------------------------//
+    @POST("ph")
+    Call<TinacoResponse> getph(
+            @Header("Authorization") String authToken,
+            @Body Map<String, Object> body
+    );
+    @POST("turbidez")
+    Call<TinacoResponse> getturbidez(
+            @Header("Authorization") String authToken,
+            @Body Map<String, Object> body
+    );
+    @POST("tds")
+    Call<TinacoResponse> gettds(
+            @Header("Authorization") String authToken,
+            @Body Map<String, Object> body
+    );
+    @POST("ultrasonico")
+    Call<TinacoResponse> getultrasonico(
+            @Header("Authorization") String authToken,
+            @Body Map<String, Object> body
+    );
+    @POST("temperatura")
+    Call<TinacoResponse> gettemperatura(
+            @Header("Authorization") String authToken,
+            @Body Map<String, Object> body
+    );
+    @GET("reporte-datos")
+    Call<ReporteResponse> obtenerDatos(
+            @Header("Authorization") String authToken
+    );
+    @GET("reporte-datos-fecha") // Cambia la ruta según tu configuración
+    Call<ReporteResponsePorFecha> obtenerDatosPorFecha(
+            @Header("Authorization") String authToken
+    );
+    @POST("reporte-datos-sensor") // Cambia la ruta según tu configuración
+    Call<ApiResponse> obtenerdatossensor(
+            @Header("Authorization") String authToken,
+            @Body Map<String, Object> body
+
+    );
+
+    //----------------------------------------------------------------//
     //          TODO Link de notificacion                            //
     //----------------------------------------------------------------//
     @GET("notifications")
     Call<NotificacionResponse> getNotifications(
             @Header("Authorization") String token
     );
+
     @DELETE("notifications/{id}")
     Call<Void> deleteNotification(
             @Header("Authorization") String authToken,
             @Path("id") int notificationId
     );
+
     //----------------------------------------------------------------//
     //          TODO Link de admin                                    //
     //----------------------------------------------------------------//
@@ -143,7 +191,7 @@ public interface ApiService {
     @POST("cambiarRol")
     Call<ApiResponse> postcambiarRol(
             @Header("Authorization") String token,
-            @Body Map<String, String> roleData // Aquí pasamos los datos del email y el rol
+            @Body Map<String, String> roleData
     );
 
     @GET("getUserStatistics")
