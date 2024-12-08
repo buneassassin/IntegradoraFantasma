@@ -1,5 +1,6 @@
 package com.primerp.integradora.Cosas.Responst;
 
+import com.google.gson.annotations.SerializedName;
 import com.primerp.integradora.Cosas.Modelos.Tinacos;
 
 import java.util.List;
@@ -8,6 +9,18 @@ public class TinacoResponse {
     private List<Tinacos> tinacosList;
     private boolean success;
     private String message;
+
+    @SerializedName("mensaje")
+    private String mensaje;
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
     public boolean isSuccess() {
         return success;
     }
@@ -18,6 +31,7 @@ public class TinacoResponse {
     public String getMessage() {
         return message;
     }
+
 
     public TinacoResponse(String s, int i, String tinacoName) {
 

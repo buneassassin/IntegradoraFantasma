@@ -1,5 +1,6 @@
 package com.primerp.integradora.Cosas.Responst;
 
+import com.primerp.integradora.Cosas.Modelos.Sensores;
 import com.primerp.integradora.Cosas.Modelos.Tinacos;
 import com.primerp.integradora.Cosas.Modelos.User;
 
@@ -10,6 +11,9 @@ public class ApiResponse {
     private String message;
     private String token;
     private User user;
+    private List<Sensores> data;
+    private List<User> users;
+    private String status;
 
     // Getters
     public boolean isSuccess() {
@@ -29,7 +33,6 @@ public class ApiResponse {
     }
 
 
-    private List<User> users;
 
     public List<User> getUsers() {
         return users;
@@ -43,5 +46,20 @@ public class ApiResponse {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public List<Sensores> getData() {
+        return data;
+    }
+
+    public void setData(List<Sensores> data) {
+        this.data = data;
     }
 }

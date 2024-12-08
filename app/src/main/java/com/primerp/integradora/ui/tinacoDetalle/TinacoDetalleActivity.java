@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.primerp.integradora.Cosas.Dialog.SensoresActivity;
 import com.primerp.integradora.Cosas.ViewModelFactory.TinacoDetalleViewModelFactory;
 import com.primerp.integradora.Cosas.ViewModelFactory.TinacoViewModelFactory;
 import com.primerp.integradora.Cosas.viewmodel.TinacoViewModel;
@@ -37,10 +39,17 @@ public class TinacoDetalleActivity extends AppCompatActivity {
         // Inicializar UI
         CardView cardEditar = findViewById(R.id.cardEditar);
         ImageView backIcon = findViewById(R.id.iconback);
-        ImageView irGarfica = findViewById(R.id.irGarfica);
+        CardView irGarfica = findViewById(R.id.cardEstadistica);
         textTitulo = findViewById(R.id.textTituloTinaco);
         nombretinaco = findViewById(R.id.nombretinaco);
         btndelet = findViewById(R.id.btn_delet);
+
+        // Obtener los botones de los sensores
+        Button btnPh = findViewById(R.id.btn_Ph);
+        Button btnTurbidez = findViewById(R.id.btn_Turbidez);
+        Button btnUltrasonico = findViewById(R.id.btn_Ultrasonico);
+        Button btnTemperatura = findViewById(R.id.btn_Temperatura);
+        Button btnTds = findViewById(R.id.btn_TDS);
 
         // Inicializar ViewModel
         viewModel = new ViewModelProvider(this, new TinacoDetalleViewModelFactory(this))
@@ -65,10 +74,47 @@ public class TinacoDetalleActivity extends AppCompatActivity {
         });
         irGarfica.setOnClickListener(v -> {
             Intent intent = new Intent(this, TinacoGraficaActivity.class);
+            intent.putExtra("TINACO_ID", tinacoId);
             intent.putExtra("tinaco_title", nombre);
             startActivity(intent);
         });
         btndelet.setOnClickListener(v -> confirmDeleteTinaco());
+
+        // Configurar el OnClickListener para cada botón
+        btnPh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irAActividadConSensor("Ph");
+            }
+        });
+
+        btnTurbidez.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irAActividadConSensor("Turbidez");
+            }
+        });
+
+        btnUltrasonico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irAActividadConSensor("Ultrasonico");
+            }
+        });
+
+        btnTemperatura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irAActividadConSensor("Temperatura");
+            }
+        });
+
+        btnTds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irAActividadConSensor("TDS");
+            }
+        });
     }
 
     private void observeViewModel() {
@@ -101,6 +147,11 @@ public class TinacoDetalleActivity extends AppCompatActivity {
                 .setPositiveButton("Sí", (dialog, which) -> viewModel.deleteTinaco(tinacoId))
                 .setNegativeButton("No", null)
                 .show();
+    }
+    private void irAActividadConSensor(String nombreSensor) {
+        Intent intent = new Intent(TinacoDetalleActivity.this, SensoresActivity.class);  // Cambia 'OtraActividad' por la actividad de destino
+        intent.putExtra("nombre_sensor", nombreSensor);  // Enviar el nombre del sensor
+        startActivity(intent);
     }
 
 }
