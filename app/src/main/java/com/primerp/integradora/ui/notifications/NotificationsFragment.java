@@ -41,6 +41,7 @@ import com.primerp.integradora.ui.tinaco.TinacoActivity;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -323,17 +324,25 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful()) {
+                    Log.d("DEBUG", "Respuesta exitosa: " + response.body());
                     Toast.makeText(getContext(), "Imagen subida correctamente", Toast.LENGTH_SHORT).show();
                 } else {
+                    try {
+                        Log.e("DEBUG", "Error en la respuesta: " + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     Toast.makeText(getContext(), "Error al subir la imagen", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Log.e("DEBUG", "Error de conexión: " + t.getMessage());
                 Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
     private String getRealPathFromURI(Uri uri) {
         String[] projection = { MediaStore.Images.Media.DATA };
