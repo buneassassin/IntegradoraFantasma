@@ -6,271 +6,205 @@
     android:layout_height="match_parent"
 
     android:fillViewport="true">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/wave4"
-    android:padding="16dp">
 
-<!-- Profile Section -->
-
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/circle_background"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_admin"
-        android:layout_width="50dp"
-        android:layout_height="46dp"
-        android:layout_margin="4dp"
-        android:layout_marginTop="4dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:drawableLeft="@drawable/ic_admin"
-        android:focusable="true"
-        android:onClick="ondmin"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/edit_profile"
-        android:layout_width="50dp"
-        android:layout_height="46dp"
-        android:layout_margin="4dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:drawableLeft="@drawable/ic_edit"
-        android:focusable="true"
-        android:onClick="onEditClick"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-    android:id="@+id/username"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Nombre de Usuario"
-    android:textColor="#000"
-    android:textSize="18sp"
-    android:textStyle="bold"
-    app:layout_constraintTop_toBottomOf="@id/profile_image"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginTop="8dp" />
-
-<!-- User Information Section -->
-<androidx.cardview.widget.CardView
-    android:id="@+id/user_info_card"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    android:layout_marginTop="16dp"
-    app:layout_constraintTop_toBottomOf="@id/username"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="11dp">
+        android:layout_height="match_parent"
+        android:background="@drawable/wave4"
+        android:padding="16dp">
+
+        <!-- Profile Section -->
+
+        <ImageView
+            android:layout_marginTop="30dp"
+            android:id="@+id/profile_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/circle_background"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_admin"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
+            android:layout_margin="4dp"
+            android:layout_marginTop="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_admin"
+            android:focusable="true"
+            android:onClick="ondmin"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/edit_profile"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
+            android:layout_margin="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_edit"
+            android:focusable="true"
+            android:onClick="onEditClick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/Nombre"
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/nombre_del_individuo"
-            android:textColor="#555"
-            android:textSize="14sp" />
+            android:layout_marginTop="8dp"
+            android:text="Nombre de Usuario"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_image" />
 
-        <TextView
-            android:id="@+id/Telefono"
+        <!-- User Information Section -->
+        <androidx.cardview.widget.CardView
+            app:layout_goneMarginTop="27dp"
+            android:id="@+id/user_info_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/username">
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="11dp">
+
+                <TextView
+                    android:id="@+id/Nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/nombre_del_individuo"
+                    android:textColor="#555"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/Telefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/_000_000_0000"
+                    android:textColor="#555"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/Correo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/usario_ejemplo_com"
+                    android:textColor="#555"
+                    android:textSize="14sp" />
+
+                <!-- LinearLayout horizontal para alinear el texto y el botón de editar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- TextView para la contraseña -->
+                    <TextView
+                        android:id="@+id/Pasaword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/contra"
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        android:textStyle="bold" /> <!-- Espacio entre el texto y el botón -->
+
+                    <!-- Botón de editar -->
+                    <ImageButton
+                        android:id="@+id/edit_contrasena"
+                        android:layout_width="wrap_content"
+                        android:layout_height="19dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="editarContrasena"
+                        android:src="@drawable/ic_edit" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Buttons Section -->
+        <Button
+
+            android:id="@+id/btn_add_new"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#00BCD4"
+            android:drawableStart="@drawable/ic_add"
+            android:padding="12dp"
+            android:text="@string/agregar_nuevo_tinaco"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline3" />
+
+        <Button
+            android:id="@+id/btn_notificacion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#03A9F4"
+            android:drawableStart="@drawable/ic_notifications"
+            android:padding="12dp"
+            android:text="Notification"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_add_new" />
+
+        <!-- Options Section -->
+
+        <!-- Logout Button -->
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#F44336"
+            android:drawableStart="@drawable/ic_logout"
+            android:onClick="onLogoutClick"
+            android:padding="5dp"
+            android:text="Log out"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_notificacion" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/_000_000_0000"
-            android:textColor="#555"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/Correo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/usario_ejemplo_com"
-            android:layout_marginBottom="8dp"
-            android:textColor="#555"
-            android:textSize="14sp" />
-
-        <!-- LinearLayout horizontal para alinear el texto y el botón de editar -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="8dp">
+            app:layout_constraintGuide_percent="0.54" />
 
-            <!-- TextView para la contraseña -->
-            <TextView
-                android:id="@+id/Pasaword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/contra"
-                android:textColor="#000"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginEnd="8dp" /> <!-- Espacio entre el texto y el botón -->
-
-            <!-- Botón de editar -->
-            <ImageButton
-                android:id="@+id/edit_contrasena"
-                android:layout_width="24dp"
-                android:layout_height="19dp"
-                android:layout_marginEnd="10dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/ic_edit"
-                android:onClick="editarContrasena" />
-
-
-        </LinearLayout>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
-
-<!-- Buttons Section -->
-<Button
-    android:id="@+id/btn_add_new"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:text="@string/agregar_nuevo_tinaco"
-    android:drawableStart="@drawable/ic_add"
-    android:textColor="#FFFFFF"
-    android:backgroundTint="#00BCD4"
-    android:padding="12dp"
-    app:layout_constraintTop_toBottomOf="@id/user_info_card"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginTop="10dp" />
-
-<Button
-    android:id="@+id/btn_notificacion"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:text="Notification"
-    android:drawableStart="@drawable/ic_notifications"
-    android:textColor="#FFFFFF"
-    android:backgroundTint="#03A9F4"
-    android:padding="12dp"
-    app:layout_constraintTop_toBottomOf="@id/btn_add_new"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginTop="10dp" />
-
-<!-- Options Section -->
-<androidx.cardview.widget.CardView
-    android:id="@+id/options_card"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    android:layout_marginTop="16dp"
-    app:layout_constraintTop_toBottomOf="@id/btn_notificacion"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="2dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/tankwat"
-                android:layout_marginEnd="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tus Tinacos"
-                android:textColor="#000"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_settings"
-                android:layout_marginEnd="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Settings"
-                android:textColor="#000"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_more"
-                android:layout_marginEnd="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Más..."
-                android:textColor="#000"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
-
-<!-- Logout Button -->
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Log out"
-        android:drawableStart="@drawable/ic_logout"
-        android:backgroundTint="#F44336"
-        android:textColor="#FFFFFF"
-        android:padding="5dp"
-        app:layout_constraintTop_toBottomOf="@id/options_card"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:onClick="onLogoutClick" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
