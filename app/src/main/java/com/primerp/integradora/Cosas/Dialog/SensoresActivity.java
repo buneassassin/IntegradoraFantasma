@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class SensoresActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private SessionManager sessionManager;
     private ApiService apiService;
+    private TextView tv_tinacos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class SensoresActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.rv_sensor);
         emptyView = findViewById(R.id.empty_view);
+        tv_tinacos = findViewById(R.id.tv_tinacos);
 
         sessionManager = new SessionManager(this);
         apiService = RetrofitClient.getInstance(this).getApiService();
@@ -71,7 +74,7 @@ public class SensoresActivity extends AppCompatActivity {
 
         String authToken = "Bearer " + token;
         String nombreSensor = getIntent().getStringExtra("nombre_sensor");
-        Toast.makeText(this, "Nombre del sensor: " + nombreSensor, Toast.LENGTH_SHORT).show();
+        tv_tinacos.setText(nombreSensor);
 
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("nombre", nombreSensor);
