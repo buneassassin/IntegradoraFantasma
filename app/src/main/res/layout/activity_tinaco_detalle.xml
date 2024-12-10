@@ -259,6 +259,18 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="457dp" />
 
+    <ImageView
+        android:id="@+id/Info"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/baseline_help_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.960"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

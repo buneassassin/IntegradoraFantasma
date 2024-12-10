@@ -1,6 +1,7 @@
 package com.primerp.integradora.ui.tinacoDetalle;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import com.primerp.integradora.Cosas.Dialog.EditTinacoDialogActivity;
 import com.primerp.integradora.Cosas.viewmodel.TinacoDetalleViewModel;
 import com.primerp.integradora.ui.tinacoGrafica.TinacoGraficaActivity;
 
+import org.w3c.dom.Text;
+
 public class TinacoDetalleActivity extends AppCompatActivity {
     private TinacoDetalleViewModel viewModel;
     private TextView textTitulo, nombretinaco;
@@ -40,6 +43,7 @@ public class TinacoDetalleActivity extends AppCompatActivity {
         CardView cardEditar = findViewById(R.id.cardEditar);
         ImageView backIcon = findViewById(R.id.iconback);
         CardView irGarfica = findViewById(R.id.cardEstadistica);
+        ImageView infoIcon = findViewById(R.id.Info);
         textTitulo = findViewById(R.id.textTituloTinaco);
         nombretinaco = findViewById(R.id.nombretinaco);
         btndelet = findViewById(R.id.btn_delet);
@@ -66,6 +70,7 @@ public class TinacoDetalleActivity extends AppCompatActivity {
         // Cargar datos del tinaco
         viewModel.loadTinacoData(tinacoId);
         backIcon.setOnClickListener(v -> finish());
+        infoIcon.setOnClickListener(v -> mostrarCuadroExplicativo());
 
         cardEditar.setOnClickListener(v -> {
             Intent intentedit = new Intent(this, EditTinacoDialogActivity.class);
@@ -152,6 +157,46 @@ public class TinacoDetalleActivity extends AppCompatActivity {
         Intent intent = new Intent(TinacoDetalleActivity.this, SensoresActivity.class);  // Cambia 'OtraActividad' por la actividad de destino
         intent.putExtra("nombre_sensor", nombreSensor);  // Enviar el nombre del sensor
         startActivity(intent);
+    }
+
+    private void mostrarCuadroExplicativo() {
+        // Crea el diálogo
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_explanation);
+        dialog.setCancelable(true);
+
+        // Obtén los elementos del diálogo
+        TextView tvDialogTitle = dialog.findViewById(R.id.tvDialogTitle);
+        TextView tvExplanation = dialog.findViewById(R.id.tvExplanation);
+        TextView tvExplanationRed = dialog.findViewById(R.id.tvExplanationRed);
+        TextView tvExplanationYellow = dialog.findViewById(R.id.tvExplanationYellow);
+        TextView tvExplanationGreen = dialog.findViewById(R.id.tvExplanationGreen);
+        Button btnClose = dialog.findViewById(R.id.btnClose);
+
+        // Configura los textos dinámicamente
+        tvDialogTitle.setText("Información del Proyecto");
+        tvExplanation.setText("Este proyecto utiliza los siguientes valores para medir el estado del tinaco:\n\n" +
+                "1. **Temperatura (°C):**\n" +
+                "- Valores saludables: Entre 20 °C y 35 °C, considerado normal para agua en almacenamiento.\n" +
+                "- Valores peligrosos: Temperaturas inferiores a 5 °C o superiores a 45 °C, que pueden comprometer la calidad del agua o indicar condiciones inusuales.\n\n" +
+                "2. **pH:**\n" +
+                "- Valores saludables: Entre 6.5 y 8.5 pH, que es el rango ideal para agua potable.\n" +
+                "- Valores peligrosos: Valores fuera del rango saludable (indican agua potencialmente corrosiva o contaminada).\n\n" +
+                "3. **Turbidez (NTU):**\n" +
+                "- Valores saludables: Menores a 5 NTU, que indican agua limpia.\n" +
+                "- Valores peligrosos: Valores superiores a 5 NTU, que pueden señalar suciedad, contaminación o presencia de sedimentos.\n\n" +
+                "4. **TDS (ppm):**\n" +
+                "- Valores saludables: Menores a 500 ppm, considerado apto para consumo humano.\n" +
+                "- Valores peligrosos: Valores superiores a 500 ppm, que pueden indicar altos niveles de minerales o contaminación.");
+        tvExplanationRed.setText("🔴 Rojo: Indica niveles peligrosos para la salud.");
+        tvExplanationYellow.setText("🟡 Amarillo: Muestra condiciones de dudosa calidad.");
+        tvExplanationGreen.setText("🟢 Verde: Representa valores seguros y óptimos.");
+
+        // Configura el botón de cierre
+        btnClose.setOnClickListener(v -> dialog.dismiss());
+
+        // Muestra el diálogo
+        dialog.show();
     }
 
 }

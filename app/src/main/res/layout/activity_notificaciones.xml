@@ -36,8 +36,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_notificaciones"
-        android:layout_width="360dp"
-        android:layout_height="564dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
