@@ -32,29 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textTituloGrafica"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Grafica de Lectura por Sensor"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
-
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/pieChart"
-        android:layout_width="291dp"
-        android:layout_height="228dp"
-        android:layout_margin="16dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"
-        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -75,11 +52,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="318dp" />
+        app:layout_constraintGuide_begin="94dp" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="334dp"
-        android:layout_height="301dp"
+        android:layout_width="349dp"
+        android:layout_height="443dp"
         android:layout_margin="16dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="20dp"
@@ -88,8 +65,8 @@
         app:layout_constraintTop_toTopOf="@+id/guideline9">
 
         <ScrollView
-            android:layout_width="342dp"
-            android:layout_height="356dp">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -201,6 +178,7 @@
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/EstadodelAgua"
                     app:layout_constraintTop_toTopOf="@+id/EstadodelAgua" />
+
                 <TextView
                     android:id="@+id/Tds"
                     android:layout_width="wrap_content"
@@ -227,6 +205,7 @@
                     android:id="@+id/textTituloGrafica2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="13dp"
                     android:text="Grafica de Lectura por Fecha"
                     android:textColor="@android:color/black"
                     android:textSize="15sp"

@@ -83,7 +83,7 @@ public class TinacoGraficaActivity extends AppCompatActivity {
         gettds(authToken,tinacoId);
         getultrasonico(authToken,tinacoId);
         gettemperatura(authToken,tinacoId);
-        PieChart(authToken);
+       // PieChart(authToken);
         BarChart(authToken);
 
 
@@ -218,7 +218,7 @@ public class TinacoGraficaActivity extends AppCompatActivity {
         });
     }
 
-    private void PieChart1(){
+  /*  private void PieChart1(){
         // Configuración del PieChart
         PieChart pieChart = findViewById(R.id.pieChart);
         ArrayList<PieEntry> entries = new ArrayList<>();
@@ -280,8 +280,8 @@ public class TinacoGraficaActivity extends AppCompatActivity {
         });
         xAxis.setGranularity(1f);
         xAxis.setLabelRotationAngle(-45);
-    }
-    private void PieChart(String authToken) {
+    }*/
+    /*private void PieChart(String authToken) {
         Call<ReporteResponse> call = apiService.obtenerDatos(authToken);
 
         call.enqueue(new retrofit2.Callback<ReporteResponse>() {
@@ -340,7 +340,7 @@ public class TinacoGraficaActivity extends AppCompatActivity {
                 Toast.makeText(TinacoGraficaActivity.this, "Error al obtener datos", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
     private void BarChart(String authToken) {
         Call<ReporteResponsePorFecha> call = apiService.obtenerDatosPorFecha(authToken);
 
