@@ -7,8 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,21 +20,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.primerp.integradora.Cosas.Api.ApiService;
+import com.primerp.integradora.Cosas.Class.RetrofitClient;
+import com.primerp.integradora.Cosas.Class.SessionManager;
 import com.primerp.integradora.Cosas.Dialog.SensoresActivity;
+import com.primerp.integradora.Cosas.Responst.AdminResponse;
 import com.primerp.integradora.Cosas.ViewModelFactory.TinacoDetalleViewModelFactory;
 import com.primerp.integradora.Cosas.ViewModelFactory.TinacoViewModelFactory;
 import com.primerp.integradora.Cosas.viewmodel.TinacoViewModel;
 import com.primerp.integradora.R;
 import com.primerp.integradora.Cosas.Dialog.EditTinacoDialogActivity;
 import com.primerp.integradora.Cosas.viewmodel.TinacoDetalleViewModel;
+import com.primerp.integradora.ui.admin.AdminRolActivity;
 import com.primerp.integradora.ui.tinacoGrafica.TinacoGraficaActivity;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
+import retrofit2.Call;
+
 public class TinacoDetalleActivity extends AppCompatActivity {
     private TinacoDetalleViewModel viewModel;
+    private ApiService apiService;
+    private SessionManager sessionManager;
     private TextView textTitulo, nombretinaco;
     private Button btndelet;
+    private Switch bombamanual1;
     private int tinacoId;
     private String nombre;
 
@@ -47,7 +63,21 @@ public class TinacoDetalleActivity extends AppCompatActivity {
         textTitulo = findViewById(R.id.textTituloTinaco);
         nombretinaco = findViewById(R.id.nombretinaco);
         btndelet = findViewById(R.id.btn_delet);
-
+        bombamanual1 = findViewById(R.id.bombamanual1);
+        bombamanual1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // Si el switch está activado
+                    encenderoprender();
+                } else {
+                    // Si el switch está desactivado
+                    apagaroprender();
+                }
+            }
+        });
+        sessionManager = new SessionManager(this);
+        apiService = RetrofitClient.getInstance(this).getApiService();
         // Obtener los botones de los sensores
         Button btnPh = findViewById(R.id.btn_Ph);
         Button btnTurbidez = findViewById(R.id.btn_Turbidez);
@@ -141,6 +171,55 @@ public class TinacoDetalleActivity extends AppCompatActivity {
             if (success) {
                 Toast.makeText(this, "Eliminado con éxito", Toast.LENGTH_SHORT).show();
                 finish();
+            }
+        });
+    }
+    private void apagaroprender() {
+        String token = sessionManager.getToken();
+        if (token == null || token.isEmpty()) {
+            Toast.makeText(this, "Token no válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String authToken = "Bearer " + token;
+        Call<Void> call = apiService.bombaapagado(authToken); // Cambia el endpoint si es necesario
+        call.enqueue(new retrofit2.Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(TinacoDetalleActivity.this, "Bomba apagada", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(TinacoDetalleActivity.this, "Error en la respuesta de la API", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(TinacoDetalleActivity.this, "Error al apagar la bomba", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void encenderoprender() {
+        String token = sessionManager.getToken();
+        if (token == null || token.isEmpty()) {
+            Toast.makeText(this, "Token no válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String authToken = "Bearer " + token;
+        Call<Void> call = apiService.bombaencedido(authToken); // Cambia el endpoint si es necesario
+        call.enqueue(new retrofit2.Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(TinacoDetalleActivity.this, "Bomba encendida", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(TinacoDetalleActivity.this, "Error en la respuesta de la API", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(TinacoDetalleActivity.this, "Error al encender la bomba", Toast.LENGTH_SHORT).show();
             }
         });
     }

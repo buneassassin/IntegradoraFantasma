@@ -120,6 +120,15 @@ public interface ApiService {
     //----------------------------------------------------------------//
     //            TODO Links para el Sensores;                         //
     //----------------------------------------------------------------//
+    @POST("bombaapagado")
+    Call<Void> bombaapagado(
+            @Header("Authorization") String authToken
+    );
+
+    @POST("bombaapagado")
+    Call<Void> bombaencedido(
+            @Header("Authorization") String authToken
+    );
     @POST("ph")
     Call<TinacoResponse> getph(
             @Header("Authorization") String authToken,
