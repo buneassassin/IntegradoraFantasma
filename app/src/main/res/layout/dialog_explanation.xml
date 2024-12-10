@@ -1,75 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@android:color/white"
-    android:elevation="4dp">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <!-- Título del diálogo -->
-    <TextView
-        android:id="@+id/tvDialogTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Información del Proyecto"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="@android:color/holo_blue_dark"
-        android:layout_marginBottom="12dp" />
-
-    <!-- Explicación general -->
-    <TextView
-        android:id="@+id/tvExplanation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Este proyecto utiliza los siguientes valores para medir el estado del tinaco:"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Descripción de los niveles -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="16dp">
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:elevation="4dp">
 
+        <!-- Título del diálogo -->
         <TextView
-            android:id="@+id/tvExplanationRed"
+            android:id="@+id/tvDialogTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🔴 Rojo: Indica niveles peligrosos para la salud."
+            android:text="Información del Proyecto"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Explicación general -->
+        <TextView
+            android:id="@+id/tvExplanation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Este proyecto utiliza los siguientes valores para medir el estado del tinaco:"
             android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:id="@+id/tvExplanationYellow"
+        <!-- Descripción de los niveles -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🟡 Amarillo: Muestra condiciones de dudosa calidad."
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
 
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+            <TextView
+                android:id="@+id/tvExplanationRed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🔴 Rojo: Indica niveles peligrosos para la salud."
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:id="@+id/tvExplanationGreen"
+            <TextView
+                android:id="@+id/tvExplanationYellow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🟡 Amarillo: Muestra condiciones de dudosa calidad."
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tvExplanationGreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🟢 Verde: Representa valores seguros y óptimos."
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Botón de cierre -->
+        <Button
+            android:id="@+id/btnClose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🟢 Verde: Representa valores seguros y óptimos."
-
-            android:textSize="16sp" />
+            android:text="Cerrar"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
     </LinearLayout>
-
-    <!-- Botón de cierre -->
-    <Button
-        android:id="@+id/btnClose"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cerrar"
-        android:backgroundTint="@android:color/holo_blue_light"
-        android:textColor="@android:color/white"
-        android:textStyle="bold" />
-</LinearLayout>
+</ScrollView>
