@@ -175,19 +175,20 @@ public class TinacoDetalleActivity extends AppCompatActivity {
 
         // Configura los textos dinámicamente
         tvDialogTitle.setText("Información del Proyecto");
-        tvExplanation.setText("Este proyecto utiliza los siguientes valores para medir el estado del tinaco:\n\n" +
+        tvExplanation.setText("Este proyecto monitorea el estado del agua en el tinaco utilizando los siguientes parámetros:\n\n" +
                 "1. **Temperatura (°C):**\n" +
-                "- Valores saludables: Entre 20 °C y 35 °C, considerado normal para agua en almacenamiento.\n" +
-                "- Valores peligrosos: Temperaturas inferiores a 5 °C o superiores a 45 °C, que pueden comprometer la calidad del agua o indicar condiciones inusuales.\n\n" +
+                "- Saludables: Entre 20 °C y 35 °C.\n" +
+                "- Peligrosos: Menores a 5 °C o mayores a 45 °C.\n\n" +
                 "2. **pH:**\n" +
-                "- Valores saludables: Entre 6.5 y 8.5 pH, que es el rango ideal para agua potable.\n" +
-                "- Valores peligrosos: Valores fuera del rango saludable (indican agua potencialmente corrosiva o contaminada).\n\n" +
+                "- Saludables: Entre 6.5 y 8.5.\n" +
+                "- Peligrosos: Fuera de este rango.\n\n" +
                 "3. **Turbidez (NTU):**\n" +
-                "- Valores saludables: Menores a 5 NTU, que indican agua limpia.\n" +
-                "- Valores peligrosos: Valores superiores a 5 NTU, que pueden señalar suciedad, contaminación o presencia de sedimentos.\n\n" +
+                "- Saludables: Menores a 5 NTU.\n" +
+                "- Peligrosos: Mayores a 5 NTU.\n\n" +
                 "4. **TDS (ppm):**\n" +
-                "- Valores saludables: Menores a 500 ppm, considerado apto para consumo humano.\n" +
-                "- Valores peligrosos: Valores superiores a 500 ppm, que pueden indicar altos niveles de minerales o contaminación.");
+                "- Saludables: Menores a 500 ppm.\n" +
+                "- Peligrosos: Mayores a 500 ppm.\n\n" +
+                "Estos valores ayudan a evaluar la calidad y seguridad del agua almacenada.");
         tvExplanationRed.setText("🔴 Rojo: Indica niveles peligrosos para la salud.");
         tvExplanationYellow.setText("🟡 Amarillo: Muestra condiciones de dudosa calidad.");
         tvExplanationGreen.setText("🟢 Verde: Representa valores seguros y óptimos.");

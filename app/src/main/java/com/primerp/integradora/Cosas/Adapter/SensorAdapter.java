@@ -59,6 +59,7 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
         TextView nombreTextView;
         TextView valorTextView;
         TextView fechaTextView;
+        TextView color;
 
         public SensorViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,8 +68,73 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.SensorView
             nombreTextView = itemView.findViewById(R.id.sensor_name);
             valorTextView = itemView.findViewById(R.id.sensor_value);
             fechaTextView = itemView.findViewById(R.id.sensor_date);
+            color = itemView.findViewById(R.id.sensor_color); // Agrega esto al XML
         }
+
         public void setData(Sensores sensores) {
+            // Obtener el valor del sensor como número (asegúrate de que sea un valor parseable)
+            double valor;
+            try {
+                valor = Double.parseDouble(sensores.getValue());
+            } catch (NumberFormatException e) {
+                valor = -1; // Valor inválido
+            }
+
+            // Determinar el color basado en el tipo de sensor y su valor
+            String emoji;
+
+            switch (sensores.getNombre().toLowerCase()) {
+                case "ultrasonico":
+                    emoji = valor > 10 ? "\uD83D\uDFE2" : "\uD83D\uDD34"; // Verde o Rojo
+                    break;
+
+                case "temperatura":
+                    if (valor >= 25 && valor <= 40) {
+                        emoji = "\uD83D\uDFE2"; // Verde
+                    } else if (valor > 24 && valor < 15) {
+                        emoji = "\uD83D\uDFE1"; // Amarillo
+                    } else {
+                        emoji = "\uD83D\uDD34"; // Rojo
+                    }
+                    break;
+
+                case "ph":
+                    if (valor >= 5.5 && valor <= 8.5) {
+                        emoji = "\uD83D\uDFE2"; // Verde
+                    } else if (valor >= 5.4 && valor < 5 || valor > 8.5 && valor <= 10) {
+                        emoji = "\uD83D\uDFE1"; // Amarillo
+                    } else {
+                        emoji = "\uD83D\uDD34"; // Rojo
+                    }
+                    break;
+
+                case "turbidez":
+                    if (valor >= 0 && valor <= 5) {
+                        emoji = "\uD83D\uDFE2"; // Verde
+                    } else if (valor > 5 && valor <= 50) {
+                        emoji = "\uD83D\uDFE1"; // Amarillo
+                    } else {
+                        emoji = "\uD83D\uDD34"; // Rojo
+                    }
+                    break;
+
+                case "tds":
+                    if (valor >= 0 && valor <= 50) {
+                        emoji = "\uD83D\uDFE2"; // Verde
+                    } else if (valor > 50 && valor <= 500) {
+                        emoji = "\uD83D\uDFE1"; // Amarillo
+                    } else {
+                        emoji = "\uD83D\uDD34"; // Rojo
+                    }
+                    break;
+
+                default:
+                    emoji = "\u2753"; // Interrogación
+                    break;
+            }
+
+            // Asignar los datos a las vistas
+            color.setText(emoji);
             nombreTextView.setText(sensores.getNombre());
             valorTextView.setText(sensores.getValue());
             fechaTextView.setText(sensores.getCreated_at());
