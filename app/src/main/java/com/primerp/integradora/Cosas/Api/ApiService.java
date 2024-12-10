@@ -120,6 +120,12 @@ public interface ApiService {
     //----------------------------------------------------------------//
     //            TODO Links para el Sensores;                         //
     //----------------------------------------------------------------//
+    @POST("kaboom")
+    Call<TinacoResponse> getph(
+            @Header("Authorization") String authToken,
+            @Body Map<String, Object> body
+    );
+
     @POST("ph")
     Call<TinacoResponse> getph(
             @Header("Authorization") String authToken,

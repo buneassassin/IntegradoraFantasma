@@ -7,6 +7,7 @@
     android:background="@drawable/wave9"
     android:padding="16dp"
     tools:context=".ui.tinacoDetalle.TinacoDetalleActivity">
+
     <ImageView
         android:id="@+id/iconback"
         android:layout_width="42dp"
@@ -17,6 +18,7 @@
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textTituloTinaco"
         android:layout_width="wrap_content"
@@ -54,6 +56,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline10" />
+
+    <Switch
+        android:id="@+id/bombamanual1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15sp"
+        android:text="Estado de la bomba"
+        app:layout_constraintBottom_toTopOf="@+id/btn_delet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.571" /> />
 
     <!-- CardView: Nivel de Agua -->
     <androidx.cardview.widget.CardView
@@ -133,6 +147,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
