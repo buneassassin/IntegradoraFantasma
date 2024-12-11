@@ -120,12 +120,12 @@ public interface ApiService {
     //----------------------------------------------------------------//
     //            TODO Links para el Sensores;                         //
     //----------------------------------------------------------------//
-    @POST("bombaapagado")
+    @POST("apagarbomba")
     Call<Void> bombaapagado(
             @Header("Authorization") String authToken
     );
 
-    @POST("bombaapagado")
+    @POST("encenderbomba")
     Call<Void> bombaencedido(
             @Header("Authorization") String authToken
     );
